@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lacework-config
+  namespace: {{ .Release.Namespace }}          
+data:
+  config.json: |
+    {"autoupgrade": "{{ required "A value for autoupgrade is required" .Values.laceworkConfig.autoUpgrade }}",
+     "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
+     "tags": {"Env": "{{ .Values.laceworkConfig.env }}"
+              {{- if .Values.laceworkConfig.kubernetesCluster }}, "KubernetesCluster" :"{{ .Values.laceworkConfig.kubernetesCluster}}" {{- end }}
+             }
+    }

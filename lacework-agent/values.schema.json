@@ -1,0 +1,84 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "required": [
+        "laceworkConfig"
+    ],
+    "properties": {
+        "image": {
+            "type": "object",
+            "properties": {
+                "imagePullSecrets": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                },
+                "pullPolicy": {
+                    "type": "string",
+                    "enum": [
+                        "Always",
+                        "IfNotPresent",
+                        "Never"
+                    ]
+                },
+                "registry": {
+                    "type": "string"
+                },
+                "repository": {
+                    "type": "string"
+                },
+                "tag": {
+                    "type": "string"
+                }
+            }
+        },
+        "laceworkConfig": {
+            "type": "object",
+            "required": [
+                "accessToken"
+            ],
+            "properties": {
+                "accessToken": {
+                    "type": "string"
+                },
+                "autoUpgrade": {
+                    "type": "string",
+                    "enum": [
+                        "disable",
+                        "enable"
+                    ]
+                },
+                "kubernetesCluster": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "env": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "serverUrl": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            }
+        },
+        "priorityClassName": {
+            "type": [
+                "string",
+                "null"
+            ]
+        }
+    },
+    "additionalProperties": true
+}

@@ -1,0 +1,76 @@
+# Default values for Lacework Agent.
+
+image:
+  registry: docker.io
+  repository: lacework/datacollector
+  tag: latest
+
+  # imagePullPolicy should be Always to get the latest container
+  # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  pullPolicy: Always
+
+  # [Optional] imagePullSecrets.
+  # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  # imagePullSecrets:
+  #   - name: CustomerRegistrKeySecretName
+
+resources:
+  # The requests/limits is guidance and should be adjusted based on the workload
+  # Please contact Lacework support for additional details
+  # https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits
+  # https://support.lacework.com/hc/en-us/articles/360047019354-Usage-Impact-of-Agent-Deployment
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 500m
+    memory: 1450Mi
+
+laceworkConfig:
+  # [Optional] Set to "disable" to disable autoupgrade of the datacollector
+  autoUpgrade: enable
+  # [Required] An access token is required before running agents.
+  # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
+  accessToken: 
+  # [Optional] Give your k8s environment a friendly name
+  env: 
+  # [Optional] Kubernetes cluster name
+  # https://support.lacework.com/hc/en-us/articles/360005263034-Deploy-on-Kubernetes
+  kubernetesCluster:
+  # [Optional] Region specific Lacework service URL. If not provided
+  # the Agent defaults to the US region
+  serverUrl:
+
+##########################################################################
+# Set daemonset priorityClassName
+priorityClassName:
+
+# Allow Lacework agent to run on all nodes including master node
+tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+  # Allow Lacework agent to run on all nodes in case of a taint
+  # - effect: NoSchedule
+  #   operator: Exists
+
+daemonset:
+  # Use rolling updates in the DaemonSet
+  # https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/
+  updateStrategy:
+    type: RollingUpdate
+  # DaemonSet to schedule using affinity rules
+  # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: kubernetes.io/arch
+            operator: In
+            values:
+              - amd64
+              - arm64
+          - key: kubernetes.io/os
+            operator: In
+            values:
+              - linux

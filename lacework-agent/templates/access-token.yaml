@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "lacework-agent.name" . }}-access-token
+  labels:
+    tier: monitoring
+    app: {{ include "lacework-agent.name" . }}
+type: Opaque
+data:
+  agent-access-token: {{ required "A valid AccessToken is required! Specify your Lacework agent token in values.yaml" .Values.laceworkConfig.accessToken | b64enc }}
