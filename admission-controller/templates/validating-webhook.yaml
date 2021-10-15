@@ -1,0 +1,26 @@
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: {{ include "admission.fullname" . }}
+webhooks:
+  - name: validate.lacework.net
+    failurePolicy: {{ .Values.webhooks.failurePolicy }}
+    sideEffects: "None"
+    admissionReviewVersions: ["v1beta1"]
+    namespaceSelector:
+      matchExpressions:
+      - key: admission-webhook
+        operator: NotIn
+        values: ["false"]
+    rules:
+      - operations: ["CREATE", "CONNECT"]
+        apiGroups: ["apps", ""]
+        apiVersions: ["*"]
+        resources: ["pods", "deployments", "pods/exec"]
+    clientConfig:
+      caBundle: {{ .Values.webhooks.caBundle }}
+      service:
+        namespace: {{ .Release.Namespace }}
+        name: {{ include "admission.fullname" . }}
+        path: "/validate"
+    timeoutSeconds: {{ .Values.webhooks.timeoutSeconds }}

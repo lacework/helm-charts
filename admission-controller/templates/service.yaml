@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    role: {{ include "admission.fullname" . }}
+  name: {{ include "admission.fullname" . }}
+spec:
+  ports:
+    - port: 443
+      targetPort: 8443
+  selector:
+    app: {{ include "admission.fullname" . }}

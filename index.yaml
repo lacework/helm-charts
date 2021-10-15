@@ -1,9 +1,27 @@
 apiVersion: v1
 entries:
+  admission-controller:
+  - apiVersion: v2
+    appVersion: 0.0.2
+    created: "2021-10-14T17:30:09.643059-07:00"
+    description: Lacework admission controller using Lacework proxy scanner
+    digest: 4d5cd2204fcd14debf8069ef0b6824ec149f0fa28648b569f18b81fa83b1b69d
+    keywords:
+    - admission-controller
+    - runtime-security
+    - lacework
+    maintainers:
+    - email: chitra.kumar@lacework.net
+      name: chitrapkumar
+    name: admission-controller
+    type: application
+    urls:
+    - admission-controller-1.0.9.tgz
+    version: 1.0.9
   lacework-agent:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2021-10-06T20:28:07.439483296-07:00"
+    created: "2021-10-14T17:30:09.643832-07:00"
     description: Lacework Agent
     digest: 316df313975abcb5ab65846cc749c194c5169f09636f2ffbc26a71f0ae9ef29b
     home: https://www.lacework.com
@@ -21,4 +39,15 @@ entries:
     urls:
     - lacework-agent-4.3.0.tgz
     version: 4.3.0
-generated: "2021-10-06T20:28:07.438487133-07:00"
+  proxy-scanner:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2021-10-14T17:30:09.64416-07:00"
+    description: A Helm chart for Lacework Proxy Scanner
+    digest: cd7d7beba3d14df0c55a298f1f5c01a82dbe69b00dc43e08face71322cdb4ee4
+    name: proxy-scanner
+    type: application
+    urls:
+    - proxy-scanner-1.0.4.tgz
+    version: 1.0.4
+generated: "2021-10-14T17:30:09.640583-07:00"

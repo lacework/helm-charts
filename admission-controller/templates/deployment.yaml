@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    role: {{ .Release.Name }}
+    app: {{ include "admission.fullname" . }}
+  name: {{ include "admission.fullname" . }}
+spec:
+  replicas: {{ .Values.deployment.replicaCount }}
+  template:
+    metadata:
+      labels:
+        app: {{ include "admission.fullname" . }}
+    spec:
+      securityContext:
+        runAsUser: 11431
+        runAsGroup: 11433
+        fsGroup: 11433
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      containers:
+        - name: {{ include "admission.name" . }}
+          image: "{{ .Values.deployment.image }}:{{ .Values.deployment.tag }}"
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          ports:
+            - containerPort: 8443
+          livenessProbe:
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            httpGet:
+              scheme: HTTPS
+              path: /healthz
+              port: 8443
+          volumeMounts:
+            - name: "certs"
+              mountPath: "/certs"
+              readOnly: true
+            - name: "lacework-admission-volume"
+              mountPath: "/config"
+              readOnly: true
+      volumes:
+        - name: "certs"
+          secret:
+            secretName: {{ .Values.certs.name }}
+        - name: "lacework-admission-volume"
+          configMap:
+            name: {{ include "admission.fullname" . }}
+  selector:
+    matchLabels:
+      app: {{ include "admission.fullname" . }}

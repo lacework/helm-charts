@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "scanner.fullname" . }}
+data:
+  config.yml: |
+    {{- toYaml .Values.config | nindent 8 }}
+  docker_apis.yml: |
+    v2_registry:
+      list_repositories:
+        method: GET
+        api: /v2/_catalog
+        token_scope: registry:catalog:*
+        json_path: $.repositories[*]
+      list_tags:
+        method: GET
+        api: /v2/%repository/tags/list
+        token_scope: repository:%repository:pull
+        json_path: $.tags[*]
+      manifest:
+        method: GET
+        api: /v2/%repository/manifests/%reference
+        token_scope: repository:%repository:pull
+      blob:
+        method: GET
+        api: /v2/%repository/blobs/%digest
+        token_scope: repository:%repository:pull
+  notifications.yml: |
+    dtr:
+      digest: $.contents.digest
+      tag: $.contents.tag
+      org: $.contents.namespace
+      repo: $.contents.repository
+
+    v2_registry:
+      digest: $.events[0].target.digest
+      repo: $.events[0].target.repository
+      tag: $.events[0].target.tag
+
+    jfrog:
+      org: $.data.repo_key
+      repo: $.data.path
+      tag: $.data.tag
+      digest: $.data.sha256
+
+    acr:
+      digest: $.target.digest
+      repo: $.target.repository
+      tag: $.target.tag
+
+    hub:
+      tag: $.push_data.tag
+      repo: $.repository.repo_name
+
+    ghcr:
+      digest: $.package.package_version.container_metadata.tag.digest
+      tag: $.package.package_version.container_metadata.tag.name
+      org: $.package.namespace
+      repo: $.package.name
