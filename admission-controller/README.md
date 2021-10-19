@@ -4,7 +4,7 @@ Instructions for using HELM charts to deploy the Lacework Admission Controller.
 
 ## Using release packages
 
-1. Download the latest release of the Admission Controller from the Releases page (not public yet)
+1. Download the latest release of the Admission Controller from https://github.com/lacework/helm-charts
 
 2. Extract the admission-controller-*.tar.gz file
 tar -xvf admission-controller-*.tar.gz --directory ~/lacework/.
@@ -17,12 +17,14 @@ tar -xvf admission-controller-*.tar.gz --directory ~/lacework/.
    cat <file-name> | base64 | tr -d '\n'
    
    b. Provide the certificates previously obtained in the fields of the values.yaml file
+   ```
    certs:
    name: lacework-admission-certs
    serverCertificate: "<base64_encoded_admission.crt>"
    serverKey: "<base64_encoded_admission.key>"
    webhooks:
    caBundle: "<base64_encoded_ca.crt>"
+   ```
 
 4. Update proxy scanner settings if required - port, skipVerify, caCert according to definitions provided below
 
@@ -34,14 +36,16 @@ helm install -n lacework --create-namespace lacework-admission-controller ./helm
 kubectl get pods -n lacework-dev
     
 ## Adding helm repo
-helm repo add lacework https://lacework.github.io/helm-charts (not public yet)
-helm upgrade --install --create-namespace --namespace lacework \
---set webhooks.caBundle= ${WEBHOOK_ROOT_CA} \
---set certs.serverCertificate= ${WEBHOOK_SERVER_CERT}\
---set certs.serverKey= ${WEBHOOK_SERVER_KEY}\
---set scanner.caCert= ${SCANNER_ROOT_CA}\
-lacework-admission-controller lacework/admission-controller
+```
+helm repo add lacework https://lacework.github.io/helm-charts 
 
+helm upgrade --install --create-namespace --namespace lacework \
+   --set webhooks.caBundle= ${WEBHOOK_ROOT_CA} \
+   --set certs.serverCertificate= ${WEBHOOK_SERVER_CERT}\
+   --set certs.serverKey= ${WEBHOOK_SERVER_KEY}\
+   --set scanner.caCert= ${SCANNER_ROOT_CA}\
+lacework-admission-controller lacework/admission-controller
+```
 Note: the above should be base 64 encoded certs/keys you have or generate using the script above
 scanner.caCert is used for SSL between Admission webhook and scanner
 
