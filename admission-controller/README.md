@@ -1,6 +1,9 @@
 # Admission Controller Helm Chart
 
-Instructions for using HELM charts to deploy the Lacework Admission Controller.
+## Disclaimer: This is an Alpha Release, for internal use only
+Contact Lacework Support to be enrolled in the Beta program
+
+## Instructions for using HELM charts to deploy the Lacework Admission Controller.
 
 ## Using release packages
 

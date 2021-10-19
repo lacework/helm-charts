@@ -3,9 +3,9 @@ entries:
   admission-controller:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2021-10-19T01:03:52.205327-07:00"
+    created: "2021-10-19T13:26:13.082176-07:00"
     description: Lacework admission controller using Lacework proxy scanner
-    digest: 8c68a9f0f88800910f521884bfafc06496b46cb768b98a7779f5b8680b3a3680
+    digest: d6d2a6042b051b02ee6eac547b528cb56c5d2ce772f79f962bfb01f41c8ccccd
     keywords:
     - admission-controller
     - runtime-security
@@ -16,25 +16,8 @@ entries:
     name: admission-controller
     type: application
     urls:
-    - admission-controller-4.3.0.tgz
-    version: 4.3.0
-  - apiVersion: v2
-    appVersion: 0.0.2
-    created: "2021-10-19T01:03:52.204788-07:00"
-    description: Lacework admission controller using Lacework proxy scanner
-    digest: 4d5cd2204fcd14debf8069ef0b6824ec149f0fa28648b569f18b81fa83b1b69d
-    keywords:
-    - admission-controller
-    - runtime-security
-    - lacework
-    maintainers:
-    - email: chitra.kumar@lacework.net
-      name: chitrapkumar
-    name: admission-controller
-    type: application
-    urls:
-    - admission-controller-1.0.9.tgz
-    version: 1.0.9
+    - admission-controller-0.1.0.tgz
+    version: 0.1.0
   lacework-agent:
   - apiVersion: v1
     appVersion: "1.0"
@@ -59,22 +42,12 @@ entries:
   proxy-scanner:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2021-10-19T01:03:52.206577-07:00"
+    created: "2021-10-19T13:26:13.08344-07:00"
     description: A Helm chart for Lacework Proxy Scanner
-    digest: 0b60b74c657b42c9cc01762f635f722cf04d99095d50ceafa41cca4e6292e74a
+    digest: fb0bbde3066707aca7f32735c9890e5cf2b24181c9357467124b9cb4fa209f08
     name: proxy-scanner
     type: application
     urls:
-    - proxy-scanner-4.3.0.tgz
-    version: 4.3.0
-  - apiVersion: v2
-    appVersion: "1.0"
-    created: "2021-10-19T01:03:52.206176-07:00"
-    description: A Helm chart for Lacework Proxy Scanner
-    digest: cd7d7beba3d14df0c55a298f1f5c01a82dbe69b00dc43e08face71322cdb4ee4
-    name: proxy-scanner
-    type: application
-    urls:
-    - proxy-scanner-1.0.4.tgz
-    version: 1.0.4
-generated: "2021-10-19T01:03:52.203992-07:00"
+    - proxy-scanner-0.2.1.tgz
+    version: 0.2.1
+generated: "2021-10-19T13:26:13.08139-07:00"
