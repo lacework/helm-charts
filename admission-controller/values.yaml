@@ -1,0 +1,65 @@
+name: lacework-admission-controller
+
+# Configuration
+logger:
+  debug: true
+
+admission:
+  tls_port: 8443
+  cert_file_path: "/certs/admission.crt"
+  cert_key_path: "/certs/admission.key"
+
+policy:
+  block_exec: false
+  bypass_scope: "kube-system,kube-public,lacework,lacework-dev"
+
+scanner:
+  server: "lacework-proxy-scanner"
+  namespace: "lacework"
+  skipVerify: true
+  caCert:
+  timeout: 30
+
+# Kubernetes
+nameOverride: "lacework-admission-controller"
+fullnameOverride: "lacework-admission-controller"
+
+serviceAccount:
+  name: lacework-admission-sa
+
+certs:
+  name: lacework-admission-certs
+  serverCertificate:
+  serverKey:
+
+webhooks:
+  caBundle:
+  failurePolicy: Ignore
+  timeoutSeconds: 30
+
+podAnnotations: {}
+#  my-annotation-key: my value; more value
+
+securityContext:
+  runAsUser: 11431
+  runAsGroup: 11433
+  fsGroup: 11433
+container_securityContext: {}
+
+resources: {}
+  # requests:
+  #   cpu: 250m
+  #   memory: 0.2Gi
+  # limits:
+  #   cpu: 500m
+#   memory: 1.5Gi
+
+nodeSelector: {}
+
+deployment:
+  image: lacework/lacework-admission-controller
+  tag: 0.1.0
+  pullPolicy: Always
+  replicaCount: 1
+  service:
+    port: 8443

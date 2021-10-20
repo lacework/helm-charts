@@ -1,0 +1,13 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    role: {{ include "scanner.fullname" . }}
+  name: {{ include "scanner.fullname" . }}
+spec:
+  selector:
+    app: {{ .Values.name }}
+  ports:
+    - port: 8080
+      targetPort: 8080

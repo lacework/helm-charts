@@ -1,0 +1,38 @@
+#
+# Service: proxy-scanner
+# The following values may be set or changed to configure the proxy-scanner service
+#
+replicaCount: 1
+image: lacework/lacework-proxy-scanner:0.2.1
+
+name: lacework-proxy-scanner
+serviceAccount:
+  enabled: true
+
+config:
+  static_cache_location: /opt/lacework
+  lacework:
+    account_name:
+    integration_access_token:
+  registries:
+    - domain:
+      ssl: true
+      name:
+      auto_poll: false
+      credentials:
+        user_name:
+        password:
+      poll_frequency_minutes: 20
+    - domain:
+      ssl: true
+      name:
+      auto_poll: false
+      credentials:
+        user_name:
+        password:
+      poll_frequency_minutes: 20
+
+certs:
+  skipCert: true
+  serverCertificate:
+  serverKey:
