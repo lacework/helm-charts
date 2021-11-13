@@ -3,7 +3,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: latest
+  tag: 5.0.0
 
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
