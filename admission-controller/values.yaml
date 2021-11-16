@@ -19,6 +19,7 @@ scanner:
   skipVerify: true
   caCert:
   timeout: 30
+  defaultRegistry: index.docker.io
 
 # Kubernetes
 nameOverride: "lacework-admission-controller"
@@ -58,8 +59,33 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.1.0
+  tag: 0.2.0
   pullPolicy: Always
   replicaCount: 1
   service:
     port: 8443
+
+proxy-scanner:
+  fullnameOverride: lacework-proxy-scanner
+  default_registry: index.docker.io
+  enabled: true
+  config:
+    static_cache_location: /opt/lacework/cache
+    lacework:
+      account_name: 
+      integration_access_token: 
+    registries:
+      - domain: 
+        name: 
+        ssl: 
+        auto_poll: 
+        credentials:
+          user_name: 
+          password: 
+        poll_frequency_minutes: 
+        scan_non_os_packages: 
+
+  certs:
+    skipCert: true
+    serverCertificate:
+    serverKey:
