@@ -11,7 +11,6 @@ serviceAccount:
 
 config:
   static_cache_location: /opt/lacework
-  default_registry:
   lacework:
     account_name:
     integration_access_token:
