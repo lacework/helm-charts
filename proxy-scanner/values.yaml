@@ -3,7 +3,7 @@
 # The following values may be set or changed to configure the proxy-scanner service
 #
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.2.1
+image: lacework/lacework-proxy-scanner:0.2.2
 
 name: lacework-proxy-scanner
 serviceAccount:
@@ -11,6 +11,7 @@ serviceAccount:
 
 config:
   static_cache_location: /opt/lacework
+  default_registry:
   lacework:
     account_name:
     integration_access_token:
