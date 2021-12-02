@@ -28,29 +28,46 @@ tar -xvf admission-controller-*.tar.gz --directory ~/lacework/.
    webhooks:
    caBundle: "<base64_encoded_ca.crt>"
    ```
+   
+4. If proxy scanner is not already installed, update the proxy-scanner settings on the bottom of the values.yaml file by providing your Lacework account name, integration token, and registries. Otherwise, set proxy-scanner.enabled to false.
 
-4. Update proxy scanner settings if required - port, skipVerify, caCert according to definitions provided below
+5. Update proxy scanner settings if required - port, skipVerify, caCert according to definitions provided below
 
-5. Install Validating webhook in the cluster
+6. Install Validating webhook in the cluster
 cd lacework
 helm install -n lacework --create-namespace lacework-admission-controller ./helm/admission-controller
 
-6.  Display the pods for verification
+7.  Display the pods for verification
 kubectl get pods -n lacework-dev
     
-## Adding helm repo
-```
-helm repo add lacework https://lacework.github.io/helm-charts 
+## Adding helm repo and install using combined helm chart
+`helm repo add lacework https://lacework.github.io/helm-charts`
 
-helm upgrade --install --create-namespace --namespace lacework \
-   --set webhooks.caBundle= ${WEBHOOK_ROOT_CA} \
-   --set certs.serverCertificate= ${WEBHOOK_SERVER_CERT}\
-   --set certs.serverKey= ${WEBHOOK_SERVER_KEY}\
-   --set scanner.caCert= ${SCANNER_ROOT_CA}\
-lacework-admission-controller lacework/admission-controller
-```
+Retrieve the values.yaml from https://github.com/lacework/helm-charts/blob/main/admission-controller/values.yaml and fill in the proxy scanner configuration found here https://docs.lacework.com/integrate-proxy-scanner.
+
+`helm upgrade --install --create-namespace --namespace lacework \`
+
+`--set webhooks.caBundle= ${WEBHOOK_ROOT_CA} \`
+
+`--set certs.serverCertificate= ${WEBHOOK_SERVER_CERT}\`
+
+`--set certs.serverKey= ${WEBHOOK_SERVER_KEY}\`
+
+`--values values.yaml \`
+
+`lacework-admission-controller lacework/admission-controller`
+
 Note: the above should be base 64 encoded certs/keys you have or generate using the script above
 scanner.caCert is used for SSL between Admission webhook and scanner
+scanner.caCert is used for SSL between Admission webhook and scanner (optional)
+
+If you want to use SSL between admission webhook and scanner, add these to the command above.
+
+--set certs.skipCert=false \
+
+--set certs.serverCertificate=`cat <base64_scanner.crt>` \
+
+--set certs.serverKey=`cat <base64_scanner.key>` \
 
 ## Configurable parameters
 
@@ -69,6 +86,7 @@ scanner.caCert is used for SSL between Admission webhook and scanner
 | `scanner.skipVerify`              | SSL between the webhook and the scanner                                     | `true`                    | `NO`                    |
 | `scanner.caCert`                  | Root cert of scanner                                                        | `N/A`                     | `YES`                   |
 | `scanner.timeout`                 | Context deadline timeout                                                    | `30`                      | `NO`                    |
+| `scanner.defaultRegistry`         | Default registry to use when none provided in image name                    | `index.docker.io`                      | `NO`                    |
 
 
 ## Issues and feedback
