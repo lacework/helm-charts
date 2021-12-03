@@ -11,7 +11,7 @@ serviceAccount:
 
 config:
   static_cache_location: /opt/lacework
-  default_registry:
+  default_registry: index.docker.io
   lacework:
     account_name:
     integration_access_token:
