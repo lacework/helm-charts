@@ -8,6 +8,9 @@ admission:
   tls_port: 8443
   cert_file_path: "/certs/admission.crt"
   cert_key_path: "/certs/admission.key"
+  excluded_resources:
+  -
+  -
 
 policy:
   block_exec: false
@@ -59,7 +62,7 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.1.1
+  tag: 0.1.2
   pullPolicy: Always
   replicaCount: 1
   service:
@@ -70,7 +73,7 @@ proxy-scanner:
   default_registry: index.docker.io
   enabled: true
   config:
-    static_cache_location: /opt/lacework/cache
+    static_cache_location: /opt/lacework
     lacework:
       account_name: 
       integration_access_token: 

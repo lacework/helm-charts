@@ -69,7 +69,7 @@ scanner.caCert is used for SSL between Admission webhook and scanner
 | `scanner.skipVerify`              | SSL between the webhook and the scanner                                     | `true`                    | `NO`                    |
 | `scanner.caCert`                  | Root cert of scanner                                                        | `N/A`                     | `YES`                   |
 | `scanner.timeout`                 | Context deadline timeout                                                    | `30`                      | `NO`                    |
-
+| `admission.excluded_resources`    | List of resources to skip admission review                                  | `N/A`                     | `NO`                    |
 
 ## Issues and feedback
 
