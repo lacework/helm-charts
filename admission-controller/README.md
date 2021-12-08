@@ -1,6 +1,13 @@
 # Admission Controller Helm Chart
 
-## Disclaimer: This is an Alpha Release, for internal use only
+## Release notes
+### 0.1.2
+- Added configurable list of resources to exclude for admission review.
+### 0.1.1
+- Added proxy-scanner as a dependency to enable combined helm chart deployment.
+- Added config option for specifying a default registry when no domain name provided in image name.
+
+## Disclaimer: This is a Beta release.
 Contact Lacework Support to be enrolled in the Beta program
 
 ## Instructions for using HELM charts to deploy the Lacework Admission Controller.
