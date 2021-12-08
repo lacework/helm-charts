@@ -86,7 +86,8 @@ If you want to use SSL between admission webhook and scanner, add these to the c
 | `scanner.skipVerify`              | SSL between the webhook and the scanner                                     | `true`                    | `NO`                    |
 | `scanner.caCert`                  | Root cert of scanner                                                        | `N/A`                     | `YES`                   |
 | `scanner.timeout`                 | Context deadline timeout                                                    | `30`                      | `NO`                    |
-| `scanner.defaultRegistry`         | Default registry to use when none provided in image name                    | `index.docker.io`                      | `NO`                    |
+| `scanner.defaultRegistry`         | Default registry to use when none provided in image name                    | `index.docker.io`         | `NO`                    |
+| `admission.excluded_resources`    | List of resources to skip admission review                                  | `N/A`                     | `NO`                    |
 
 
 ## Issues and feedback

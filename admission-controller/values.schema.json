@@ -1,0 +1,1004 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "title": "The root schema",
+    "description": "The root schema comprises the entire JSON document.",
+    "default": {},
+    "examples": [
+      {
+        "name": "lacework-admission-controller",
+        "logger": {
+          "debug": true
+        },
+        "admission": {
+          "tls_port": 8443,
+          "cert_file_path": "/certs/admission.crt",
+          "cert_key_path": "/certs/admission.key",
+          "excluded_resources": [
+            null,
+            null
+          ]
+        },
+        "policy": {
+          "block_exec": false,
+          "bypass_scope": "kube-system,kube-public,lacework,lacework-dev"
+        },
+        "scanner": {
+          "server": "lacework-proxy-scanner",
+          "namespace": "lacework",
+          "skipVerify": true,
+          "caCert": null,
+          "timeout": 30,
+          "defaultRegistry": "index.docker.io"
+        },
+        "nameOverride": "lacework-admission-controller",
+        "fullnameOverride": "lacework-admission-controller",
+        "serviceAccount": {
+          "name": "lacework-admission-sa"
+        },
+        "certs": {
+          "name": "lacework-admission-certs",
+          "serverCertificate": null,
+          "serverKey": null
+        },
+        "webhooks": {
+          "caBundle": null,
+          "failurePolicy": "Ignore",
+          "timeoutSeconds": 30
+        },
+        "podAnnotations": {},
+        "securityContext": {
+          "runAsUser": 11431,
+          "runAsGroup": 11433,
+          "fsGroup": 11433
+        },
+        "container_securityContext": {},
+        "resources": {},
+        "nodeSelector": {},
+        "deployment": {
+          "image": "lacework/lacework-admission-controller",
+          "tag": "0.1.2",
+          "pullPolicy": "Always",
+          "replicaCount": 1,
+          "service": {
+            "port": 8443
+          }
+        },
+        "proxy-scanner": {
+          "fullnameOverride": "lacework-proxy-scanner",
+          "default_registry": "index.docker.io",
+          "enabled": true,
+          "config": {
+            "static_cache_location": "/opt/lacework",
+            "lacework": {
+              "account_name": null,
+              "integration_access_token": null
+            },
+            "registries": [
+              {
+                "domain": null,
+                "name": null,
+                "ssl": null,
+                "auto_poll": null,
+                "credentials": {
+                  "user_name": null,
+                  "password": null
+                },
+                "poll_frequency_minutes": null,
+                "scan_non_os_packages": null
+              }
+            ]
+          },
+          "certs": {
+            "skipCert": true,
+            "serverCertificate": null,
+            "serverKey": null
+          }
+        }
+      }
+    ],
+    "required": [
+      "name",
+      "admission",
+      "policy",
+      "scanner",
+      "serviceAccount",
+      "certs",
+      "webhooks",
+      "deployment",
+      "proxy-scanner"
+    ],
+    "properties": {
+      "name": {
+        "$id": "#/properties/name",
+        "type": "string",
+        "title": "The name schema",
+        "default": "",
+        "examples": [
+          "lacework-admission-controller"
+        ]
+      },
+      "logger": {
+        "$id": "#/properties/logger",
+        "type": "object",
+        "title": "The logger schema",
+        "default": {},
+        "examples": [
+          {
+            "debug": true
+          }
+        ],
+        "required": [],
+        "properties": {
+          "debug": {
+            "$id": "#/properties/logger/properties/debug",
+            "type": "boolean",
+            "title": "The debug schema",
+            "default": false,
+            "examples": [
+              true
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "admission": {
+        "$id": "#/properties/admission",
+        "type": "object",
+        "title": "The admission schema",
+        "default": {},
+        "examples": [
+          {
+            "tls_port": 8443,
+            "cert_file_path": "/certs/admission.crt",
+            "cert_key_path": "/certs/admission.key",
+            "excluded_resources": [
+              null,
+              null
+            ]
+          }
+        ],
+        "required": [
+          "tls_port",
+          "cert_file_path",
+          "cert_key_path"
+        ],
+        "properties": {
+          "tls_port": {
+            "$id": "#/properties/admission/properties/tls_port",
+            "type": "integer",
+            "title": "The tls_port schema",
+            "default": 0,
+            "examples": [
+              8443
+            ]
+          },
+          "cert_file_path": {
+            "$id": "#/properties/admission/properties/cert_file_path",
+            "type": "string",
+            "title": "The cert_file_path schema",
+            "default": "",
+            "examples": [
+              "/certs/admission.crt"
+            ]
+          },
+          "cert_key_path": {
+            "$id": "#/properties/admission/properties/cert_key_path",
+            "type": "string",
+            "title": "The cert_key_path schema",
+            "default": "",
+            "examples": [
+              "/certs/admission.key"
+            ]
+          },
+          "excluded_resources": {
+            "$id": "#/properties/admission/properties/excluded_resources",
+            "type": "array",
+            "title": "The excluded_resources schema",
+            "default": [],
+            "examples": [
+              [
+                null,
+                null
+              ]
+            ],
+            "additionalItems": true,
+            "items": {
+              "$id": "#/properties/admission/properties/excluded_resources/items",
+              "anyOf": [
+                {
+                  "$id": "#/properties/admission/properties/excluded_resources/items/anyOf/0",
+                  "type": "null",
+                  "title": "The first anyOf schema",
+                  "default": null,
+                  "examples": [
+                    null
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        "additionalProperties": true
+      },
+      "policy": {
+        "$id": "#/properties/policy",
+        "type": "object",
+        "title": "The policy schema",
+        "default": {},
+        "examples": [
+          {
+            "block_exec": false,
+            "bypass_scope": "kube-system,kube-public,lacework,lacework-dev"
+          }
+        ],
+        "required": [],
+        "properties": {
+          "block_exec": {
+            "$id": "#/properties/policy/properties/block_exec",
+            "type": "boolean",
+            "title": "The block_exec schema",
+            "default": false,
+            "examples": [
+              false
+            ]
+          },
+          "bypass_scope": {
+            "$id": "#/properties/policy/properties/bypass_scope",
+            "type": "string",
+            "title": "The bypass_scope schema",
+            "default": "",
+            "examples": [
+              "kube-system,kube-public,lacework,lacework-dev"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "scanner": {
+        "$id": "#/properties/scanner",
+        "type": "object",
+        "title": "The scanner schema",
+        "default": {},
+        "examples": [
+          {
+            "server": "lacework-proxy-scanner",
+            "namespace": "lacework",
+            "skipVerify": true,
+            "caCert": null,
+            "timeout": 30,
+            "defaultRegistry": "index.docker.io"
+          }
+        ],
+        "required": [
+          "server",
+          "namespace",
+          "skipVerify",
+          "timeout"
+        ],
+        "properties": {
+          "server": {
+            "$id": "#/properties/scanner/properties/server",
+            "type": "string",
+            "title": "The server schema",
+            "default": "",
+            "examples": [
+              "lacework-proxy-scanner"
+            ]
+          },
+          "namespace": {
+            "$id": "#/properties/scanner/properties/namespace",
+            "type": "string",
+            "title": "The namespace schema",
+            "default": "",
+            "examples": [
+              "lacework"
+            ]
+          },
+          "skipVerify": {
+            "$id": "#/properties/scanner/properties/skipVerify",
+            "type": "boolean",
+            "title": "The skipVerify schema",
+            "default": false,
+            "examples": [
+              true
+            ]
+          },
+          "caCert": {
+            "$id": "#/properties/scanner/properties/caCert",
+            "type": "null",
+            "title": "The caCert schema",
+            "default": null,
+            "examples": [
+              null
+            ]
+          },
+          "timeout": {
+            "$id": "#/properties/scanner/properties/timeout",
+            "type": "integer",
+            "title": "The timeout schema",
+            "default": 0,
+            "examples": [
+              30
+            ]
+          },
+          "defaultRegistry": {
+            "$id": "#/properties/scanner/properties/defaultRegistry",
+            "type": "string",
+            "title": "The defaultRegistry schema",
+            "default": "",
+            "examples": [
+              "index.docker.io"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "nameOverride": {
+        "$id": "#/properties/nameOverride",
+        "type": "string",
+        "title": "The nameOverride schema",
+        "default": "",
+        "examples": [
+          "lacework-admission-controller"
+        ]
+      },
+      "fullnameOverride": {
+        "$id": "#/properties/fullnameOverride",
+        "type": "string",
+        "title": "The fullnameOverride schema",
+        "default": "",
+        "examples": [
+          "lacework-admission-controller"
+        ]
+      },
+      "serviceAccount": {
+        "$id": "#/properties/serviceAccount",
+        "type": "object",
+        "title": "The serviceAccount schema",
+        "default": {},
+        "examples": [
+          {
+            "name": "lacework-admission-sa"
+          }
+        ],
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "$id": "#/properties/serviceAccount/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "default": "",
+            "examples": [
+              "lacework-admission-sa"
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "certs": {
+        "$id": "#/properties/certs",
+        "type": "object",
+        "title": "The certs schema",
+        "default": {},
+        "examples": [
+          {
+            "name": "lacework-admission-certs",
+            "serverCertificate": null,
+            "serverKey": null
+          }
+        ],
+        "required": [],
+        "properties": {
+          "name": {
+            "$id": "#/properties/certs/properties/name",
+            "type": "string",
+            "title": "The name schema",
+            "default": "",
+            "examples": [
+              "lacework-admission-certs"
+            ]
+          },
+          "serverCertificate": {
+            "$id": "#/properties/certs/properties/serverCertificate",
+            "type": "null",
+            "title": "The serverCertificate schema",
+            "default": null,
+            "examples": [
+              null
+            ]
+          },
+          "serverKey": {
+            "$id": "#/properties/certs/properties/serverKey",
+            "type": "null",
+            "title": "The serverKey schema",
+            "default": null,
+            "examples": [
+              null
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "webhooks": {
+        "$id": "#/properties/webhooks",
+        "type": "object",
+        "title": "The webhooks schema",
+        "default": {},
+        "examples": [
+          {
+            "caBundle": null,
+            "failurePolicy": "Ignore",
+            "timeoutSeconds": 30
+          }
+        ],
+        "required": [
+          "failurePolicy",
+          "timeoutSeconds"
+        ],
+        "properties": {
+          "caBundle": {
+            "$id": "#/properties/webhooks/properties/caBundle",
+            "type": "null",
+            "title": "The caBundle schema",
+            "default": null,
+            "examples": [
+              null
+            ]
+          },
+          "failurePolicy": {
+            "$id": "#/properties/webhooks/properties/failurePolicy",
+            "type": "string",
+            "title": "The failurePolicy schema",
+            "default": "",
+            "examples": [
+              "Ignore"
+            ]
+          },
+          "timeoutSeconds": {
+            "$id": "#/properties/webhooks/properties/timeoutSeconds",
+            "type": "integer",
+            "title": "The timeoutSeconds schema",
+            "default": 0,
+            "examples": [
+              30
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "podAnnotations": {
+        "$id": "#/properties/podAnnotations",
+        "type": "object",
+        "title": "The podAnnotations schema",
+        "default": {},
+        "examples": [
+          {}
+        ],
+        "required": [],
+        "additionalProperties": true
+      },
+      "securityContext": {
+        "$id": "#/properties/securityContext",
+        "type": "object",
+        "title": "The securityContext schema",
+        "default": {},
+        "examples": [
+          {
+            "runAsUser": 11431,
+            "runAsGroup": 11433,
+            "fsGroup": 11433
+          }
+        ],
+        "required": [],
+        "properties": {
+          "runAsUser": {
+            "$id": "#/properties/securityContext/properties/runAsUser",
+            "type": "integer",
+            "title": "The runAsUser schema",
+            "default": 0,
+            "examples": [
+              11431
+            ]
+          },
+          "runAsGroup": {
+            "$id": "#/properties/securityContext/properties/runAsGroup",
+            "type": "integer",
+            "title": "The runAsGroup schema",
+            "default": 0,
+            "examples": [
+              11433
+            ]
+          },
+          "fsGroup": {
+            "$id": "#/properties/securityContext/properties/fsGroup",
+            "type": "integer",
+            "title": "The fsGroup schema",
+            "default": 0,
+            "examples": [
+              11433
+            ]
+          }
+        },
+        "additionalProperties": true
+      },
+      "container_securityContext": {
+        "$id": "#/properties/container_securityContext",
+        "type": "object",
+        "title": "The container_securityContext schema",
+        "default": {},
+        "examples": [
+          {}
+        ],
+        "required": [],
+        "additionalProperties": true
+      },
+      "resources": {
+        "$id": "#/properties/resources",
+        "type": "object",
+        "title": "The resources schema",
+        "default": {},
+        "examples": [
+          {}
+        ],
+        "required": [],
+        "additionalProperties": true
+      },
+      "nodeSelector": {
+        "$id": "#/properties/nodeSelector",
+        "type": "object",
+        "title": "The nodeSelector schema",
+        "default": {},
+        "examples": [
+          {}
+        ],
+        "required": [],
+        "additionalProperties": true
+      },
+      "deployment": {
+        "$id": "#/properties/deployment",
+        "type": "object",
+        "title": "The deployment schema",
+        "default": {},
+        "examples": [
+          {
+            "image": "lacework/lacework-admission-controller",
+            "tag": "0.1.2",
+            "pullPolicy": "Always",
+            "replicaCount": 1,
+            "service": {
+              "port": 8443
+            }
+          }
+        ],
+        "required": [
+          "image",
+          "tag",
+          "pullPolicy",
+          "replicaCount",
+          "service"
+        ],
+        "properties": {
+          "image": {
+            "$id": "#/properties/deployment/properties/image",
+            "type": "string",
+            "title": "The image schema",
+            "default": "",
+            "examples": [
+              "lacework/lacework-admission-controller"
+            ]
+          },
+          "tag": {
+            "$id": "#/properties/deployment/properties/tag",
+            "type": "string",
+            "title": "The tag schema",
+            "default": "",
+            "examples": [
+              "0.1.2"
+            ]
+          },
+          "pullPolicy": {
+            "$id": "#/properties/deployment/properties/pullPolicy",
+            "type": "string",
+            "title": "The pullPolicy schema",
+            "default": "",
+            "examples": [
+              "Always"
+            ]
+          },
+          "replicaCount": {
+            "$id": "#/properties/deployment/properties/replicaCount",
+            "type": "integer",
+            "title": "The replicaCount schema",
+            "default": 0,
+            "examples": [
+              1
+            ]
+          },
+          "service": {
+            "$id": "#/properties/deployment/properties/service",
+            "type": "object",
+            "title": "The service schema",
+            "default": {},
+            "examples": [
+              {
+                "port": 8443
+              }
+            ],
+            "required": [
+              "port"
+            ],
+            "properties": {
+              "port": {
+                "$id": "#/properties/deployment/properties/service/properties/port",
+                "type": "integer",
+                "title": "The port schema",
+                "default": 0,
+                "examples": [
+                  8443
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      },
+      "proxy-scanner": {
+        "$id": "#/properties/proxy-scanner",
+        "type": "object",
+        "title": "The proxy-scanner schema",
+        "default": {},
+        "examples": [
+          {
+            "fullnameOverride": "lacework-proxy-scanner",
+            "default_registry": "index.docker.io",
+            "enabled": true,
+            "config": {
+              "static_cache_location": "/opt/lacework",
+              "lacework": {
+                "account_name": null,
+                "integration_access_token": null
+              },
+              "registries": [
+                {
+                  "domain": null,
+                  "name": null,
+                  "ssl": null,
+                  "auto_poll": null,
+                  "credentials": {
+                    "user_name": null,
+                    "password": null
+                  },
+                  "poll_frequency_minutes": null,
+                  "scan_non_os_packages": null
+                }
+              ]
+            },
+            "certs": {
+              "skipCert": true,
+              "serverCertificate": null,
+              "serverKey": null
+            }
+          }
+        ],
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "fullnameOverride": {
+            "$id": "#/properties/proxy-scanner/properties/fullnameOverride",
+            "type": "string",
+            "title": "The fullnameOverride schema",
+            "default": "",
+            "examples": [
+              "lacework-proxy-scanner"
+            ]
+          },
+          "default_registry": {
+            "$id": "#/properties/proxy-scanner/properties/default_registry",
+            "type": "string",
+            "title": "The default_registry schema",
+            "default": "",
+            "examples": [
+              "index.docker.io"
+            ]
+          },
+          "enabled": {
+            "$id": "#/properties/proxy-scanner/properties/enabled",
+            "type": "boolean",
+            "title": "The enabled schema",
+            "default": false,
+            "examples": [
+              true
+            ]
+          },
+          "config": {
+            "$id": "#/properties/proxy-scanner/properties/config",
+            "type": "object",
+            "title": "The config schema",
+            "default": {},
+            "examples": [
+              {
+                "static_cache_location": "/opt/lacework",
+                "lacework": {
+                  "account_name": null,
+                  "integration_access_token": null
+                },
+                "registries": [
+                  {
+                    "domain": null,
+                    "name": null,
+                    "ssl": null,
+                    "auto_poll": null,
+                    "credentials": {
+                      "user_name": null,
+                      "password": null
+                    },
+                    "poll_frequency_minutes": null,
+                    "scan_non_os_packages": null
+                  }
+                ]
+              }
+            ],
+            "required": [
+              "static_cache_location",
+              "lacework",
+              "registries"
+            ],
+            "properties": {
+              "static_cache_location": {
+                "$id": "#/properties/proxy-scanner/properties/config/properties/static_cache_location",
+                "type": "string",
+                "title": "The static_cache_location schema",
+                "default": "",
+                "examples": [
+                  "/opt/lacework"
+                ]
+              },
+              "lacework": {
+                "$id": "#/properties/proxy-scanner/properties/config/properties/lacework",
+                "type": "object",
+                "title": "The lacework schema",
+                "default": {},
+                "examples": [
+                  {
+                    "account_name": null,
+                    "integration_access_token": null
+                  }
+                ],
+                "required": [
+                  "account_name",
+                  "integration_access_token"
+                ],
+                "properties": {
+                  "account_name": {
+                    "$id": "#/properties/proxy-scanner/properties/config/properties/lacework/properties/account_name",
+                    "type": "null",
+                    "title": "The account_name schema",
+                    "default": null,
+                    "examples": [
+                      null
+                    ]
+                  },
+                  "integration_access_token": {
+                    "$id": "#/properties/proxy-scanner/properties/config/properties/lacework/properties/integration_access_token",
+                    "type": "null",
+                    "title": "The integration_access_token schema",
+                    "default": null,
+                    "examples": [
+                      null
+                    ]
+                  }
+                },
+                "additionalProperties": true
+              },
+              "registries": {
+                "$id": "#/properties/proxy-scanner/properties/config/properties/registries",
+                "type": "array",
+                "title": "The registries schema",
+                "default": [],
+                "examples": [
+                  [
+                    {
+                      "domain": null,
+                      "name": null,
+                      "ssl": null,
+                      "auto_poll": null,
+                      "credentials": {
+                        "user_name": null,
+                        "password": null
+                      },
+                      "poll_frequency_minutes": null,
+                      "scan_non_os_packages": null
+                    }
+                  ]
+                ],
+                "additionalItems": true,
+                "items": {
+                  "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items",
+                  "anyOf": [
+                    {
+                      "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0",
+                      "type": "object",
+                      "title": "The first anyOf schema",
+                      "default": {},
+                      "examples": [
+                        {
+                          "domain": null,
+                          "name": null,
+                          "ssl": null,
+                          "auto_poll": null,
+                          "credentials": {
+                            "user_name": null,
+                            "password": null
+                          },
+                          "poll_frequency_minutes": null,
+                          "scan_non_os_packages": null
+                        }
+                      ],
+                      "required": [
+                        "domain",
+                        "name",
+                        "ssl",
+                        "auto_poll",
+                        "credentials",
+                        "poll_frequency_minutes",
+                        "scan_non_os_packages"
+                      ],
+                      "properties": {
+                        "domain": {
+                          "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/domain",
+                          "type": "null",
+                          "title": "The domain schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "name": {
+                          "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/name",
+                          "type": "null",
+                          "title": "The name schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "ssl": {
+                          "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/ssl",
+                          "type": "null",
+                          "title": "The ssl schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "auto_poll": {
+                          "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/auto_poll",
+                          "type": "null",
+                          "title": "The auto_poll schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "credentials": {
+                          "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/credentials",
+                          "type": "object",
+                          "title": "The credentials schema",
+                          "default": {},
+                          "examples": [
+                            {
+                              "user_name": null,
+                              "password": null
+                            }
+                          ],
+                          "required": [
+                            "user_name",
+                            "password"
+                          ],
+                          "properties": {
+                            "user_name": {
+                              "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/credentials/properties/user_name",
+                              "type": "null",
+                              "title": "The user_name schema",
+                              "default": null,
+                              "examples": [
+                                null
+                              ]
+                            },
+                            "password": {
+                              "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/credentials/properties/password",
+                              "type": "null",
+                              "title": "The password schema",
+                              "default": null,
+                              "examples": [
+                                null
+                              ]
+                            }
+                          },
+                          "additionalProperties": true
+                        },
+                        "poll_frequency_minutes": {
+                          "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/poll_frequency_minutes",
+                          "type": "null",
+                          "title": "The poll_frequency_minutes schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        },
+                        "scan_non_os_packages": {
+                          "$id": "#/properties/proxy-scanner/properties/config/properties/registries/items/anyOf/0/properties/scan_non_os_packages",
+                          "type": "null",
+                          "title": "The scan_non_os_packages schema",
+                          "default": null,
+                          "examples": [
+                            null
+                          ]
+                        }
+                      },
+                      "additionalProperties": true
+                    }
+                  ]
+                }
+              }
+            },
+            "additionalProperties": true
+          },
+          "certs": {
+            "$id": "#/properties/proxy-scanner/properties/certs",
+            "type": "object",
+            "title": "The certs schema",
+            "default": {},
+            "examples": [
+              {
+                "skipCert": true,
+                "serverCertificate": null,
+                "serverKey": null
+              }
+            ],
+            "required": [
+              "skipCert"
+            ],
+            "properties": {
+              "skipCert": {
+                "$id": "#/properties/proxy-scanner/properties/certs/properties/skipCert",
+                "type": "boolean",
+                "title": "The skipCert schema",
+                "default": false,
+                "examples": [
+                  true
+                ]
+              },
+              "serverCertificate": {
+                "$id": "#/properties/proxy-scanner/properties/certs/properties/serverCertificate",
+                "type": "null",
+                "title": "The serverCertificate schema",
+                "default": null,
+                "examples": [
+                  null
+                ]
+              },
+              "serverKey": {
+                "$id": "#/properties/proxy-scanner/properties/certs/properties/serverKey",
+                "type": "null",
+                "title": "The serverKey schema",
+                "default": null,
+                "examples": [
+                  null
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "additionalProperties": true
+  }
