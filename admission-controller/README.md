@@ -1,6 +1,8 @@
 # Admission Controller Helm Chart
 
 ## Release notes
+### 0.1.3
+- Added values.schema.json to enable helm lint.
 ### 0.1.2
 - Added configurable list of resources to exclude for admission review.
 ### 0.1.1

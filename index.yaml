@@ -3,6 +3,28 @@ entries:
   admission-controller:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2021-12-08T14:46:27.516292-06:00"
+    dependencies:
+    - condition: proxy-scanner.enabled
+      name: proxy-scanner
+      repository: https://lacework.github.io/helm-charts
+      version: 0.2.2
+    description: Lacework admission controller using Lacework proxy scanner
+    digest: 65240b75ccc0f5224451364fd2fae55d73612ac79f441f5cc794f9b6feb24355
+    keywords:
+    - admission-controller
+    - runtime-security
+    - lacework
+    maintainers:
+    - email: chitra.kumar@lacework.net
+      name: chitrapkumar
+    name: admission-controller
+    type: application
+    urls:
+    - admission-controller-0.1.3.tgz
+    version: 0.1.3
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2021-12-07T15:49:46.489022-06:00"
     dependencies:
     - condition: proxy-scanner.enabled
@@ -108,7 +130,7 @@ entries:
     appVersion: "1.0"
     created: "2021-11-16T19:49:36.102667-08:00"
     description: A Helm chart for Lacework Proxy Scanner
-    digest: 652a7a24a1b93da1afe9ebcff66b08c79580b672e9a17a739c50ffa330a78f6d
+    digest: adc5ba1623b878b70329e67cf97263f7ff353befdd2d47efe8f2e75808d6ad76
     name: proxy-scanner
     type: application
     urls:
@@ -124,4 +146,4 @@ entries:
     urls:
     - proxy-scanner-0.2.1.tgz
     version: 0.2.1
-generated: "2021-12-07T15:49:46.480687-06:00"
+generated: "2021-12-08T14:46:27.511119-06:00"
