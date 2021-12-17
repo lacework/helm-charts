@@ -336,7 +336,7 @@
           }
         },
         "blockOnError": {
-          "$id": "#/properties/scanner/properties/skipVerify",
+          "$id": "#/properties/scanner/properties/blockOnError",
           "type": "boolean",
           "title": "The blockOnError schema",
           "default": false,
