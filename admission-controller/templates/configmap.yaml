@@ -24,3 +24,4 @@ data:
       timeout: {{ .Values.scanner.timeout }}
       skipVerify: {{ .Values.scanner.skipVerify }}
       defaultRegistry: {{ .Values.scanner.defaultRegistry }}
+      blockOnError: {{ .Values.scanner.blockOnError }}

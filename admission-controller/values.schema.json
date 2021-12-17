@@ -30,7 +30,8 @@
           "skipVerify": true,
           "caCert": null,
           "timeout": 30,
-          "defaultRegistry": "index.docker.io"
+          "defaultRegistry": "index.docker.io",
+          "blockOnError": false
         },
         "nameOverride": "lacework-admission-controller",
         "fullnameOverride": "lacework-admission-controller",
@@ -268,7 +269,8 @@
             "skipVerify": true,
             "caCert": null,
             "timeout": 30,
-            "defaultRegistry": "index.docker.io"
+            "defaultRegistry": "index.docker.io",
+            "blockOnError": false
           }
         ],
         "required": [
@@ -332,6 +334,15 @@
               "index.docker.io"
             ]
           }
+        },
+        "blockOnError": {
+          "$id": "#/properties/scanner/properties/skipVerify",
+          "type": "boolean",
+          "title": "The blockOnError schema",
+          "default": false,
+          "examples": [
+            true
+          ]
         },
         "additionalProperties": true
       },

@@ -1,6 +1,8 @@
 # Admission Controller Helm Chart
 
 ## Release notes
+### 0.1.4
+- Added configurable parameter to block or allow deployment on error connecting to proxy-scanner
 ### 0.1.3
 - Added values.schema.json to enable helm lint.
 ### 0.1.2
@@ -97,6 +99,7 @@ If you want to use SSL between admission webhook and scanner, add these to the c
 | `scanner.timeout`                 | Context deadline timeout                                                    | `30`                      | `NO`                    |
 | `scanner.defaultRegistry`         | Default registry to use when none provided in image name                    | `index.docker.io`         | `NO`                    |
 | `admission.excluded_resources`    | List of resources to skip admission review                                  | `N/A`                     | `NO`                    |
+| `scanner.blockOnError`            | Block admission request if scanner returns error                            | `false`                   | `YES`                   |
 
 
 ## Issues and feedback

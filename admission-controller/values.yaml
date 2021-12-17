@@ -23,6 +23,7 @@ scanner:
   caCert:
   timeout: 30
   defaultRegistry: index.docker.io
+  blockOnError: false
 
 # Kubernetes
 nameOverride: "lacework-admission-controller"
@@ -70,9 +71,9 @@ deployment:
 
 proxy-scanner:
   fullnameOverride: lacework-proxy-scanner
-  default_registry: index.docker.io
   enabled: true
   config:
+    default_registry: index.docker.io
     static_cache_location: /opt/lacework
     lacework:
       account_name: 
