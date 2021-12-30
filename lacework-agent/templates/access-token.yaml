@@ -1,3 +1,4 @@
+{{- if not .Values.laceworkConfig.accessTokenSecret.enabled -}}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -8,3 +9,4 @@ metadata:
 type: Opaque
 data:
   agent-access-token: {{ required "A valid AccessToken is required! Specify your Lacework agent token in values.yaml" .Values.laceworkConfig.accessToken | b64enc }}
+{{- end -}}

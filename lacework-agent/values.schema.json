@@ -39,12 +39,23 @@
         },
         "laceworkConfig": {
             "type": "object",
-            "required": [
-                "accessToken"
-            ],
             "properties": {
                 "accessToken": {
                     "type": "string"
+                },
+                "accessTokenSecret": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "key": {
+                            "type": "string"
+                        },
+                        "name": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "autoUpgrade": {
                     "type": "string",

@@ -29,9 +29,14 @@ resources:
 laceworkConfig:
   # [Optional] Set to "disable" to disable autoupgrade of the datacollector
   autoUpgrade: enable
-  # [Required] An access token is required before running agents.
+  # [Optional] An access token is required before running agents. Required if accessTokenSecret isn't provided.
   # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
-  accessToken: 
+  accessToken: ""
+  # [Optional] A reference to an existing secret that contains the access token. Required if accessToken isn't provided.
+  accessTokenSecret:
+    enabled: false
+    name: ""
+    key: ""
   # [Optional] Give your k8s environment a friendly name
   env: 
   # [Optional] Kubernetes cluster name

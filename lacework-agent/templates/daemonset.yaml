@@ -35,11 +35,19 @@ spec:
         env:
           - name: LaceworkLogStdout
             value: "yes"
+{{- if .Values.laceworkConfig.accessTokenSecret.enabled }}
+          - name: LaceworkAccessToken
+            valueFrom:
+              secretKeyRef:
+                name: {{ required "Existing secret name required!" .Values.laceworkConfig.accessTokenSecret.name }}
+                key: {{ required "Existing secret key required!" .Values.laceworkConfig.accessTokenSecret.key }}
+{{- else }}
           - name: LaceworkAccessToken
             valueFrom:
               secretKeyRef:
                 name: {{ include "lacework-agent.name" . }}-access-token
                 key: agent-access-token
+{{- end }}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
         securityContext:
