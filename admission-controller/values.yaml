@@ -87,7 +87,7 @@ proxy-scanner:
           user_name: 
           password: 
         poll_frequency_minutes: 
-        scan_non_os_packages: 
+        disable_non_os_package_scanning:
 
   certs:
     skipCert: true
