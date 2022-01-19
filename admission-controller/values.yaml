@@ -81,6 +81,9 @@ proxy-scanner:
     registries:
       - domain: 
         name: 
+        auth_header_name:
+        auth_type:
+        is_public:
         ssl: 
         auto_poll: 
         credentials:
