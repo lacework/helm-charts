@@ -7,12 +7,20 @@ metadata:
   labels:
     tier: monitoring
     app: {{ include "lacework-agent.name" . }}
+  {{- with .Values.laceworkConfig.annotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
 spec:
   selector:
     matchLabels:
       name: {{ include "lacework-agent.name" . }}
   template:
     metadata:
+      {{- with .Values.laceworkConfig.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
         name: {{ include "lacework-agent.name" . }}
     spec:

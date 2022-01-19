@@ -3,6 +3,10 @@ kind: ConfigMap
 metadata:
   name: lacework-config
   namespace: {{ .Release.Namespace }}          
+  {{- with .Values.laceworkConfig.annotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
 data:
   config.json: |
     {"autoupgrade": "{{ required "A value for autoupgrade is required" .Values.laceworkConfig.autoUpgrade }}",
