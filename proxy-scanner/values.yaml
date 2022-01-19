@@ -3,7 +3,7 @@
 # The following values may be set or changed to configure the proxy-scanner service
 #
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.2.5
+image: lacework/lacework-proxy-scanner:0.2.6
 
 name: lacework-proxy-scanner
 serviceAccount:
@@ -11,7 +11,7 @@ serviceAccount:
 
 config:
   static_cache_location: /opt/lacework
-  default_registry: index.docker.io
+  default_registry:
   lacework:
     account_name:
     integration_access_token:
@@ -19,6 +19,9 @@ config:
     - domain:
       ssl: true
       name:
+      auth_header_name:
+      auth_type:
+      is_public:
       auto_poll: false
       credentials:
         user_name:
@@ -27,6 +30,9 @@ config:
     - domain:
       ssl: true
       name:
+      auth_header_name:
+      auth_type:
+      is_public:
       auto_poll: false
       credentials:
         user_name:

@@ -25,6 +25,24 @@ data:
         method: GET
         api: /v2/%repository/blobs/%digest
         token_scope: repository:%repository:pull
+    gcr:
+      manifest:
+        method: GET
+        api: /v2/%repository/manifests/%reference
+        token_scope: repository:%repository:pull
+      blob:
+        method: GET
+        api: /v2/%repository/blobs/%digest
+        token_scope: repository:%repository:pull
+    ecr:
+      manifest:
+        method: GET
+        api: /v2/%repository/manifests/%reference
+        token_scope: repository:%repository:pull
+      blob:
+        method: GET
+        api: /v2/%repository/blobs/%digest
+        token_scope: repository:%repository:pull
   notifications.yml: |
     dtr:
       digest: $.contents.digest
