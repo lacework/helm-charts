@@ -131,6 +131,26 @@ entries:
   lacework-agent:
   - apiVersion: v1
     appVersion: "1.0"
+    created: "2022-01-19T16:04:11.685281973-08:00"
+    description: Lacework Agent
+    digest: 40199f36400a1d1a3e434a512fc79cc82866183ac7497423ec15c5e59dfc06c8
+    home: https://www.lacework.com
+    icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
+    keywords:
+    - monitoring
+    - security
+    - run-time
+    - metric
+    - troubleshooting
+    maintainers:
+    - email: info@lacework.net
+      name: lacework-support
+    name: lacework-agent
+    urls:
+    - lacework-agent-5.1.0.tgz
+    version: 5.1.0
+  - apiVersion: v1
+    appVersion: "1.0"
     created: "2021-11-12T15:07:24.796458378-08:00"
     description: Lacework Agent
     digest: e6c0778f858ed427cf0bc48a509b22480473d9d0b1a38fcc22ab532a74c1118c
@@ -220,4 +240,4 @@ entries:
     urls:
     - proxy-scanner-0.2.1.tgz
     version: 0.2.1
-generated: "2022-01-18T19:04:23.271422-08:00"
+generated: "2022-01-19T16:04:11.685281973-08:00"
