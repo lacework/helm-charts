@@ -13,4 +13,4 @@ maintainers:
 - email: info@lacework.net
   name: lacework-support
 name: lacework-agent
-version: 5.0.0
+version: 5.1.0
