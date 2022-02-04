@@ -46,6 +46,12 @@
                 "accessToken": {
                     "type": "string"
                 },
+                "annotations": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "autoUpgrade": {
                     "type": "string",
                     "enum": [
