@@ -77,6 +77,8 @@ spec:
             readOnly: true
           - name: hostlacework
             mountPath: /var/lib/lacework/collector
+          - name: hostlaceworkcontroller
+            mountPath: /var/lib/lacework/controller
           - name: hostroot
             mountPath: /laceworkfim
             readOnly: true
@@ -110,6 +112,9 @@ spec:
         - name: hostlacework
           hostPath:
               path: /var/lib/lacework/collector
+        - name: hostlaceworkcontroller
+          hostPath:
+              path: /var/lib/lacework/controller
         - name: cfgmap
           configMap:
             name: lacework-config
