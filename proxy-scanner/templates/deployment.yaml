@@ -24,7 +24,7 @@ spec:
         image: {{ .Values.image }}
         env:
           - name: LOG_LEVEL
-            value: "info"
+            value: {{ .Values.loglevel }}
         ports:
         - containerPort: 8080
         volumeMounts:
