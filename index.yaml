@@ -3,7 +3,7 @@ entries:
   admission-controller:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-02-03T21:07:15.562842-08:00"
+    created: "2022-02-07T21:24:43.305938-08:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -280,4 +280,4 @@ entries:
     urls:
     - proxy-scanner-0.2.1.tgz
     version: 0.2.1
-generated: "2022-02-07T21:16:01.369256-08:00"
+generated: "2022-02-07T21:24:43.294977-08:00"
