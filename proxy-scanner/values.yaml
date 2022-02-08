@@ -4,6 +4,12 @@
 #
 replicaCount: 1
 image: lacework/lacework-proxy-scanner:0.2.8
+# The LOG_LEVEL variable may be set or changed to configure the proxy-scanner debugging level
+# Available LOG_LEVEL options = info|error|warn|debug
+#
+loglevel: "debug"
+
+
 
 name: lacework-proxy-scanner
 serviceAccount:
