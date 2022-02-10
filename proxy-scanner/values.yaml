@@ -38,7 +38,6 @@ config:
         user_name:
         password:
       poll_frequency_minutes: 20
-fullnameOverride: {}
 certs:
   skipCert: true
   serverCertificate:

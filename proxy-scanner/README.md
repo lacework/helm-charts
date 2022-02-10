@@ -66,6 +66,7 @@ Values.yaml with the registry credentials as described above is MANDATORY.
 | `certs.serverCertificate`         | Certificate for TLS authentication with the Admission controller            | `N/A`                     | `NO`                   |
 | `certs.serverKey`                 | Certificate key for TLS authentication with the Admission controller        | `N/A`                     | `NO`                   |
 | `config`                          | Registry credentials as specified in values.yaml                            | `N/A  `                   | `YES`                   |
+| `ingress.enabled`                 | Ingress resource for webhook notification                                   | `false`                   | `NO`                    |
 
 ## Issues and feedback
 
