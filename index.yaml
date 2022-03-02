@@ -234,6 +234,16 @@ entries:
   proxy-scanner:
   - apiVersion: v2
     appVersion: "1.0"
+    created: "2022-03-01T19:42:44.20446-08:00"
+    description: A Helm chart for Lacework Proxy Scanner
+    digest: 394da8b5dc2a18b416fc423a5b13e49d9920c1f89be5976d9fe6e9d94c6883b2
+    name: proxy-scanner
+    type: application
+    urls:
+    - proxy-scanner-0.2.10.tgz
+    version: 0.2.10
+  - apiVersion: v2
+    appVersion: "1.0"
     created: "2022-02-15T16:30:46.259751-08:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: 43324444314509c32b76ce2c213e48a90c54d16d3146d69141b18e42a9383b46
@@ -312,4 +322,4 @@ entries:
     urls:
     - proxy-scanner-0.2.1.tgz
     version: 0.2.1
-generated: "2022-02-15T16:36:55.013649-08:00"
+generated: "2022-03-01T19:42:44.188796-08:00"
