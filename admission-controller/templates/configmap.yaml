@@ -5,13 +5,17 @@ metadata:
 data:
   admission.yaml: |
     ---
+    kubernetesCluster: {{ .Values.kubernetesCluster }}
     logger:
       debug: {{ .Values.logger.debug }}
 
     admission:
+      version: {{ .Values.deployment.tag }}
       tls_port: {{ .Values.admission.tls_port }}
       cert_file_path: {{ .Values.admission.cert_file_path }}
       cert_key_path: {{ .Values.admission.cert_key_path }}
+      version: {{ .Values.deployment.tag }}
+      failure_policy: {{ .Values.webhooks.failurePolicy }}
       excluded_resources: {{ toYaml .Values.admission.excluded_resources | nindent 10 }}
 
     policy:
