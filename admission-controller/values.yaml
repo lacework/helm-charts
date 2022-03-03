@@ -29,6 +29,10 @@ scanner:
 nameOverride: "lacework-admission-controller"
 fullnameOverride: "lacework-admission-controller"
 
+# [Optional] Kubernetes cluster name
+# https://support.lacework.com/hc/en-us/articles/360005263034-Deploy-on-Kubernetes
+kubernetesCluster:
+
 serviceAccount:
   name: lacework-admission-sa
 
