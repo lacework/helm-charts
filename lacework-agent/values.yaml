@@ -24,8 +24,9 @@ resources:
 laceworkConfig:
   # [Required] An access token is required before running agents.
   # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
+  # Default true. Set this to vault to not create the accessToken secret
   createSecret: true
-  accessToken: "fake"
+  accessToken: "Your Access Token Goes Here"
   # [Optional] Define custom annotations to use for identifying resources created by these charts
   annotations: {}
   # [Optional] Set to "disable" to disable autoupgrade of the datacollector
