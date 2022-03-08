@@ -3,6 +3,12 @@ kind: ConfigMap
 metadata:
   name: lacework-config
   namespace: {{ .Release.Namespace }}          
+  labels:
+    tier: monitoring
+    app: {{ include "lacework-agent.name" . }}
+    {{- with .Values.laceworkConfig.labels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
   {{- with .Values.laceworkConfig.annotations }}
   annotations:
     {{- toYaml . | nindent 8 }}
@@ -10,6 +16,7 @@ metadata:
 data:
   config.json: |
     {"autoupgrade": "{{ required "A value for autoupgrade is required" .Values.laceworkConfig.autoUpgrade }}",
+     {{- if .Values.laceworkConfig.proxyUrl }} "proxyurl" :"{{ .Values.laceworkConfig.proxyUrl}}", {{- end }}
      "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
      "tags": {"Env": "{{ .Values.laceworkConfig.env }}"
               {{- if .Values.laceworkConfig.kubernetesCluster }}, "KubernetesCluster" :"{{ .Values.laceworkConfig.kubernetesCluster}}" {{- end }}
