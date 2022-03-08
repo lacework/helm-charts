@@ -44,7 +44,34 @@
             ],
             "properties": {
                 "accessToken": {
-                    "type": "string"
+                    "oneOf": [
+                        {
+                            "type": "string"
+                        },
+                        {
+                            "type": "object",
+                            "required": [
+                                "existingSecret"
+                            ],
+                            "properties": {
+                                "existingSecret": {
+                                    "type": "object",
+                                    "required": [
+                                        "name",
+                                        "key"
+                                    ],
+                                    "properties": {
+                                        "key": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    ]
                 },
                 "annotations": {
                     "type": "object",
@@ -65,17 +92,28 @@
                         "null"
                     ]
                 },
+                "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "env": {
                     "type": [
                         "string",
                         "null"
                     ]
                 },
-                "serverUrl": {
+                "proxyUrl": {
                     "type": [
                         "string",
                         "null"
                     ]
+                },
+                "serverUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "pattern": "^https://.*.lacework.net$"
                 }
             }
         },

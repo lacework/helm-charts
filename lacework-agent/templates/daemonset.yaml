@@ -7,6 +7,9 @@ metadata:
   labels:
     tier: monitoring
     app: {{ include "lacework-agent.name" . }}
+    {{- with .Values.laceworkConfig.labels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
   {{- with .Values.laceworkConfig.annotations }}
   annotations:
     {{- toYaml . | nindent 8 }}
@@ -24,6 +27,8 @@ spec:
       labels:
         name: {{ include "lacework-agent.name" . }}
     spec:
+      affinity:
+{{ toYaml .Values.daemonset.affinity | indent 8 }}
       tolerations: 
 {{ toYaml .Values.tolerations | indent 8 }}
 {{- if .Values.priorityClassName }}
@@ -43,11 +48,19 @@ spec:
         env:
           - name: LaceworkLogStdout
             value: "yes"
+{{- if kindIs "string" .Values.laceworkConfig.accessToken }}
           - name: LaceworkAccessToken
             valueFrom:
               secretKeyRef:
                 name: {{ include "lacework-agent.name" . }}-access-token
                 key: agent-access-token
+{{- else }}
+          - name: LaceworkAccessToken
+            valueFrom:
+              secretKeyRef:
+                name: {{ required "Secret name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.name }}
+                key: {{ required "Key name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.key }}
+{{- end}}
         resources:
 {{ toYaml .Values.resources | indent 12 }}
         securityContext:
@@ -117,6 +130,7 @@ spec:
               path: /var/lib/lacework/controller
         - name: cfgmap
           configMap:
+            defaultMode: 0640
             name: lacework-config
             items:
             - key: config.json
