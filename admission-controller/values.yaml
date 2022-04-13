@@ -101,24 +101,6 @@ proxy-scanner:
           enable: false
           scan_directory_path: ""
 
-      - domain:
-        name:
-        ssl:
-        type:
-        auto_poll:
-        is_public:
-        auth_type:
-        auth_header_name: Authorization
-        credentials:
-          user_name:
-          password:
-        notification_type:
-        poll_frequency_minutes: 20
-        disable_non_os_package_scanning: false
-        go_binary_scanning:
-          enable: false
-          scan_directory_path: ""
-
   certs:
     skipCert: true
     serverCertificate:
