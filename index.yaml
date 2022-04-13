@@ -197,9 +197,9 @@ entries:
   lacework-agent:
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-04-12T05:06:56.412054469Z"
+    created: "2022-04-13T14:33:35.822277914-07:00"
     description: Lacework Agent
-    digest: 87444edae1655bbe932fa53346985523deff16ad3e38b8b660c0f3f4d77d22d1
+    digest: 7dc078885fb3163ef07fcd87b94cb2e932b364960adf2f9f6051d10b65865192
     home: https://www.lacework.com
     icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
     keywords:
@@ -436,4 +436,4 @@ entries:
     urls:
     - proxy-scanner-0.2.1.tgz
     version: 0.2.1
-generated: "2022-04-13T09:40:09.030938-07:00"
+generated: "2022-04-13T14:33:35.809130426-07:00"
