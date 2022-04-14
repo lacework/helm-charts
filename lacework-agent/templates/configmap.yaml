@@ -16,6 +16,21 @@ metadata:
 data:
   config.json: |
     {"autoupgrade": "{{ required "A value for autoupgrade is required" .Values.laceworkConfig.autoUpgrade }}",
+     {{- with .Values.laceworkConfig.fim }}
+     {{- if .enable }}
+     "fim": {
+             {{- if kindIs "int64" .coolingPeriod }}"coolingperiod": "{{ .coolingPeriod }}", {{- end }}
+             {{- if kindIs "int64" .crawlInterval }}"crawlinterval": "{{ .crawlInterval }}", {{- end }}
+             {{- if .fileIgnore }}"fileignore": {{ mustToJson .fileIgnore }}, {{- end }}
+             {{- if .filePath }}"filepath": {{ mustToJson .filePath }}, {{- end }}
+             "mode": "enable"
+             {{- if .noAtime }}, "noatime": "true" {{- end }}
+             {{- if .runAt }}, "runat": "{{ .runAt }}" {{- end }}
+     },
+     {{- else }}
+     "fim": {"mode": "disable"},
+     {{- end }}
+     {{- end }}
      {{- if .Values.laceworkConfig.proxyUrl }} "proxyurl" :"{{ .Values.laceworkConfig.proxyUrl}}", {{- end }}
      "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
      "tags": {"Env": "{{ .Values.laceworkConfig.env }}"

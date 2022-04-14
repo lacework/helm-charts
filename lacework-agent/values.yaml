@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 5.4.2
+  tag: 5.5.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -33,6 +33,22 @@ laceworkConfig:
   autoUpgrade: enable
   # [Optional] Give your k8s environment a friendly name
   env:
+  # [Optional] Configure File Integrity Monitoring
+  # https://docs.lacework.com/configure-agent-behavior-in-configjson-file#file-integrity-monitoring-fim-properties
+  fim:
+    # [Optional] Configure coolingperiod in minutes
+    coolingPeriod:
+    # [Optional] Configure crawlinterval in minutes
+    crawlInterval:
+    enable: true
+    # [Optional] Configure file paths to ignore
+    fileIgnore: []
+    # [Optional] Configure file paths to include
+    filePath: []
+    # [Optional] Set to true to prevent atime from being used in metadata hash computation
+    noAtime:
+    # [Optional] Run the FIM scan interval at the specifid time of the day (HH:MM)
+    runAt:
   # [Optional] Kubernetes cluster name
   # https://support.lacework.com/hc/en-us/articles/360005263034-Deploy-on-Kubernetes
   kubernetesCluster:
@@ -40,6 +56,8 @@ laceworkConfig:
   proxyUrl:
   # [Required] Region specific Lacework service URL. Defaults to the US region.
   serverUrl: https://api.lacework.net
+  # [Optional] Set to false to prevent agent from sending diagnostic logs to stdout
+  stdoutLogging: true
 ##########################################################################
 # Set daemonset priorityClassName
 priorityClassName:

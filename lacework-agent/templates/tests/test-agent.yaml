@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-test"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: {{ .Release.Name }}-token-test
+      image: {{ template "lacework-agent.image" . }}
+      imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+      env:
+        - name: LACEWORK_SERVER_URL
+          value: {{ .Values.laceworkConfig.serverUrl | quote }}
+        - name: LACEWORK_AGENT_TOKEN
+          valueFrom:
+            secretKeyRef:
+{{- if kindIs "string" .Values.laceworkConfig.accessToken }}
+              name: {{ include "lacework-agent.name" . }}-access-token
+              key: agent-access-token
+{{- else }}
+              name: {{ required "Secret name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.name }}
+              key: {{ required "Key name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.key }}
+{{- end }}
+      # Dummy test until we have a URL that we can use to validate the server URL + agent token combination
+      command:
+        - /usr/bin/bash
+        - "true"
+  restartPolicy: Never
