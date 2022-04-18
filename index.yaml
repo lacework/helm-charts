@@ -197,9 +197,9 @@ entries:
   lacework-agent:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-04-14T17:54:46.165585-04:00"
+    created: "2022-04-18T15:41:09.705164971-07:00"
     description: Lacework Agent
-    digest: d11a79d7fcecc33e24cee3a4f5197ed2ba5c3ce109c8441b47afa966096fcf16
+    digest: 4ccaf43d39c6bdc31b03af0ebc09b0e34ced39b55a321c15fbd1b457fed9df98
     home: https://www.lacework.com
     icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
     keywords:
@@ -208,7 +208,7 @@ entries:
     - run-time
     - metric
     - troubleshooting
-    kubeVersion: '> 1.9.0'
+    kubeVersion: '> 1.9.0-0'
     maintainers:
     - email: info@lacework.net
       name: lacework-support
@@ -457,4 +457,4 @@ entries:
     urls:
     - proxy-scanner-0.2.1.tgz
     version: 0.2.1
-generated: "2022-04-14T17:54:46.137183-04:00"
+generated: "2022-04-18T15:41:09.695012228-07:00"
