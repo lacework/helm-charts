@@ -75,3 +75,12 @@ data:
       tag: $.package.package_version.container_metadata.tag.name
       org: $.package.namespace
       repo: $.package.name
+
+    harbor:
+      digest: $.event_data.resources[0].digest
+      tag: $.event_data.resources[0].tag
+      repo: $.event_data.repository.repo_full_name
+
+    nexus:
+      repo: $.component.name
+      tag: $.component.version
