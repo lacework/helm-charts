@@ -204,6 +204,12 @@
                     "format": "uri",
                     "pattern": "^https://.*.lacework.net$"
                 },
+                "serviceAccountName": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
                 "stdoutLogging": {
                     "type": "boolean"
                 }
