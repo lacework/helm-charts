@@ -96,6 +96,9 @@ spec:
             readOnly: true
           - name: podinfo
             mountPath: /etc/podinfo
+{{- if kindIs "string" .Values.laceworkConfig.serviceAccountName }}
+      serviceAccountName: {{ .Values.laceworkConfig.serviceAccountName | quote }}
+{{- end}}
       volumes:
         - name: dev
           hostPath:
