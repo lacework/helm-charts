@@ -14,6 +14,8 @@ spec:
     metadata:
       labels:
         app: {{ include "scanner.fullname" . }}
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
     spec:
       {{- if .Values.serviceAccount.enabled }}
       serviceAccountName: {{ .Values.name }}
@@ -24,7 +26,7 @@ spec:
         image: {{ .Values.image }}
         env:
           - name: LOG_LEVEL
-            value: "info"
+            value: {{ .Values.logLevel }}
         ports:
         - containerPort: 8080
         volumeMounts:
