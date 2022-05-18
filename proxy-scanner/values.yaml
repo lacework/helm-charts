@@ -9,6 +9,8 @@
 #
 logLevel: "info"
 
+resources: {}
+
 replicaCount: 1
 image: lacework/lacework-proxy-scanner:0.3.0
 

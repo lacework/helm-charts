@@ -34,6 +34,8 @@ spec:
           mountPath: /certs
         - name: scanner-config-volume
           mountPath: /opt/lacework/config
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
       volumes:
       - name: "certs"
         secret:
