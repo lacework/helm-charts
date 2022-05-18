@@ -2,8 +2,17 @@
 # Service: proxy-scanner
 # The following values may be set or changed to configure the proxy-scanner service
 #
+
+#
+# The LOG_LEVEL variable may be set or changed to configure the proxy-scanner log level
+# Available LOG_LEVEL options = info|error|warn|debug
+#
+logLevel: "info"
+
+resources: {}
+
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.2.15
+image: lacework/lacework-proxy-scanner:0.3.0
 
 name: lacework-proxy-scanner
 serviceAccount:
@@ -11,6 +20,7 @@ serviceAccount:
 
 config:
   static_cache_location: /opt/lacework
+  scan_public_registries: true
   default_registry:
   lacework:
     account_name:
