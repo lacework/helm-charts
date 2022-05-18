@@ -76,9 +76,15 @@ deployment:
 proxy-scanner:
   fullnameOverride: lacework-proxy-scanner
   enabled: true
+
+  logLevel: "info"
+
+  resources: {}
+
   config:
     default_registry: index.docker.io
     static_cache_location: /opt/lacework
+    scan_public_registries: true
     lacework:
       account_name: 
       integration_access_token: 
