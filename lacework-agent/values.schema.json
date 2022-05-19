@@ -4,6 +4,10 @@
         "laceworkConfig"
     ],
     "properties": {
+        "global": {
+            "type": "object",
+            "$comment": "Blanket 'global' object to enable embedding this chart as a sub-chart"
+        },
         "daemonset": {
             "type:": "object",
             "properties": {
