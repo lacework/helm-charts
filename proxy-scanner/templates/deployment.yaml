@@ -27,6 +27,16 @@ spec:
         env:
           - name: LOG_LEVEL
             value: {{ .Values.logLevel }}
+          - name: LACEWORK_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+{{- if kindIs "string" .Values.config.lacework.integration_access_token }}
+                name: {{ include "scanner.name" . }}-access-token
+                key: scanner-access-token
+{{- else }}
+                name: {{ required "Secret name required for existing secret" .Values.config.lacework.integration_access_token.existingSecret.name }}
+                key: {{ required "Key name required for existing secret" .Values.config.lacework.integration_access_token.existingSecret.key }}
+{{- end }}
         ports:
         - containerPort: 8080
         volumeMounts:

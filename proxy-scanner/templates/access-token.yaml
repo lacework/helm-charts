@@ -1,0 +1,12 @@
+{{- if kindIs "string" .Values.config.lacework.integration_access_token -}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "scanner.name" . }}-access-token
+  labels:
+    tier: monitoring
+    app: {{ include "scanner.name" . }}
+type: Opaque
+data:
+  scanner-access-token: {{ required "A valid AccessToken is required! Specify your Lacework integration access token in values.yaml" .Values.config.lacework.integration_access_token | b64enc }}
+{{- end -}}
