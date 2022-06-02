@@ -3,7 +3,7 @@ entries:
   admission-controller:
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.502326-07:00"
+    created: "2022-06-02T15:02:49.616752-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -25,7 +25,7 @@ entries:
     version: 0.1.9
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.500501-07:00"
+    created: "2022-06-02T15:02:49.61456-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -47,7 +47,7 @@ entries:
     version: 0.1.8
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.499323-07:00"
+    created: "2022-06-02T15:02:49.612824-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -69,7 +69,7 @@ entries:
     version: 0.1.7
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.49824-07:00"
+    created: "2022-06-02T15:02:49.610878-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -91,7 +91,7 @@ entries:
     version: 0.1.6
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.497218-07:00"
+    created: "2022-06-02T15:02:49.60926-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -113,7 +113,7 @@ entries:
     version: 0.1.5
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.496063-07:00"
+    created: "2022-06-02T15:02:49.607372-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -135,7 +135,7 @@ entries:
     version: 0.1.4
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.494318-07:00"
+    created: "2022-06-02T15:02:49.605146-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -157,7 +157,7 @@ entries:
     version: 0.1.3
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.493256-07:00"
+    created: "2022-06-02T15:02:49.603431-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -179,7 +179,7 @@ entries:
     version: 0.1.2
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.491574-07:00"
+    created: "2022-06-02T15:02:49.600962-07:00"
     dependencies:
     - condition: proxy-scanner.enabled
       name: proxy-scanner
@@ -201,7 +201,7 @@ entries:
     version: 0.1.1
   - apiVersion: v2
     appVersion: 0.0.1
-    created: "2022-06-02T14:59:05.490496-07:00"
+    created: "2022-06-02T15:02:49.599365-07:00"
     description: Lacework admission controller using Lacework proxy scanner
     digest: d6d2a6042b051b02ee6eac547b528cb56c5d2ce772f79f962bfb01f41c8ccccd
     keywords:
@@ -219,7 +219,7 @@ entries:
   lacework-agent:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.508894-07:00"
+    created: "2022-06-02T15:02:49.627228-07:00"
     description: Lacework Agent
     digest: 38dff4c5a000e95b2dcf9d6a80972ea4049501170865985dfaac41f5cc64f6e1
     home: https://www.lacework.com
@@ -240,7 +240,7 @@ entries:
     version: 5.6.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.507581-07:00"
+    created: "2022-06-02T15:02:49.625904-07:00"
     description: Lacework Agent
     digest: 6075c64963e465766642809a3bedb520ade8fae54137dd16a1f0ca72a7eb4ec6
     home: https://www.lacework.com
@@ -261,7 +261,7 @@ entries:
     version: 5.5.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.506831-07:00"
+    created: "2022-06-02T15:02:49.624061-07:00"
     description: Lacework Agent
     digest: 00fe42c64021bb5d592adaff34c42ddbba4bacb4e9271a58e72ddc13f9cdc394
     home: https://www.lacework.com
@@ -282,7 +282,7 @@ entries:
     version: 5.5.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.506073-07:00"
+    created: "2022-06-02T15:02:49.622828-07:00"
     description: Lacework Agent
     digest: 4ccaf43d39c6bdc31b03af0ebc09b0e34ced39b55a321c15fbd1b457fed9df98
     home: https://www.lacework.com
@@ -303,7 +303,7 @@ entries:
     version: 5.5.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.505328-07:00"
+    created: "2022-06-02T15:02:49.621855-07:00"
     description: Lacework Agent
     digest: 7dc078885fb3163ef07fcd87b94cb2e932b364960adf2f9f6051d10b65865192
     home: https://www.lacework.com
@@ -323,7 +323,7 @@ entries:
     version: 5.4.2
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.504843-07:00"
+    created: "2022-06-02T15:02:49.620731-07:00"
     description: Lacework Agent
     digest: 2cfd347bac431971f6a56854db8aba5ce3746bc9d77e48a07142906713aeb885
     home: https://www.lacework.com
@@ -343,7 +343,7 @@ entries:
     version: 5.4.1
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.50434-07:00"
+    created: "2022-06-02T15:02:49.619909-07:00"
     description: Lacework Agent
     digest: 9fd57c70abb267d1e57b3625f04f4623ae6629341a6c2e92d97c2464b9ad8515
     home: https://www.lacework.com
@@ -363,7 +363,7 @@ entries:
     version: 5.2.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.503803-07:00"
+    created: "2022-06-02T15:02:49.619139-07:00"
     description: Lacework Agent
     digest: 40199f36400a1d1a3e434a512fc79cc82866183ac7497423ec15c5e59dfc06c8
     home: https://www.lacework.com
@@ -383,7 +383,7 @@ entries:
     version: 5.1.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.503316-07:00"
+    created: "2022-06-02T15:02:49.618357-07:00"
     description: Lacework Agent
     digest: e6c0778f858ed427cf0bc48a509b22480473d9d0b1a38fcc22ab532a74c1118c
     home: https://www.lacework.com
@@ -403,7 +403,7 @@ entries:
     version: 5.0.0
   - apiVersion: v1
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.502827-07:00"
+    created: "2022-06-02T15:02:49.617607-07:00"
     description: Lacework Agent
     digest: 316df313975abcb5ab65846cc749c194c5169f09636f2ffbc26a71f0ae9ef29b
     home: https://www.lacework.com
@@ -424,9 +424,9 @@ entries:
   proxy-scanner:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.515255-07:00"
+    created: "2022-06-02T15:02:49.639203-07:00"
     description: A Helm chart for Lacework Proxy Scanner
-    digest: babfbbb7ce921e4d3f6005e0b0d52d0f1f878594a8496494bca5d7ca308e0e17
+    digest: 1cf299439f8dacb5eca70fa47ca8854c6220dfcc86cd2ae0d555269fc4db30bd
     name: proxy-scanner
     type: application
     urls:
@@ -434,7 +434,7 @@ entries:
     version: 0.3.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.514823-07:00"
+    created: "2022-06-02T15:02:49.637893-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: f8505e42c9514dd1b35c9095a3e6d013361acd1b24354a574cb21f12095d1322
     name: proxy-scanner
@@ -444,7 +444,7 @@ entries:
     version: 0.3.1
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.514395-07:00"
+    created: "2022-06-02T15:02:49.637182-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: fca9cbde0d83449c036c86013b7b468df43f27858f31628954cc2ce8225e1b71
     name: proxy-scanner
@@ -454,7 +454,7 @@ entries:
     version: 0.3.0
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.511267-07:00"
+    created: "2022-06-02T15:02:49.631561-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: f2169a46fb0a49068fe1ef42ab34e99fd50aaf9cff8fb767e49b67484926f8a1
     name: proxy-scanner
@@ -464,7 +464,7 @@ entries:
     version: 0.2.15
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.510855-07:00"
+    created: "2022-06-02T15:02:49.630815-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: dff07f929e41b1a21cf2f66eab38b1d64af3edcf8bd4ca170ff2ec63caeb06ad
     name: proxy-scanner
@@ -474,7 +474,7 @@ entries:
     version: 0.2.14
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.510445-07:00"
+    created: "2022-06-02T15:02:49.630063-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: 69ce605e16c01f1ad58c1bcd3da4a96368b838ad502257290479f6b108bac65a
     name: proxy-scanner
@@ -484,7 +484,7 @@ entries:
     version: 0.2.13
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.510048-07:00"
+    created: "2022-06-02T15:02:49.629324-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: eeca51b1ba0b699863eab83fb1d4642ba6851c32a3cb02358118390521dacb13
     name: proxy-scanner
@@ -494,7 +494,7 @@ entries:
     version: 0.2.12
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.509654-07:00"
+    created: "2022-06-02T15:02:49.628551-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: 394da8b5dc2a18b416fc423a5b13e49d9920c1f89be5976d9fe6e9d94c6883b2
     name: proxy-scanner
@@ -504,7 +504,7 @@ entries:
     version: 0.2.10
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.513968-07:00"
+    created: "2022-06-02T15:02:49.636425-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: 43324444314509c32b76ce2c213e48a90c54d16d3146d69141b18e42a9383b46
     name: proxy-scanner
@@ -514,7 +514,7 @@ entries:
     version: 0.2.9
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.513566-07:00"
+    created: "2022-06-02T15:02:49.635655-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: b2735c7642058f3d630f69f319c6957c5a406b6d0f720a83caa770735ddf9b17
     name: proxy-scanner
@@ -524,7 +524,7 @@ entries:
     version: 0.2.8
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.513183-07:00"
+    created: "2022-06-02T15:02:49.634915-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: 2265208dc08b5b502fa1d9defda5ca87236f3e9a14c33ab8a47a36b06e21bf2d
     name: proxy-scanner
@@ -534,7 +534,7 @@ entries:
     version: 0.2.7
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.512802-07:00"
+    created: "2022-06-02T15:02:49.634134-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: 54201342fd7677c391d536298b32263fc6736463717a41f1636f54dfb8c719d2
     name: proxy-scanner
@@ -544,7 +544,7 @@ entries:
     version: 0.2.6
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.512415-07:00"
+    created: "2022-06-02T15:02:49.633445-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: a2c75b0233b886373017762b45af3e7c71bb50b1c80e4b2f8d7945da2177df22
     name: proxy-scanner
@@ -554,7 +554,7 @@ entries:
     version: 0.2.5
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.512033-07:00"
+    created: "2022-06-02T15:02:49.63284-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: 7fe22bae1babc9de329c70220eb2668b56a9b6d93d1687c95dc396250f23eeb5
     name: proxy-scanner
@@ -564,7 +564,7 @@ entries:
     version: 0.2.4
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.51164-07:00"
+    created: "2022-06-02T15:02:49.63224-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: adc5ba1623b878b70329e67cf97263f7ff353befdd2d47efe8f2e75808d6ad76
     name: proxy-scanner
@@ -574,7 +574,7 @@ entries:
     version: 0.2.2
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-06-02T14:59:05.509274-07:00"
+    created: "2022-06-02T15:02:49.627715-07:00"
     description: A Helm chart for Lacework Proxy Scanner
     digest: fb0bbde3066707aca7f32735c9890e5cf2b24181c9357467124b9cb4fa209f08
     name: proxy-scanner
@@ -582,4 +582,4 @@ entries:
     urls:
     - proxy-scanner-0.2.1.tgz
     version: 0.2.1
-generated: "2022-06-02T14:59:05.489697-07:00"
+generated: "2022-06-02T15:02:49.597762-07:00"
