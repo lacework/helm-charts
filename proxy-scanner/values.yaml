@@ -12,7 +12,7 @@ logLevel: "info"
 resources: {}
 
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.3.1
+image: lacework/lacework-proxy-scanner:0.3.2
 
 name: lacework-proxy-scanner
 serviceAccount:
@@ -29,7 +29,6 @@ config:
   - domain:
     name:
     ssl:
-    type:
     auto_poll:
     is_public:
     auth_type:
@@ -47,7 +46,6 @@ config:
   - domain:
     name:
     ssl:
-    type:
     auto_poll:
     is_public:
     auth_type:
