@@ -13,10 +13,10 @@ webhooks:
         operator: NotIn
         values: ["false"]
     rules:
-      - operations: ["CREATE", "CONNECT"]
-        apiGroups: ["apps", ""]
+      - operations: ["CREATE", "CONNECT", "UPDATE"]
+        apiGroups: ["apps", "", "v1", "batch"]
         apiVersions: ["*"]
-        resources: ["pods", "deployments", "pods/exec"]
+        resources: ["pods", "deployments", "pods/exec", "replicasets", "daemonsets", "jobs", "cronjobs", "statefulsets"]
     clientConfig:
       caBundle: {{ .Values.webhooks.caBundle }}
       service:
