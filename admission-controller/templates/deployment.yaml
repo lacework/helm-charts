@@ -21,6 +21,15 @@ spec:
         - name: {{ include "admission.name" . }}
           image: "{{ .Values.deployment.image }}:{{ .Values.deployment.tag }}"
           imagePullPolicy: {{ .Values.deployment.pullPolicy }}
+          env:
+            - name: AC_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: AC_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
           ports:
             - containerPort: 8443
           livenessProbe:

@@ -3,9 +3,6 @@ kind: ClusterRole
 metadata:
   name: {{ include "admission.fullname" . }}
 rules:
-  - apiGroups: ["*"]
-    resources: ["pods", "nodes", "namespaces", "deployments", "statefulsets", "jobs", "cronjobs", "daemonsets", "replicasets", "replicationcontrollers", "clusterroles", "clusterrolebindings", "componentstatuses"]
-    verbs: ["get", "list", "watch"]
-  - apiGroups: [ "*" ]
-    resources: [ "secrets" ]
-    verbs: [ "get", "list", "watch", "update", "create" ]
+  - apiGroups: ["validate.lacework.net"]
+    resources: [{{ include "admission.fullname" . }}]
+    verbs: [ "get", "list", "watch", "create" ]
