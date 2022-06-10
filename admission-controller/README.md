@@ -1,6 +1,16 @@
 # Admission Controller Helm Chart
 
 ## Release notes
+### 0.1.10
+- Update cluster role permissions
+### 0.1.9
+- Update chart with latest proxy scanner helm chart
+### 0.1.8
+- Assume latest tag when none provided
+### 0.1.7
+- Send deployment configs to Lacework platform as scan tags
+### 0.1.6
+- Update chart with latest proxy scanner helm chart
 ### 0.1.4
 - Added configurable parameter to block or allow deployment on error connecting to proxy-scanner
 ### 0.1.3
@@ -10,9 +20,6 @@
 ### 0.1.1
 - Added proxy-scanner as a dependency to enable combined helm chart deployment.
 - Added config option for specifying a default registry when no domain name provided in image name.
-
-## Disclaimer: This is a Beta release.
-Contact Lacework Support to be enrolled in the Beta program
 
 ## Instructions for using HELM charts to deploy the Lacework Admission Controller.
 

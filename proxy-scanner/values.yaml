@@ -2,8 +2,17 @@
 # Service: proxy-scanner
 # The following values may be set or changed to configure the proxy-scanner service
 #
+
+#
+# The LOG_LEVEL variable may be set or changed to configure the proxy-scanner log level
+# Available LOG_LEVEL options = info|error|warn|debug
+#
+logLevel: "info"
+
+resources: {}
+
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.2.8
+image: lacework/lacework-proxy-scanner:0.3.2
 
 name: lacework-proxy-scanner
 serviceAccount:
@@ -11,33 +20,46 @@ serviceAccount:
 
 config:
   static_cache_location: /opt/lacework
+  scan_public_registries: true
   default_registry:
   lacework:
     account_name:
     integration_access_token:
   registries:
-    - domain:
-      ssl: true
-      name:
-      auth_header_name:
-      auth_type:
-      is_public:
-      auto_poll: false
-      credentials:
-        user_name:
-        password:
-      poll_frequency_minutes: 20
-    - domain:
-      ssl: true
-      name:
-      auth_header_name:
-      auth_type:
-      is_public:
-      auto_poll: false
-      credentials:
-        user_name:
-        password:
-      poll_frequency_minutes: 20
+  - domain:
+    name:
+    ssl:
+    auto_poll:
+    is_public:
+    auth_type:
+    auth_header_name: Authorization
+    credentials:
+      user_name:
+      password:
+    notification_type:
+    poll_frequency_minutes: 20
+    disable_non_os_package_scanning: false
+    go_binary_scanning:
+      enable: false
+      scan_directory_path: ""
+
+  - domain:
+    name:
+    ssl:
+    auto_poll:
+    is_public:
+    auth_type:
+    auth_header_name: Authorization
+    credentials:
+      user_name:
+      password:
+    notification_type:
+    poll_frequency_minutes: 20
+    disable_non_os_package_scanning: false
+    go_binary_scanning:
+      enable: false
+      scan_directory_path: ""
+
 certs:
   skipCert: true
   serverCertificate:

@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 appVersion: "1.0"
 description: Lacework Agent
 home: https://www.lacework.com
@@ -9,8 +9,9 @@ keywords:
 - run-time
 - metric
 - troubleshooting
+kubeVersion: '> 1.9.0-0'
 maintainers:
 - email: info@lacework.net
   name: lacework-support
 name: lacework-agent
-version: 5.2.0
+version: 5.6.0

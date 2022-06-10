@@ -29,6 +29,10 @@ scanner:
 nameOverride: "lacework-admission-controller"
 fullnameOverride: "lacework-admission-controller"
 
+# [Optional] Kubernetes cluster name
+# https://support.lacework.com/hc/en-us/articles/360005263034-Deploy-on-Kubernetes
+kubernetesCluster:
+
 serviceAccount:
   name: lacework-admission-sa
 
@@ -63,7 +67,7 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.1.5
+  tag: 0.1.7
   pullPolicy: Always
   replicaCount: 1
   service:
@@ -72,25 +76,36 @@ deployment:
 proxy-scanner:
   fullnameOverride: lacework-proxy-scanner
   enabled: true
+
+  logLevel: "info"
+
+  resources: {}
+
   config:
     default_registry: index.docker.io
     static_cache_location: /opt/lacework
+    scan_public_registries: true
     lacework:
       account_name: 
       integration_access_token: 
     registries:
-      - domain: 
-        name: 
-        auth_header_name:
-        auth_type:
+      - domain:
+        name:
+        ssl:
+        type:
+        auto_poll:
         is_public:
-        ssl: 
-        auto_poll: 
+        auth_type:
+        auth_header_name: Authorization
         credentials:
-          user_name: 
-          password: 
-        poll_frequency_minutes: 
-        disable_non_os_package_scanning:
+          user_name:
+          password:
+        notification_type:
+        poll_frequency_minutes: 20
+        disable_non_os_package_scanning: false
+        go_binary_scanning:
+          enable: false
+          scan_directory_path: ""
 
   certs:
     skipCert: true

@@ -6,19 +6,28 @@ Instructions for using HELM charts to deploy the Lacework Proxy Scanner.
 More details can be found at https://support.lacework.com/hc/en-us/articles/1500004222981-Integrate-Proxy-Scanner
 ```
 config:
+  scan_public_registries: true
   static_cache_location: /opt/lacework
   lacework:
     account_name: 
     integration_access_token: 
   registries:
-    - domain: 
-      ssl: 
-      name: 
-      auto_poll: 
-      credentials:
-        user_name: 
-        password:
-      scan_non_os_packages:
+  - domain:
+    name:
+    ssl:
+    auto_poll:
+    is_public:
+    auth_type:
+    auth_header_name: Authorization
+    credentials:
+      user_name:
+      password:
+    notification_type:
+    poll_frequency_minutes: 20
+    disable_non_os_package_scanning: false
+    go_binary_scanning:
+      enable: false
+      scan_directory_path: ""
 ```
 ## Using release packages
 
