@@ -1,4 +1,4 @@
-# Admission Controller Helm Chart
+# Proxy Scanner Helm Chart
 
 Instructions for using HELM charts to deploy the Lacework Proxy Scanner.
 
@@ -12,6 +12,7 @@ config:
     account_name: 
     integration_access_token: 
   registries:
+  registry_secret_name:
   - domain:
     name:
     ssl:
