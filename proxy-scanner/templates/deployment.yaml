@@ -44,12 +44,21 @@ spec:
           mountPath: /certs
         - name: scanner-config-volume
           mountPath: /opt/lacework/config
+        - name: registries
+          mountPath: /registries
         resources:
 {{ toYaml .Values.resources | indent 10 }}
       volumes:
       - name: "certs"
         secret:
             secretName: {{ .Values.name }}-certs
+      - name: "registries"
+        secret:
+{{- if .Values.config.registry_secret_name }}
+          secretName: {{ .Values.config.registry_secret_name }}
+{{- else }}
+          secretName: {{ include "scanner.name" . }}-registry-secrets
+{{- end }}
       - name: "scanner-config-volume"
         configMap:
           name: {{ include "scanner.fullname" . }}
