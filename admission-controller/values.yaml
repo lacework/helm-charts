@@ -67,7 +67,7 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.1.7
+  tag: 0.1.11
   pullPolicy: Always
   replicaCount: 1
   service:
@@ -88,6 +88,7 @@ proxy-scanner:
     lacework:
       account_name: 
       integration_access_token: 
+    registry_secret_name:
     registries:
       - domain:
         name:
