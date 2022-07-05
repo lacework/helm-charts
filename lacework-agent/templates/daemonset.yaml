@@ -41,6 +41,7 @@ spec:
       terminationGracePeriodSeconds: 20
       hostPID: true
       hostNetwork: true
+      dnsPolicy: ClusterFirstWithHostNet
       containers:
       - name: lacework
         image: {{ template "lacework-agent.image" . }}
@@ -73,10 +74,6 @@ spec:
             mountPath: /var/lib/lacework/config
           - name: dev
             mountPath: /dev
-          - name: run-sock
-            mountPath: /var/run/docker.sock
-          - name: run-pid
-            mountPath: /var/run/docker.pid
           - name: sys
             mountPath: /sys
           - name: log
@@ -103,12 +100,6 @@ spec:
         - name: dev
           hostPath:
               path: /dev
-        - name: run-sock
-          hostPath:
-              path: /var/run/docker.sock
-        - name: run-pid
-          hostPath:
-              path: /var/run/docker.pid
         - name: sys
           hostPath:
               path: /sys

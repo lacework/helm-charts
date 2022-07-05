@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 5.6.0
+  tag: 5.7.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -21,6 +21,28 @@ resources:
   limits:
     cpu: 500m
     memory: 1450Mi
+clusterAgent:
+  # [Optional] Should we install cluster agent.
+  enable: false
+  # [Optional] Cluster type.
+  clusterType: unknown
+  # [Optional] Cluster region.
+  clusterRegion:
+  # [Optional] Cluster mode agent's initial delay of cluster scraping after startup in minutes.
+  scrapeInitialDelayMins:
+  # [Optional] Cluster mode agent's scrape interval in minutes.
+  scrapeIntervalMins:
+  image:
+    registry: docker.io
+    repository: lacework/k8scollector
+    tag: latest
+    # imagePullPolicy should be Always to get the latest container
+    # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+    pullPolicy: Always
+    # [Optional] imagePullSecrets.
+    # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    # imagePullSecrets:
+    #   - name: CustomerRegistrKeySecretName
 laceworkConfig:
   # [Required] An access token is required before running agents.
   # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
@@ -33,6 +55,10 @@ laceworkConfig:
   autoUpgrade: enable
   # [Optional] Give your k8s environment a friendly name
   env:
+  # [Optional] Set to "disable" to not run datacollector
+  datacollector: enable
+  # [Optional] Kubernetes node's scrape interval in minutes.
+  k8sNodeScrapeIntervalMins:
   # [Optional] Configure File Integrity Monitoring
   # https://docs.lacework.com/configure-agent-behavior-in-configjson-file#file-integrity-monitoring-fim-properties
   fim:
@@ -54,19 +80,21 @@ laceworkConfig:
   kubernetesCluster:
   # [Optional] Route agent traffic through the specified proxy.
   proxyUrl:
-  # [Required] Region specific Lacework service URL. Defaults to the US region.
-  serverUrl: https://api.lacework.net
   # [Optional] Specify the service account for agent pods
   serviceAccountName:
+  # [Required] Region specific Lacework service URL. Defaults to the US region.
+  serverUrl: https://api.lacework.net
   # [Optional] Set to false to prevent agent from sending diagnostic logs to stdout
   stdoutLogging: true
 ##########################################################################
 # Set daemonset priorityClassName
 priorityClassName:
-# Allow Lacework agent to run on all nodes including master node
+# Allow Lacework agent to run on all nodes including master and infra nodes
 tolerations:
   - effect: NoSchedule
     key: node-role.kubernetes.io/master
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/infra
 # Allow Lacework agent to run on all nodes in case of a taint
 # - effect: NoSchedule
 #   operator: Exists
