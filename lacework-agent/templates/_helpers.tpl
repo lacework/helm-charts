@@ -44,3 +44,17 @@ Return the proper Lacework Agent image name
     {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the proper Lacework Cluster Agent image name
+*/}}
+{{- define "lacework-cluster-agent.image" -}}
+{{- $registryName := .Values.clusterAgent.image.registry -}}
+{{- $repositoryName := .Values.clusterAgent.image.repository -}}
+{{- $tag := .Values.clusterAgent.image.tag | toString -}}
+{{- if .Values.clusterAgent.image.overrideValue }}
+    {{- printf .Values.clusterAgent.image.overrideValue -}}
+{{- else -}}
+    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}

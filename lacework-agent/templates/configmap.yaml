@@ -31,7 +31,24 @@ data:
      "fim": {"mode": "disable"},
      {{- end }}
      {{- end }}
-     {{- if .Values.laceworkConfig.proxyUrl }} "proxyurl" :"{{ .Values.laceworkConfig.proxyUrl}}", {{- end }}
+{{- if .Values.clusterAgent.enable }}
+     "k8snodecollector": {
+{{- if .Values.clusterAgent.clusterType }}
+             "k8sclustertype": "{{ .Values.clusterAgent.clusterType}}",
+{{- end }}
+{{- if kindIs "string" .Values.clusterAgent.clusterRegion }}
+             "clusterregion": "{{ .Values.clusterAgent.clusterRegion}}",
+{{- end }}
+{{- if eq .Values.laceworkConfig.datacollector "disable" }}
+             "exclusivemode": "true",
+{{- end }}
+{{- if kindIs "int64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins }}
+             "tickerfreqmins": "{{ .Values.laceworkConfig.k8sNodeScrapeIntervalMins }}",
+{{- end }}
+             "state": "enabled"
+     },
+{{- end }}
+  {{- if .Values.laceworkConfig.proxyUrl }} "proxyurl" :"{{ .Values.laceworkConfig.proxyUrl}}", {{- end }}
      "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
      "tags": {"Env": "{{ .Values.laceworkConfig.env }}"
               {{- if .Values.laceworkConfig.kubernetesCluster }}, "KubernetesCluster" :"{{ .Values.laceworkConfig.kubernetesCluster}}" {{- end }}

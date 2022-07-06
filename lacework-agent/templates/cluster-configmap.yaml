@@ -1,0 +1,40 @@
+{{- if .Values.clusterAgent.enable -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: lacework-cluster-config
+  namespace: {{ .Release.Namespace }}
+  labels:
+    tier: monitoring
+    app: cluster-{{ include "lacework-agent.name" . }}
+    {{- with .Values.laceworkConfig.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.laceworkConfig.annotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+data:
+  config.yaml: |
+    serverurl: {{ .Values.laceworkConfig.serverUrl}}
+{{- if kindIs "int64" .Values.clusterAgent.scrapeInitialDelayMins }}
+    initialdelaymins: {{ .Values.clusterAgent.scrapeInitialDelayMins }}
+{{- end }}
+{{- if kindIs "int64" .Values.clusterAgent.scrapeIntervalMins }}
+    runintervalmins: {{ .Values.clusterAgent.scrapeIntervalMins }}
+{{- end }}
+{{- if or (kindIs "string" .Values.clusterAgent.clusterType) (kindIs "string" .Values.laceworkConfig.kubernetesCluster) }}
+    clusterparams:
+{{- if kindIs "string" .Values.clusterAgent.clusterType }}
+      clustertype: {{ .Values.clusterAgent.clusterType }}
+{{- end }}
+{{- if kindIs "string" .Values.laceworkConfig.kubernetesCluster }}
+      clustername: {{ .Values.laceworkConfig.kubernetesCluster }}
+{{- end }}
+{{- end }}
+{{- if kindIs "string" .Values.clusterAgent.clusterRegion }}
+    cloudproviderparams:
+      region: {{ .Values.clusterAgent.clusterRegion }}
+{{- end }}
+
+{{- end }}

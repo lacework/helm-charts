@@ -1,0 +1,67 @@
+{{- if .Values.clusterAgent.enable -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-{{ include "lacework-agent.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    tier: monitoring
+    app: cluster-{{ include "lacework-agent.name" . }}
+    {{- with .Values.laceworkConfig.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.laceworkConfig.annotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+spec:
+  selector:
+    matchLabels:
+      name: cluster-{{ include "lacework-agent.name" . }}
+  template:
+    metadata:
+      {{- with .Values.laceworkConfig.annotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        name: cluster-{{ include "lacework-agent.name" . }}
+    spec:
+      serviceAccountName: cluster-{{ include "lacework-agent.name" . }}-sa
+      tolerations:
+{{ toYaml .Values.tolerations | indent 8 }}
+{{- if .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName | quote }}
+{{- end }}
+{{- if .Values.clusterAgent.image.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.clusterAgent.image.imagePullSecrets | indent 8 }}
+{{- end }}
+      terminationGracePeriodSeconds: 20
+      volumes:
+      - name: cfgmap
+        configMap:
+          defaultMode: 0640
+          name: lacework-cluster-config
+          items:
+          - key: config.yaml
+            path: config.yaml
+      containers:
+      - name: cluster-{{ include "lacework-agent.name" . }}
+        image: {{ template "lacework-cluster-agent.image" . }}
+        imagePullPolicy: {{ .Values.clusterAgent.image.pullPolicy }}
+        env:
+          - name: LaceworkAccessToken
+            valueFrom:
+              secretKeyRef:
+{{- if kindIs "string" .Values.laceworkConfig.accessToken }}
+                name: {{ include "lacework-agent.name" . }}-access-token
+                key: agent-access-token
+{{- else }}
+                name: {{ required "Secret name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.name }}
+                key: {{ required "Key name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.key }}
+{{- end}}
+        volumeMounts:
+          - name: cfgmap
+            mountPath: /config
+{{- end -}}
