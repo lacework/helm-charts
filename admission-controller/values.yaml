@@ -37,6 +37,7 @@ serviceAccount:
   name: lacework-admission-sa
 
 certs:
+  secret_name: 
   name: lacework-admission-certs
   serverCertificate:
   serverKey:
