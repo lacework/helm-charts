@@ -58,6 +58,7 @@ spec:
             secretName: {{ .Values.certs.secret_name }}
           {{- else }}
             secretName: {{ .Values.certs.name }}
+           {{- end }}
         - name: "lacework-admission-volume"
           configMap:
             name: {{ include "admission.fullname" . }}
