@@ -37,6 +37,7 @@ serviceAccount:
   name: lacework-admission-sa
 
 certs:
+  secret_name: # optional, name of kubernetes secret containing the cert
   name: lacework-admission-certs
   serverCertificate:
   serverKey:
@@ -67,7 +68,7 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.1.11
+  tag: 0.1.13
   pullPolicy: Always
   replicaCount: 1
   service:

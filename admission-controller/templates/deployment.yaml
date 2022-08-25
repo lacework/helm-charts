@@ -13,6 +13,9 @@ spec:
         app: {{ include "admission.fullname" . }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+{{- with .Values.podAnnotations }}
+{{- toYaml . | nindent 8 }}
+{{- end }}
     spec:
       securityContext:
         runAsUser: 11431
@@ -51,7 +54,11 @@ spec:
       volumes:
         - name: "certs"
           secret:
+{{- if .Values.certs.secret_name }}
+            secretName: {{ .Values.certs.secret_name }}
+{{- else }}
             secretName: {{ .Values.certs.name }}
+           {{- end }}
         - name: "lacework-admission-volume"
           configMap:
             name: {{ include "admission.fullname" . }}
