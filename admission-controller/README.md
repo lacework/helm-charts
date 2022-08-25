@@ -1,6 +1,9 @@
 # Admission Controller Helm Chart
 
 ## Release notes
+### 0.1.13
+- Pass pod annotations to deployment
+- Use existing secret for certs
 ### 0.1.10
 - Update cluster role permissions
 ### 0.1.9
