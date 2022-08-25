@@ -82,8 +82,6 @@ proxy-scanner:
 
   resources: {}
 
-  podAnnotations: {}
-
   config:
     default_registry: index.docker.io
     static_cache_location: /opt/lacework
