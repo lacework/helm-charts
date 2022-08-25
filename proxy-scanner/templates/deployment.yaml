@@ -16,6 +16,9 @@ spec:
         app: {{ include "scanner.fullname" . }}
       annotations:
         checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+{{- with .Values.podAnnotations }}
+  {{- toYaml . | nindent 8 }}
+{{- end }}
     spec:
       {{- if .Values.serviceAccount.enabled }}
       serviceAccountName: {{ .Values.name }}
