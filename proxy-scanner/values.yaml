@@ -12,7 +12,7 @@ logLevel: "info"
 resources: {}
 
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.9.0
+image: lacework/lacework-proxy-scanner:0.10.0
 
 podAnnotations: {}
 #  my-annotation-key: my value; more value
