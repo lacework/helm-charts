@@ -70,10 +70,7 @@
             "type": "object",
             "required": [
                 "image",
-                "enable",
-                "clusterType",
-                "scrapeInitialDelayMins",
-                "scrapeIntervalMins"
+                "enable"
             ],
             "properties": {
                 "image": {
@@ -244,13 +241,9 @@
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
-                        "coolingPeriod",
-                        "crawlInterval",
                         "enable",
                         "fileIgnore",
-                        "filePath",
-                        "noAtime",
-                        "runAt"
+                        "filePath"
                     ],
                     "properties": {
                         "coolingPeriod": {
