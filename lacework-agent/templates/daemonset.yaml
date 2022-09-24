@@ -26,9 +26,6 @@ spec:
       {{- end }}
       labels:
         name: {{ include "lacework-agent.name" . }}
-        {{- with .Values.laceworkConfig.labels }}
-          {{- toYaml . | nindent 8 }}
-        {{- end }}
     spec:
       affinity:
 {{ toYaml .Values.daemonset.affinity | indent 8 }}
