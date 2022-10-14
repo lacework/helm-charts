@@ -75,12 +75,17 @@ spec:
         volumeMounts:
           - name: cfgmap
             mountPath: /var/lib/lacework/config
-          - name: dev
-            mountPath: /dev
-          - name: sys
-            mountPath: /sys
+{{- if .Values.cloudservice.gke.autopilot }}
+          - name: log
+            mountPath: /var/log/lacework
+{{- else }}
           - name: log
             mountPath: /var/log
+          - name: dev
+            mountPath: /dev
+{{- end }}
+          - name: sys
+            mountPath: /sys
           - name: passwd
             mountPath: /etc/passwd
             readOnly: true
@@ -100,15 +105,34 @@ spec:
       serviceAccountName: {{ .Values.laceworkConfig.serviceAccountName | quote }}
 {{- end}}
       volumes:
-        - name: dev
+{{- if .Values.cloudservice.gke.autopilot }}
+        - name: log
           hostPath:
-              path: /dev
-        - name: sys
+              path: /var/log/lacework
+              type: DirectoryOrCreate
+        - name: hostlacework
           hostPath:
-              path: /sys
+              path: /var/autopilot/addon/lacework/collector
+        - name: hostlaceworkcontroller
+          hostPath:
+              path: /var/autopilot/addon/lacework/controller
+{{- else }}
         - name: log
           hostPath:
               path: /var/log
+        - name: hostlacework
+          hostPath:
+              path: /var/lib/lacework/collector
+        - name: hostlaceworkcontroller
+          hostPath:
+              path: /var/lib/lacework/controller
+        - name: dev
+          hostPath:
+              path: /dev
+{{- end }}
+        - name: sys
+          hostPath:
+              path: /sys
         - name: passwd
           hostPath:
               path: /etc/passwd
@@ -118,12 +142,6 @@ spec:
         - name: hostroot
           hostPath:
               path: /
-        - name: hostlacework
-          hostPath:
-              path: /var/lib/lacework/collector
-        - name: hostlaceworkcontroller
-          hostPath:
-              path: /var/lib/lacework/controller
         - name: cfgmap
           configMap:
             defaultMode: 0640
@@ -131,6 +149,8 @@ spec:
             items:
             - key: config.json
               path: config.json
+            - key: syscall_config.yaml
+              path: syscall_config.yaml
         - name: podinfo
           downwardAPI:
             items:

@@ -26,6 +26,20 @@
             ],
             "additionalProperties": false
         },
+        "cloudservice": {
+            "type:": "object",
+            "properties": {
+                "gke": {
+                    "type:": "object",
+                        "properties": {
+                        "autopilot": {
+                            "type": "boolean"
+                        }
+                    }
+                }
+            },
+            "additionalProperties": false
+        },
         "image": {
             "type": "object",
             "properties": {
@@ -313,6 +327,18 @@
                 },
                 "stdoutLogging": {
                     "type": "boolean"
+                },
+                "perfmode": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "lite",
+                        "scan",
+                        "ebpflite",
+                        null
+                    ]
                 }
             },
             "additionalProperties": false
