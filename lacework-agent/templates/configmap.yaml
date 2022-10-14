@@ -31,14 +31,20 @@ data:
      "fim": {"mode": "disable"},
      {{- end }}
      {{- end }}
+{{- if kindIs "string" .Values.laceworkConfig.perfmode }}
+     "perfmode": "{{ .Values.laceworkConfig.perfmode }}",
+{{- end }}
 {{- if .Values.clusterAgent.enable }}
      "k8snodecollector": {
 {{- if .Values.clusterAgent.clusterType }}
              "k8sclustertype": "{{ .Values.clusterAgent.clusterType}}",
 {{- end }}
-{{- if kindIs "string" .Values.clusterAgent.clusterRegion }}
-             "clusterregion": "{{ .Values.clusterAgent.clusterRegion}}",
-{{- end }}
+ 
+{{- if  not .Values.laceworkConfig.kubernetesCluster }}
+             #kubernetes cluster "{{ required "kubernetesCluster name is a required parameter" .Values.laceworkConfig.kubernetesCluster }}
+{{- end}}
+             "clusterregion" : "{{ required "A clusterRegion is a required parameter" .Values.clusterAgent.clusterRegion }}",
+
 {{- if eq .Values.laceworkConfig.datacollector "disable" }}
              "exclusivemode": "true",
 {{- end }}
@@ -54,3 +60,7 @@ data:
               {{- if .Values.laceworkConfig.kubernetesCluster }}, "KubernetesCluster" :"{{ .Values.laceworkConfig.kubernetesCluster}}" {{- end }}
              }
     }
+
+{{- with .Files.Glob "config/syscall_config.yaml" }}
+{{ tpl .AsConfig $ | indent 2 }}
+{{- end }}
