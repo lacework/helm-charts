@@ -1,3 +1,4 @@
+{{- if not .Values.certs.secret_name }}
 apiVersion: v1
 kind: Secret
 metadata:
@@ -8,3 +9,4 @@ data:
 {{- end }}
   admission.crt: {{ .Values.certs.serverCertificate }}  # place server cert
   admission.key: {{ .Values.certs.serverKey }}  # place server key
+{{- end }}
