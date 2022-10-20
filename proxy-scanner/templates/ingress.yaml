@@ -1,0 +1,32 @@
+{{- if .Values.ingress.enabled }}
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "scanner.fullname" . }}
+  labels:
+    app: {{ include "scanner.fullname" . }}
+    chart: {{ include "scanner.fullname" . }}
+    release: {{ .Release.Name | quote }}
+  annotations:
+    {{- if .Values.ingress.certManager }}
+    kubernetes.io/tls-acme: "true"
+    {{- end }}
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ $value | quote }}
+    {{- end }}
+spec:
+  rules:
+  {{- range .Values.ingress.hosts }}
+  - host: {{ .name }}
+    http:
+      paths:
+      - path: {{ default "/" .path }}
+        pathType: ImplementationSpecific
+        backend:
+          service:
+            name:  {{ include "scanner.fullname" $ }}
+            port:
+              number: 8080
+  {{- end }}
+{{- end }}
