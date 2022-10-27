@@ -63,6 +63,25 @@ data:
         method: GET
         api: /v2/%repository/blobs/%digest
         token_scope: repository:%repository:pull
+    quay:
+      list_repositories:
+        method: GET
+        api: /v2/_catalog
+        token_scope:
+        json_path: $.repositories[*]
+      list_tags:
+        method: GET
+        api: /v2/%repository/tags/list
+        token_scope: repository:%repository:pull
+        json_path: $.tags[*]
+      manifest:
+        method: GET
+        api: /v2/%repository/manifests/%reference
+        token_scope: repository:%repository:pull
+      blob:
+        method: GET
+        api: /v2/%repository/blobs/%digest
+        token_scope: repository:%repository:pull
   notifications.yml: |
     dtr:
       digest: $.contents.digest
