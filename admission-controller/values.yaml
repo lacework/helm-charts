@@ -68,7 +68,7 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.11.2
+  tag: 0.11.3
   pullPolicy: Always
   replicaCount: 1
   service:
@@ -83,31 +83,31 @@ proxy-scanner:
   resources: {}
 
   config:
-    default_registry: index.docker.io
+    default_registry:
     static_cache_location: /opt/lacework
     scan_public_registries: true
     lacework:
       account_name:
       integration_access_token:
-    registry_secret_name:
+#    registry_secret_name:
     registries:
-    - domain:
-      name:
-      ssl:
-      type:
-      auto_poll:
-      is_public:
-      auth_type:
-      auth_header_name: Authorization
-      credentials:
-        user_name:
-        password:
-      notification_type:
-      poll_frequency_minutes: 20
-      disable_non_os_package_scanning: false
-      go_binary_scanning:
-        enable: false
-        scan_directory_path: ""
+#      - domain:
+#        name:
+#        ssl:
+#        type:
+#        auto_poll:
+#        is_public:
+#        auth_type:
+#        auth_header_name: Authorization
+#        credentials:
+#          user_name:
+#          password:
+#        notification_type:
+#        poll_frequency_minutes: 20
+#        disable_non_os_package_scanning: false
+#        go_binary_scanning:
+#          enable: false
+#          scan_directory_path: ""
 
   certs:
     skipCert: true
