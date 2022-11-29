@@ -51,6 +51,9 @@ spec:
           mountPath: /registries
         resources:
 {{ toYaml .Values.resources | indent 10 }}
+{{- if .Values.hostNetwork }}
+      hostNetwork: {{ .Values.hostNetwork }}
+{{- end }}
       volumes:
       - name: "certs"
         secret:
