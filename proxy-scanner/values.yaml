@@ -12,7 +12,7 @@ logLevel: "info"
 resources: {}
 
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.11.2
+image: lacework/lacework-proxy-scanner:0.11.3
 
 podAnnotations: {}
 #  my-annotation-key: my value; more value
@@ -28,41 +28,41 @@ config:
   lacework:
     account_name:
     integration_access_token:
-  registry_secret_name:
-  registries:
-  - domain:
-    name:
-    ssl:
-    auto_poll:
-    is_public:
-    auth_type:
-    auth_header_name: Authorization
-    credentials:
-      user_name:
-      password:
-    notification_type:
-    poll_frequency_minutes: 20
-    disable_non_os_package_scanning: false
-    go_binary_scanning:
-      enable: false
-      scan_directory_path: ""
-
-  - domain:
-    name:
-    ssl:
-    auto_poll:
-    is_public:
-    auth_type:
-    auth_header_name: Authorization
-    credentials:
-      user_name:
-      password:
-    notification_type:
-    poll_frequency_minutes: 20
-    disable_non_os_package_scanning: false
-    go_binary_scanning:
-      enable: false
-      scan_directory_path: ""
+#  registry_secret_name:
+#  registries:
+#  - domain:
+#    name:
+#    ssl:
+#    auto_poll:
+#    is_public:
+#    auth_type:
+#    auth_header_name: Authorization
+#    credentials:
+#      user_name:
+#      password:
+#    notification_type:
+#    poll_frequency_minutes: 20
+#    disable_non_os_package_scanning: false
+#    go_binary_scanning:
+#      enable: false
+#      scan_directory_path: ""
+#
+#  - domain:
+#    name:
+#    ssl:
+#    auto_poll:
+#    is_public:
+#    auth_type:
+#    auth_header_name: Authorization
+#    credentials:
+#      user_name:
+#      password:
+#    notification_type:
+#    poll_frequency_minutes: 20
+#    disable_non_os_package_scanning: false
+#    go_binary_scanning:
+#      enable: false
+#      scan_directory_path: ""
 
 certs:
   skipCert: true
