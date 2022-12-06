@@ -68,7 +68,7 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.11.3
+  tag: 0.11.4
   pullPolicy: Always
   replicaCount: 1
   service:
