@@ -1,3 +1,4 @@
+{{- if .Values.datacollector.enable -}}
 apiVersion: apps/v1
 
 kind: DaemonSet
@@ -171,3 +172,4 @@ spec:
                   fieldPath: metadata.namespace
   updateStrategy:
 {{ toYaml .Values.daemonset.updateStrategy | indent 4 }}
+{{- end }}

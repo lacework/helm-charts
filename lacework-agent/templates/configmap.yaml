@@ -1,3 +1,4 @@
+{{- if .Values.datacollector.enable -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19,8 +20,8 @@ data:
      {{- with .Values.laceworkConfig.fim }}
      {{- if .enable }}
      "fim": {
-             {{- if kindIs "int64" .coolingPeriod }}"coolingperiod": "{{ .coolingPeriod }}", {{- end }}
-             {{- if kindIs "int64" .crawlInterval }}"crawlinterval": "{{ .crawlInterval }}", {{- end }}
+             {{- if or (kindIs "float64" .coolingPeriod) (kindIs "int64" .coolingPeriod) }}"coolingperiod": "{{ .coolingPeriod }}", {{- end }}
+             {{- if or (kindIs "float64" .crawlInterval) (kindIs "int64" .crawlInterval) }}"crawlinterval": "{{ .crawlInterval }}", {{- end }}
              {{- if .fileIgnore }}"fileignore": {{ mustToJson .fileIgnore }}, {{- end }}
              {{- if .filePath }}"filepath": {{ mustToJson .filePath }}, {{- end }}
              "mode": "enable"
@@ -48,7 +49,7 @@ data:
 {{- if eq .Values.laceworkConfig.datacollector "disable" }}
              "exclusivemode": "true",
 {{- end }}
-{{- if kindIs "int64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins }}
+{{- if or (kindIs "int64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins) (kindIs "float64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins) }}
              "tickerfreqmins": "{{ .Values.laceworkConfig.k8sNodeScrapeIntervalMins }}",
 {{- end }}
              "state": "enabled"
@@ -63,4 +64,5 @@ data:
 
 {{- with .Files.Glob "config/syscall_config.yaml" }}
 {{ tpl .AsConfig $ | indent 2 }}
+{{- end }}
 {{- end }}

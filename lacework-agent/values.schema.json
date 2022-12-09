@@ -40,6 +40,15 @@
             },
             "additionalProperties": false
         },
+        "datacollector": {
+            "type": "object",
+            "properties": {
+                "enable": {
+                    "type": "boolean",
+                    "description": "Enable lacework datacollector"
+                }
+            }
+        },
         "image": {
             "type": "object",
             "properties": {
