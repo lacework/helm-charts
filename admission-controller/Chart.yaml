@@ -1,6 +1,6 @@
 apiVersion: v2
 appVersion: "0.0.1"
-version: 0.11.4
+version: 0.12.0
 name: admission-controller
 description: Lacework admission controller using Lacework proxy scanner
 type: application
@@ -13,6 +13,6 @@ maintainers:
   email: chitra.kumar@lacework.net
 dependencies:
 - name: proxy-scanner
-  version: 0.11.4
+  version: 0.12.0
   condition: proxy-scanner.enabled
   repository: https://lacework.github.io/helm-charts
