@@ -260,6 +260,12 @@
                         "null"
                     ]
                 },
+                "tags": {
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
                 "fim": {
                     "type": "object",
                     "additionalProperties": false,

@@ -59,6 +59,12 @@ laceworkConfig:
   # [Optional] Give your k8s environment a friendly name
   # https://docs.lacework.com/onboarding/add-agent-tags
   env:
+  # [Optional] Assign additional tags to lacework-agent deployed by this chart
+  # https://docs.lacework.com/onboarding/add-agent-tags
+  # Declare as subkeys not as a list of tags
+  tags:
+    # example_tag_name_1: example_tag_value1
+    # example_tag_name_2: example_tag_value2
   # [Optional] Set to "disable" to not run datacollector
   datacollector: enable
   # [Optional] Kubernetes node's scrape interval in minutes.

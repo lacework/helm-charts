@@ -59,6 +59,9 @@ data:
      "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
      "tags": {"Env": "{{ .Values.laceworkConfig.env }}"
               {{- if .Values.laceworkConfig.kubernetesCluster }}, "KubernetesCluster" :"{{ .Values.laceworkConfig.kubernetesCluster}}" {{- end }}
+              {{- range $key, $value := .Values.laceworkConfig.tags }}
+              , {{ $key | quote }}: {{ $value | quote }}
+              {{- end }}
              }
     }
 
