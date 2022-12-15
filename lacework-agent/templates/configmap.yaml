@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: lacework-config
-  namespace: {{ .Release.Namespace }}          
+  namespace: {{ .Release.Namespace }}
   labels:
     tier: monitoring
     app: {{ include "lacework-agent.name" . }}
@@ -40,7 +40,7 @@ data:
 {{- if .Values.clusterAgent.clusterType }}
              "k8sclustertype": "{{ .Values.clusterAgent.clusterType}}",
 {{- end }}
- 
+
 {{- if  not .Values.laceworkConfig.kubernetesCluster }}
              #kubernetes cluster "{{ required "kubernetesCluster name is a required parameter" .Values.laceworkConfig.kubernetesCluster }}
 {{- end}}
