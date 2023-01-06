@@ -47,8 +47,10 @@ spec:
           mountPath: /certs
         - name: scanner-config-volume
           mountPath: /opt/lacework/config
+{{- if (and (not .Values.config.registry_secret_name) .Values.config.registries) }}
         - name: registries
           mountPath: /registries
+{{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
 {{- if .Values.hostNetwork }}
@@ -58,12 +60,14 @@ spec:
       - name: "certs"
         secret:
             secretName: {{ .Values.name }}-certs
+{{- if (and (not .Values.config.registry_secret_name) .Values.config.registries) }}
       - name: "registries"
         secret:
 {{- if .Values.config.registry_secret_name }}
           secretName: {{ .Values.config.registry_secret_name }}
 {{- else }}
           secretName: {{ include "scanner.name" . }}-registry-secrets
+{{- end }}
 {{- end }}
       - name: "scanner-config-volume"
         configMap:
