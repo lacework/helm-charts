@@ -22,6 +22,12 @@ serviceAccount:
   enabled: true
   annotations: {}
 
+# Configure auto poll parameters via environment variables
+#autoPoll:
+#  coolOffAfterTagCount: 1
+#  coolOffMilliseconds: 5000
+#  maxConcurentScans: 1
+
 config:
   static_cache_location: /opt/lacework
   scan_public_registries: true

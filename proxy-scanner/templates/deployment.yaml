@@ -30,6 +30,18 @@ spec:
         env:
           - name: LOG_LEVEL
             value: {{ .Values.logLevel }}
+          {{ if and .Values.autoPoll .Values.autoPoll.coolOffAfterTagCount }}
+          - name: COOL_OFF_AFTER_TAG_COUNT
+            value: {{ .Values.autoPoll.coolOffAfterTagCount | quote }}
+          {{ end }}
+          {{ if and .Values.autoPoll .Values.autoPoll.coolOffMilliseconds }}
+          - name: COOL_OFF_MILLISECONDS
+            value: {{ .Values.autoPoll.coolOffMilliseconds | quote }}
+          {{ end }}
+          {{ if and .Values.autoPoll .Values.autoPoll.maxConcurentScans }}
+          - name: MAX_CONCURRENT_SCANS
+            value: {{ .Values.autoPoll.maxConcurentScans | quote }}
+          {{ end }}
           - name: LACEWORK_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
