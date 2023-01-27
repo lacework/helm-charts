@@ -12,7 +12,7 @@ logLevel: "info"
 resources: {}
 
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.14.2
+image: lacework/lacework-proxy-scanner:0.15.0
 
 podAnnotations: {}
 #  my-annotation-key: my value; more value
@@ -21,6 +21,15 @@ name: lacework-proxy-scanner
 serviceAccount:
   enabled: true
   annotations: {}
+
+# Add any environment variables under env
+env:
+#  COOL_OFF_AFTER_TAG_COUNT: '1'
+#  COOL_OFF_MILLISECONDS: '10'
+#  MAX_CONCURRENT_SCANS: '20'
+#  MAX_EXTRACTABLE_FILE_SIZE: '524288000' # bytes
+#  MAX_BOOT_TIME_TAGS: '50'
+#  MAX_TAGS_PER_REPO: '5'
 
 config:
   static_cache_location: /opt/lacework
