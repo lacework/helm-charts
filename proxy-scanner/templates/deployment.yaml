@@ -40,6 +40,10 @@ spec:
                 name: {{ required "Secret name required for existing secret" .Values.config.lacework.integration_access_token.existingSecret.name }}
                 key: {{ required "Key name required for existing secret" .Values.config.lacework.integration_access_token.existingSecret.key }}
 {{- end }}
+{{- range $name, $value := .Values.env }}
+          - name: {{ $name }}
+            value: '{{ $value }}'
+{{- end }}
         ports:
         - containerPort: 8080
         volumeMounts:
