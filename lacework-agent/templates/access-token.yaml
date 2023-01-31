@@ -1,8 +1,10 @@
+{{- if not .Values.cloudservice.gke.autopilot }}
 {{- if kindIs "string" .Values.laceworkConfig.accessToken -}}
 apiVersion: v1
 kind: Secret
 metadata:
   name: {{ include "lacework-agent.name" . }}-access-token
+  namespace: {{ .Release.Namespace }}
   labels:
     tier: monitoring
     app: {{ include "lacework-agent.name" . }}
@@ -16,4 +18,5 @@ metadata:
 type: Opaque
 data:
   agent-access-token: {{ required "A valid AccessToken is required! Specify your Lacework agent token in values.yaml" .Values.laceworkConfig.accessToken | b64enc }}
+{{- end -}}
 {{- end -}}
