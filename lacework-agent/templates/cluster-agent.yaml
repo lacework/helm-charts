@@ -25,13 +25,15 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        app.kubernetes.io/name: {{ include "lacework-agent.name" . }}
+        app.kubernetes.io/instance: {{ include "lacework-agent.name" . }}
         name: {{ include "lacework-agent.name" . }}-cluster
     spec:
       serviceAccountName: cluster-{{ include "lacework-agent.name" . }}-sa
       tolerations:
 {{ toYaml .Values.tolerations | indent 8 }}
-{{- if .Values.priorityClassName }}
-      priorityClassName: {{ .Values.priorityClassName | quote }}
+{{- if or .Values.priorityClassCreate .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName | default (include "lacework-agent.fullname" . ) }}
 {{- end }}
 {{- if .Values.clusterAgent.image.imagePullSecrets }}
       imagePullSecrets:

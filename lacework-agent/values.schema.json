@@ -79,6 +79,12 @@
                 },
                 "tag": {
                     "type": "string"
+                },
+                "overrideValue": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 }
             },
             "required": [
@@ -200,6 +206,16 @@
                             }
                         }
                     ]
+                },
+                "anonymizeIncoming": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": ["netmask"],
+                    "properties": {
+                        "netmask": {
+                            "type": ["string", "null"]
+                        }
+                    }
                 },
                 "annotations": {
                     "additionalProperties": {
@@ -362,6 +378,18 @@
                 "string",
                 "null"
             ]
+        },
+        "priorityClassCreate": {
+            "description": "If specified, a priority class is created and used to deploy agent",
+            "type": "boolean"
+        },
+        "priorityClassPreemptionPolicy": {
+            "description": "If specified, it determines if agent pod can preempt a pod with a lower a priority",
+            "type": "string"
+        },
+        "priorityClassValue": {
+            "description": "If specified, it represents the priority class value to use",
+            "type": "number"
         },
         "tolerations": {
             "description": "If specified, the pod's tolerations.",

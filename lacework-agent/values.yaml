@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 6.2.0
+  tag: 6.3.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -10,6 +10,7 @@ image:
   # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
   # imagePullSecrets:
   #   - name: CustomerRegistrKeySecretName
+  overrideValue:
 resources:
   # The requests/limits is guidance and should be adjusted based on the workload
   # Please contact Lacework support for additional details
@@ -50,6 +51,10 @@ laceworkConfig:
   # [Required] An access token is required before running agents.
   # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
   accessToken:
+  # [Optional] Anonymize incoming IP addresses collected by the agent
+  anonymizeIncoming:
+    # [Optional] Use the following netmask to anonymize addresses
+    netmask:
   # [Optional] Define custom annotations to use for identifying resources created by these charts
   annotations: {}
   # [Optional] Define custom labels to use for identifying resources created by these charts
@@ -95,6 +100,12 @@ laceworkConfig:
 ##########################################################################
 # Set daemonset priorityClassName
 priorityClassName:
+# Create the priority class for the daemonset pods
+priorityClassCreate: false
+# Preemption policy for the PriorityClass
+priorityClassPreemptionPolicy: PreemptLowerPriority
+# Priority class value to use for daemonset pods
+priorityClassValue: 1000000000
 # Allow Lacework agent to run on all nodes including master and infra nodes
 tolerations:
   - effect: NoSchedule

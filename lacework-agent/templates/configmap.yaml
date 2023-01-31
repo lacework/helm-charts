@@ -17,6 +17,11 @@ metadata:
 data:
   config.json: |
     {"autoupgrade": "{{ required "A value for autoupgrade is required" .Values.laceworkConfig.autoUpgrade }}",
+      {{- with .Values.laceworkConfig.anonymizeIncoming }}
+        {{- if .netmask }}
+     "AnonymizeIncoming": {"netmask": "{{ .netmask }}"},
+        {{- end }}
+      {{- end }}
      {{- with .Values.laceworkConfig.fim }}
      {{- if .enable }}
      "fim": {
@@ -57,6 +62,10 @@ data:
 {{- end }}
   {{- if .Values.laceworkConfig.proxyUrl }} "proxyurl" :"{{ .Values.laceworkConfig.proxyUrl}}", {{- end }}
      "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
+{{- if .Values.cloudservice.gke.autopilot }}
+     "tokens":{"AccessToken": "{{ .Values.laceworkConfig.accessToken }}"},
+     "logstdout" : "true",
+{{- end }}     
      "tags": {"Env": "{{ .Values.laceworkConfig.env }}"
               {{- if .Values.laceworkConfig.kubernetesCluster }}, "KubernetesCluster" :"{{ .Values.laceworkConfig.kubernetesCluster}}" {{- end }}
              }
