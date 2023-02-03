@@ -51,7 +51,7 @@ spec:
           mountPath: /certs
         - name: scanner-config-volume
           mountPath: /opt/lacework/config
-{{- if (and (not .Values.config.registry_secret_name) .Values.config.registries) }}
+{{- if (or .Values.config.registry_secret_name .Values.config.registries) }}
         - name: registries
           mountPath: /registries
 {{- end }}
@@ -64,7 +64,7 @@ spec:
       - name: "certs"
         secret:
             secretName: {{ .Values.name }}-certs
-{{- if (and (not .Values.config.registry_secret_name) .Values.config.registries) }}
+{{- if (or .Values.config.registry_secret_name .Values.config.registries) }}
       - name: "registries"
         secret:
 {{- if .Values.config.registry_secret_name }}
