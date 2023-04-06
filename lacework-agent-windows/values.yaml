@@ -1,0 +1,90 @@
+windowsAgent:
+  # Enable installation of Windows agent on K8s cluster.
+  enable: true
+  image:
+    registry: docker.io
+    repository: lacework/datacollector-windows
+    tag: 1.5.0.3369
+    # imagePullPolicy should be Always to get the latest container
+    # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+    pullPolicy: Always
+    # [Optional] imagePullSecrets.
+    # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    # imagePullSecrets:
+    # - name: WindowsRegKeySecretName
+  agentConfig:
+    # [Required] An access token is required before running agents.
+    # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
+    accessToken:
+    # [Optional] Define custom annotations to use for identifying resources created by these charts
+    annotations: {}
+    # [Optional] Define custom labels to use for identifying resources created by these charts
+    labels: {}
+    # [Optional] Set to "disable" to disable autoupgrade of the datacollector
+    autoUpgrade: enable
+    # [Optional] Give your k8s environment a friendly name
+    env:
+    # [Optional] Kubernetes cluster name
+    # https://support.lacework.com/hc/en-us/articles/360005263034-Deploy-on-Kubernetes
+    kubernetesCluster:
+    # [Optional] Configure File Integrity Monitoring
+    # https://docs.lacework.com/onboarding/windows-agent-config-json-properties#file-integrity-monitoring-fim-properties
+    fim:
+      enable: true
+      # [Optional] Configure file paths to ignore
+      fileIgnore: []
+      # [Optional] Configure file paths to include
+      filePath: []
+      # [Optional] Set to true to prevent atime from being used in metadata hash computation
+      noAtime:
+      # [Optional] Run the FIM scan interval at the specifid time of the day (HH:MM)
+      runAt:
+      # [Optional] Max files that will be scanned.
+      maxscanfiles:
+    # [Optional] Monitor registry changes for predefined registry paths.
+    registry: enable
+    # [Optional] Set to "disable" to disable host intrusion detection system(HIDS).
+    hids: enable
+    # [Optional] Route agent traffic through the specified proxy.
+    proxyUrl:
+    # [Optional] Specify the service account for agent pods
+    serviceAccountName:
+    # [Required] Region specific Lacework service URL. Defaults to the US region.
+    serverUrl: https://api.lacework.net
+    # [Optional] Set to false to prevent agent from sending diagnostic logs to stdout
+    stdoutLogging: true
+
+  resources:
+  # The requests/limits is guidance and should be adjusted based on the workload
+  # Please contact Lacework support for additional details
+  # https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#requests-and-limits
+  # https://support.lacework.com/hc/en-us/articles/360047019354-Usage-Impact-of-Agent-Deployment
+    requests:
+      cpu: 200m
+      memory: 64Mi
+    limits:
+      cpu: 500m
+      memory: 1024Mi
+
+  priorityClassName:
+  daemonset:
+    # Use rolling updates in the DaemonSet
+    # https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/
+    updateStrategy:
+      type: RollingUpdate
+    # DaemonSet to schedule using affinity rules
+    # https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+            - key: kubernetes.io/os
+              operator: In
+              values:
+              - windows
+
