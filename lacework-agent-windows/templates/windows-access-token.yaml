@@ -1,0 +1,19 @@
+{{- if kindIs "string" .Values.windowsAgent.agentConfig.accessToken -}}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ include "lacework-windows-agent.name" . }}-access-token
+  labels:
+    tier: monitoring
+    app: {{ include "lacework-windows-agent.name" . }}
+    {{- with .Values.windowsAgent.agentConfig.labels }}
+      {{- toYaml . | nindent 4 }}
+    {{- end }}
+  {{- with .Values.windowsAgent.agentConfig.annotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+type: Opaque
+data:
+  agent-access-token: {{ required "A valid AccessToken is required! Specify your Lacework agent token in values.yaml" .Values.windowsAgent.agentConfig.accessToken | b64enc }}
+{{- end -}}
