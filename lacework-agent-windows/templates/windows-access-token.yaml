@@ -11,7 +11,7 @@ metadata:
     {{- end }}
   {{- with .Values.windowsAgent.agentConfig.annotations }}
     annotations:
-    {{- toYaml . | nindent 4 }}
+    {{- toYaml . | nindent 8 }}
   {{- end }}
 type: Opaque
 data:
