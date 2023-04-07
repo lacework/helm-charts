@@ -33,10 +33,10 @@ data:
       {{- end }}
       {{- end }}
       {{- if .Values.windowsAgent.agentConfig.proxyUrl }} 
-      "proxyurl" :"{{ .Values.windowsAgent.agentConfig.proxyUrl}}", 
+      "proxyurl": "{{ .Values.windowsAgent.agentConfig.proxyUrl}}", 
       {{- end }}
       {{- if .Values.windowsAgent.agentConfig.registry }} 
-      "registry" :"{{ .Values.windowsAgent.agentConfig.registry}}", 
+      "registry": "{{ .Values.windowsAgent.agentConfig.registry}}", 
       {{- end }}
       {{- if .Values.windowsAgent.agentConfig.hids }} 
       "hids": "{{ .Values.windowsAgent.agentConfig.hids}}", 
