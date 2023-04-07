@@ -11,8 +11,8 @@ metadata:
       {{- toYaml . | nindent 4 }}
     {{- end }}
   {{- with .Values.windowsAgent.agentConfig.annotations }}
-    annotations:
-      {{- toYaml . | nindent 8 }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
   {{- end }}
 data:
   config.json: |

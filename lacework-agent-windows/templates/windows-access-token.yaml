@@ -7,10 +7,10 @@ metadata:
     tier: monitoring
     app: {{ include "lacework-windows-agent.name" . }}
     {{- with .Values.windowsAgent.agentConfig.labels }}
-    {{- toYaml . | nindent 4 }}
+      {{- toYaml . | nindent 4 }}
     {{- end }}
   {{- with .Values.windowsAgent.agentConfig.annotations }}
-    annotations:
+  annotations:
     {{- toYaml . | nindent 8 }}
   {{- end }}
 type: Opaque
