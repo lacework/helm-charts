@@ -104,7 +104,7 @@ laceworkConfig:
     # [Optional] Define the length of the interval (in minutes) between package scans
     interval:
   # [Optional] Define the behavior of the agent's process scans
-  packagescan:
+  procscan:
     # [Optional] Set to "false" to disable agent process scans
     enable:
     # [Optional] Define the length of the interval (in minutes) between process scans

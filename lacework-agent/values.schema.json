@@ -271,6 +271,7 @@
                     ],
                     "enum": [
                         "containerd",
+                        "cri-o",
                         "docker",
                         null
                     ]
