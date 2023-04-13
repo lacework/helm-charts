@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 6.4.2
+  tag: 6.5.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -61,6 +61,16 @@ laceworkConfig:
   labels: {}
   # [Optional] Set to "disable" to disable autoupgrade of the datacollector
   autoUpgrade: enable
+  # [Optional] Filter executables tracked by the agent
+  cmdlinefilter:
+    # [Optional] Track only the executables listed in the following filter
+    allow:
+    # [Optional] Do not track only the executables listed in the following filter
+    disallow:
+  # [Optional] Define the endpoint that the agent uses to discover containers
+  containerEngineEndpoint:
+  # [Optional] Define the runtime that the agent uses to discover containers
+  containerRuntime:
   # [Optional] Give your k8s environment a friendly name
   # https://docs.lacework.com/onboarding/add-agent-tags
   env:
@@ -87,6 +97,18 @@ laceworkConfig:
   # [Optional] Kubernetes cluster name
   # https://support.lacework.com/hc/en-us/articles/360005263034-Deploy-on-Kubernetes
   kubernetesCluster:
+  # [Optional] Define the behavior of the agent's package scans
+  packagescan:
+    # [Optional] Set to "false" to disable agent package scans
+    enable:
+    # [Optional] Define the length of the interval (in minutes) between package scans
+    interval:
+  # [Optional] Define the behavior of the agent's process scans
+  procscan:
+    # [Optional] Set to "false" to disable agent process scans
+    enable:
+    # [Optional] Define the length of the interval (in minutes) between process scans
+    interval:
   # [Optional] Route agent traffic through the specified proxy.
   proxyUrl:
   # [Optional] Specify the service account for agent pods
@@ -97,6 +119,8 @@ laceworkConfig:
   stdoutLogging: true
   # [Optional] Set to one of the other modes like ebpflite, scan, or lite for load balancers.
   perfmode:
+  # [Optional] Specify custom name/value tags to categorize agents.
+  tags:
 ##########################################################################
 # Set daemonset priorityClassName
 priorityClassName:

@@ -237,6 +237,45 @@
                         "enable"
                     ]
                 },
+                "cmdlinefilter": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "allow": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "disallow": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        }
+                    }
+                },
+                "containerEngineEndpoint": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "containerRuntime": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "containerd",
+                        "cri-o",
+                        "docker",
+                        null
+                    ]
+                },
                 "datacollector": {
                     "type": "string",
                     "enum": [
@@ -333,6 +372,50 @@
                         }
                     }
                 },
+                "packagescan": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "enable": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "interval": {
+                            "minimum": 0,
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        }
+                    }
+                },
+                "procscan": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "enable": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "interval": {
+                            "minimum": 0,
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        }
+                    }
+                },
                 "proxyUrl": {
                     "type": [
                         "string",
@@ -352,6 +435,18 @@
                 },
                 "stdoutLogging": {
                     "type": "boolean"
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "type": [
+                        "object",
+                        "null"
+                    ]
                 },
                 "perfmode": {
                     "type": [
