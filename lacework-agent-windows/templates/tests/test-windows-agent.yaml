@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-windows-test"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: {{ .Release.Name }}-token-test
+      image: {{ template "lacework-windows-agent.image" . }}
+      imagePullPolicy: {{ .Values.windowsAgent.image.pullPolicy | quote }}
+      env:
+        - name: LACEWORK_SERVER_URL
+          value: {{ .Values.windowsAgent.agentConfig.serverUrl | quote }}
+        - name: LACEWORK_AGENT_TOKEN
+          valueFrom:
+            secretKeyRef:
+{{- if kindIs "string" .Values.windowsAgent.agentConfig.accessToken }}
+              name: {{ include "lacework-windows-agent.name" . }}-access-token
+              key: agent-access-token
+{{- else }}
+              name: {{ required "Secret name required for existing windowsAgent secret" .Values.windowsAgent.agentConfig.accessToken.existingSecret.name }}
+              key: {{ required "Key name required for existing windowsAgent secret" .Values.windowsAgent.agentConfig.accessToken.existingSecret.key }}
+{{- end }}
+      # Dummy test until we have a URL that we can use to validate the server URL + agent token combination
+      command:
+        - /usr/bin/bash
+        - "true"
+  restartPolicy: Never
