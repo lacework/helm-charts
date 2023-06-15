@@ -791,7 +791,28 @@ entries:
   lacework-agent:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-05-04T19:53:24.717466522Z"
+    created: "2023-06-12T17:57:49.15098459Z"
+    description: Lacework Agent
+    digest: a878e1f8bba2891d33a0295dd5a4c0bdeb612927ef261660c8b8c381fe811bcb
+    home: https://www.lacework.com
+    icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
+    keywords:
+    - monitoring
+    - security
+    - run-time
+    - metric
+    - troubleshooting
+    kubeVersion: '> 1.9.0-0'
+    maintainers:
+    - email: info@lacework.net
+      name: lacework-support
+    name: lacework-agent
+    urls:
+    - lacework-agent-6.6.0.tgz
+    version: 6.6.0
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2023-06-12T17:57:49.149429877Z"
     description: Lacework Agent
     digest: 1fda457f167eee99f9e577b69d79266a466cd60413e06cc7834d9f3ed81c48f3
     home: https://www.lacework.com
