@@ -12,7 +12,7 @@ logLevel: "info"
 resources: {}
 
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.21.1
+image: lacework/lacework-proxy-scanner:0.22.0
 
 podAnnotations: {}
 #  my-annotation-key: my value; more value
@@ -36,6 +36,8 @@ config:
   scan_public_registries: true
   default_registry:
   disable_expand_env: false
+  # [optional] Location to cache the sbom so future scan requests will use the cached sbom for vulnerability scans
+  manifest_cache_location_beta:
   lacework:
     account_name:
     integration_access_token:
