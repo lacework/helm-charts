@@ -813,9 +813,9 @@ entries:
   lacework-agent:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2023-06-22T19:28:45.967854754Z"
+    created: "2023-06-28T20:36:07.582411063Z"
     description: Lacework Agent
-    digest: 4f859d5828f4acd786a55baebaf6f4ead1bc665d62304dc86ddc88432564ee91
+    digest: 086ea69c345341ee4e6d91b625759cb264da05ebb2948adf5bc6c9c5fc21342c
     home: https://www.lacework.com
     icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
     keywords:
