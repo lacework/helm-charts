@@ -9,23 +9,75 @@
             "$comment": "Blanket 'global' object to enable embedding this chart as a sub-chart"
         },
         "daemonset": {
-            "type:": "object",
-            "properties": {
-                "affinity": {
-                    "$ref": "#/definitions/io.k8s.api.core.v1.Affinity",
-                    "description": "If specified, the pod's scheduling constraints"
-                },
-                "updateStrategy": {
-                    "$ref": "#/definitions/io.k8s.api.core.v1.DaemonSetUpdateStrategy",
-                    "description": "An update strategy to replace existing DaemonSet pods with new pods."
-                }
-            },
-            "required": [
-                "affinity",
-                "updateStrategy"
-            ],
-            "additionalProperties": false
-        },
+	     "type:": "object",
+	     "properties": {
+		 "affinity": {
+		     "$ref": "#/definitions/io.k8s.api.core.v1.Affinity",
+		     "description": "If specified, the pod's scheduling constraints"
+		 },
+		 "updateStrategy": {
+		     "$ref": "#/definitions/io.k8s.api.core.v1.DaemonSetUpdateStrategy",
+		     "description": "An update strategy to replace existing DaemonSet pods with new pods."
+		 }
+	     },
+	     "required": [
+		 "affinity",
+		 "updateStrategy"
+	     ],
+	     "additionalProperties": false
+	 },
+	 "deployment": {
+	     "type:": "object",
+	     "properties": {
+		 "affinity": {
+		     "$ref": "#/definitions/io.k8s.api.core.v1.Affinity",
+		     "description": "If specified, the pod's scheduling constraints"
+		 },
+		 "updateStrategy": {
+		     "$ref": "#/definitions/io.k8s.api.core.v1.DaemonSetUpdateStrategy",
+		     "description": "An update strategy to replace existing DaemonSet pods with new pods."
+		 },
+		 "resources": {
+		     "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements",
+		     "description": "Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
+	         },
+		 "priorityClassName": {
+		     "description": "If specified, indicates the pod's priority. \"system-node-critical\" and \"system-cluster-critical\" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default.",
+		     "type": [
+			 "string",
+			 "null"
+		     ]
+		 },
+		 "priorityClassCreate": {
+		     "description": "If specified, a priority class is created and used to deploy agent",
+		     "type": "boolean"
+		 },
+		 "priorityClassPreemptionPolicy": {
+		     "description": "If specified, it determines if agent pod can preempt a pod with a lower a priority",
+		     "type": "string"
+		 },
+		 "priorityClassValue": {
+		     "description": "If specified, it represents the priority class value to use",
+		     "type": "number"
+		 },
+		 "tolerations": {
+		     "description": "If specified, the pod's tolerations.",
+		     "items": {
+			 "$ref": "#/definitions/io.k8s.api.core.v1.Toleration",
+			 "description": "If specified, the pod's tolerations."
+		     },
+		     "type": [
+			 "array",
+			 "null"
+		     ]
+		 }
+	     },
+	     "required": [
+		 "affinity",
+		 "updateStrategy"
+	     ],
+	     "additionalProperties": false
+	 },
         "cloudservice": {
             "type:": "object",
             "properties": {
@@ -153,6 +205,7 @@
                     ],
                     "enum": [
                         "eks",
+                        "gke",
                         "unknown",
                         null
                     ],
@@ -210,7 +263,6 @@
                 "anonymizeIncoming": {
                     "type": "object",
                     "additionalProperties": false,
-                    "required": ["netmask"],
                     "properties": {
                         "netmask": {
                             "type": ["string", "null"]
@@ -308,6 +360,13 @@
                         "object",
                         "null"
                     ]
+                },
+		"metadataRequestInterval": {
+                    "type": [
+			"string",
+			"null"
+		    ],
+                    "pattern": "^[-+]?[0-9]*(\\.[0-9]*)?(ns|us|ms|s|m|h)$"
                 },
                 "env": {
                     "type": [
@@ -425,7 +484,7 @@
                 "serverUrl": {
                     "type": "string",
                     "format": "uri",
-                    "pattern": "^(https://.*.lacework.net|http://.*.svc.cluster.local)$"
+                    "pattern": "^(https://.*.lacework.net|http://.*.svc.cluster.local:?[0-9]*|https?://(?:[0-9]{1,3}\\.){3}[0-9]{1,3}(?::[0-9]{1,5}))$"
                 },
                 "serviceAccountName": {
                     "type": [
