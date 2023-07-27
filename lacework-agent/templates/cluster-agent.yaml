@@ -30,10 +30,12 @@ spec:
         name: {{ include "lacework-agent.name" . }}-cluster
     spec:
       serviceAccountName: cluster-{{ include "lacework-agent.name" . }}-sa
+      affinity:
+{{ toYaml .Values.deployment.affinity | indent 8 }}
       tolerations:
-{{ toYaml .Values.tolerations | indent 8 }}
-{{- if or .Values.priorityClassCreate .Values.priorityClassName }}
-      priorityClassName: {{ .Values.priorityClassName | default (include "lacework-agent.fullname" . ) }}
+{{ toYaml .Values.deployment.tolerations | indent 8 }}
+{{- if or .Values.deployment.priorityClassCreate .Values.priorityClassName }}
+      priorityClassName: {{ or .Values.deployment.priorityClassName .Values.priorityClassName  | default (include "lacework-agent.fullname" . ) }}
 {{- end }}
 {{- if .Values.clusterAgent.image.imagePullSecrets }}
       imagePullSecrets:
@@ -66,6 +68,11 @@ spec:
                 name: {{ required "Secret name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.name }}
                 key: {{ required "Key name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.key }}
 {{- end}}
+        resources:
+          requests:
+{{ toYaml .Values.resources.requests | indent 12 }}
+          limits:
+{{ toYaml .Values.resources.limits | indent 12 }}
         volumeMounts:
           - name: cfgmap
             mountPath: /config

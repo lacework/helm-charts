@@ -102,6 +102,9 @@ data:
 {{- end }}
   {{- if .Values.laceworkConfig.proxyUrl }} "proxyurl" :"{{ .Values.laceworkConfig.proxyUrl}}", {{- end }}
      "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
+  {{- if .Values.laceworkConfig.metadataRequestInterval }} 
+     "metadata_request_interval": "{{ .Values.laceworkConfig.metadataRequestInterval}}",
+  {{- end }}
 {{- if .Values.cloudservice.gke.autopilot }}
      "tokens":{"AccessToken": "{{ .Values.laceworkConfig.accessToken }}"},
      "logstdout" : "true",
