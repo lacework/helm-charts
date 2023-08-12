@@ -310,6 +310,21 @@
                         }
                     }
                 },
+                "codeaware": {
+                    "type": [
+                        "object",
+                        "null"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                        "enable": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        }
+                    }
+                },
                 "containerEngineEndpoint": {
                     "type": [
                         "string",
