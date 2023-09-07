@@ -4,7 +4,7 @@ windowsAgent:
   image:
     registry: docker.io
     repository: lacework/datacollector-windows
-    tag: 1.6.0.3557
+    tag: 1.7.0.3913
     # imagePullPolicy should be Always to get the latest container
     # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     pullPolicy: Always
@@ -69,6 +69,8 @@ windowsAgent:
     limits:
       cpu: 500m
       memory: 1024Mi
+
+  tolerations:
 
   priorityClassName:
   daemonset:
