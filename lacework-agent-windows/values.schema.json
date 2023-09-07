@@ -391,119 +391,130 @@
                 "priorityClassName",
                 "daemonset"
             ],
-            "properties": {
-                "enable": {
-                    "type": "boolean",
-                    "description": "Enable lacework windows agent"
-                },
-                "image": {
-                    "$ref": "#/properties/image"
-                },
-                "agentConfig": {
-                    "type": "object",
-                    "required": [
-                        "accessToken"
-                    ],
-                    "properties": {
-                        "accessToken": {
-                            "$ref": "#/properties/laceworkConfig/properties/accessToken"
-                        },
-                        "annotations": {
-                            "$ref": "#/properties/laceworkConfig/properties/annotations"
-                        },
-                        "labels": {
-                            "$ref": "#/properties/laceworkConfig/properties/labels"
-                        },
-                        "autoUpgrade": {
-                            "$ref": "#/properties/laceworkConfig/properties/autoUpgrade"
-                        },
-                        "env": {
-                            "$ref": "#/properties/laceworkConfig/properties/env"                        
-                        },
-                        "kubernetesCluster": {
-                            "$ref": "#/properties/laceworkConfig/properties/kubernetesCluster"
-                        },
-                        "tags": {
-                            "$ref": "#/properties/laceworkConfig/properties/tags"
-                        },
-                        "fim": {
-                            "type": "object",
-                            "additionalProperties": false,
-                            "required": [
-                                "enable"
-                            ],
-                            "properties": {
-                                "enable": {
-                                    "type": "boolean"
-                                },
-                                "fileIgnore": {
-                                    "$ref": "#/properties/laceworkConfig/properties/fim/properties/fileIgnore"
-                                },
-                                "filePath": {
-                                    "$ref": "#/properties/laceworkConfig/properties/fim/properties/filePath"
-                                },
-                                "noAtime": {
-                                    "$ref": "#/properties/laceworkConfig/properties/fim/properties/noAtime"
-                                },
-                                "runAt": {
-                                    "$ref": "#/properties/laceworkConfig/properties/fim/properties/runAt"
-                                },
-                                "maxscanfiles": {
-                                    "minimum": 0,
-                                    "type": [
-                                        "integer",
-                                        "null"
-                                    ]
-                                }
-                            }
-                        },
-                        "registry": {
-                            "type": "string",
-                            "enum": [
-                                "disable",
-                                "enable"
-                            ]
-                        },
-                        "hids": {
-                            "type": "string",
-                            "enum": [
-                                "disable",
-                                "enable"
-                            ]
-                        },
-                        "proxyUrl": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        },
-                        "serverUrl": {
-                            "type": "string",
-                            "format": "uri",
-                            "pattern": "^(https://.*.lacework.net|http://.*.svc.cluster.local)$"
-                        },
-                        "serviceAccountName": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
-                        },
-                        "stdoutLogging": {
-                            "type": "boolean"
-                        }
-                    },
-                    "additionalProperties": false
-                },
-                "resources": {
-                    "$ref": "#/properties/resources"
-                },
-                "priorityClassName": {
-                    "$ref": "#/properties/priorityClassName"
-                },
-                "daemonset": {
-                    "$ref": "#/properties/daemonset"
-                }
+          "properties": {
+            "tolerations": {
+              "description": "If specified, the pod's tolerations.",
+              "items": {
+                "$ref": "#/definitions/io.k8s.api.core.v1.Toleration",
+                "description": "If specified, the pod's tolerations."
+              },
+              "type": [
+                "array",
+                "null"
+              ]
             },
+            "enable": {
+              "type": "boolean",
+              "description": "Enable lacework windows agent"
+            },
+            "image": {
+              "$ref": "#/properties/image"
+            },
+            "agentConfig": {
+              "type": "object",
+              "required": [
+                "accessToken"
+              ],
+              "properties": {
+                "accessToken": {
+                  "$ref": "#/properties/laceworkConfig/properties/accessToken"
+                },
+                "annotations": {
+                  "$ref": "#/properties/laceworkConfig/properties/annotations"
+                },
+                "labels": {
+                  "$ref": "#/properties/laceworkConfig/properties/labels"
+                },
+                "autoUpgrade": {
+                  "$ref": "#/properties/laceworkConfig/properties/autoUpgrade"
+                },
+                "env": {
+                  "$ref": "#/properties/laceworkConfig/properties/env"
+                },
+                "kubernetesCluster": {
+                  "$ref": "#/properties/laceworkConfig/properties/kubernetesCluster"
+                },
+                "tags": {
+                  "$ref": "#/properties/laceworkConfig/properties/tags"
+                },
+                "fim": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "enable"
+                  ],
+                  "properties": {
+                    "enable": {
+                      "type": "boolean"
+                    },
+                    "fileIgnore": {
+                      "$ref": "#/properties/laceworkConfig/properties/fim/properties/fileIgnore"
+                    },
+                    "filePath": {
+                      "$ref": "#/properties/laceworkConfig/properties/fim/properties/filePath"
+                    },
+                    "noAtime": {
+                      "$ref": "#/properties/laceworkConfig/properties/fim/properties/noAtime"
+                    },
+                    "runAt": {
+                      "$ref": "#/properties/laceworkConfig/properties/fim/properties/runAt"
+                    },
+                    "maxscanfiles": {
+                      "minimum": 0,
+                      "type": [
+                        "integer",
+                        "null"
+                      ]
+                    }
+                  }
+                },
+                "registry": {
+                  "type": "string",
+                  "enum": [
+                    "disable",
+                    "enable"
+                  ]
+                },
+                "hids": {
+                  "type": "string",
+                  "enum": [
+                    "disable",
+                    "enable"
+                  ]
+                },
+                "proxyUrl": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "serverUrl": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^(https://.*.lacework.net|http://.*.svc.cluster.local)$"
+                },
+                "serviceAccountName": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "stdoutLogging": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "resources": {
+              "$ref": "#/properties/resources"
+            },
+            "priorityClassName": {
+              "$ref": "#/properties/priorityClassName"
+            },
+            "daemonset": {
+              "$ref": "#/properties/daemonset"
+            }
+          },
             "additionalProperties": false
         }
     },

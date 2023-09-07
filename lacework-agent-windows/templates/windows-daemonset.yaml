@@ -32,6 +32,8 @@ spec:
     spec:
       affinity:
 {{ toYaml .Values.windowsAgent.daemonset.affinity | indent 8 }}
+      tolerations:
+{{ toYaml .Values.windowsAgent.tolerations | indent 8 }}
 {{- if .Values.windowsAgent.priorityClassName }}
       priorityClassName: {{ .Values.windowsAgent.priorityClassName | quote }}
 {{- end }}
