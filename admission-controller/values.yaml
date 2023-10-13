@@ -75,7 +75,7 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.21.1
+  tag: 0.23.0
   pullPolicy: Always
   replicaCount: 1
   service:
@@ -93,6 +93,8 @@ proxy-scanner:
     default_registry:
     static_cache_location: /opt/lacework
     scan_public_registries: true
+    # [optional] Location to cache the sbom so future scan requests will use the cached sbom for vulnerability scans
+    manifest_cache_location_beta:
     lacework:
       account_name:
       integration_access_token:
