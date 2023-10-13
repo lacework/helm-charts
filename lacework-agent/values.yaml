@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 6.7.6
+  tag: 6.9.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -36,7 +36,7 @@ clusterAgent:
   image:
     registry: docker.io
     repository: lacework/k8scollector
-    tag: 6.7.6
+    tag: 6.9.0
     # imagePullPolicy should be Always to get the latest container
     # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     pullPolicy: Always
@@ -67,6 +67,10 @@ laceworkConfig:
     allow:
     # [Optional] Do not track only the executables listed in the following filter
     disallow:
+  # [Optional] Enable Active Vulnerability Detection
+  # https://docs.lacework.net/onboarding/configure-agent-behavior-in-configjson-file#codeaware-property
+  codeaware:
+    enable: false
   # [Optional] Define the endpoint that the agent uses to discover containers
   containerEngineEndpoint:
   # [Optional] Define the runtime that the agent uses to discover containers

@@ -36,6 +36,13 @@ data:
        },
        {{- end }}
      {{- end }}
+     {{- with .Values.laceworkConfig.codeaware }}
+       {{- if .enable }}
+        "codeaware": {
+          "enable": "all"
+        },
+       {{- end }}
+     {{- end }}
      {{- if .Values.laceworkConfig.containerEngineEndpoint }}
      "containerengineendpoint": "{{- .Values.laceworkConfig.containerEngineEndpoint }}",
      {{- end }}
