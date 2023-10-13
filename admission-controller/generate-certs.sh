@@ -13,6 +13,9 @@ DNS.1 = lacework-admission-controller.lacework.svc
 DNS.2 = lacework-admission-controller.lacework.svc.cluster.local
 DNS.3 = admission.lacework-dev.svc
 DNS.4 = admission.lacework-dev.svc.cluster.local
+DNS.5 = lacework-proxy-scanner.lacework.svc
+DNS.6 = lacework-proxy-scanner.lacework.svc.cluster.local
+DNS.7 = lacework-proxy-scanner.lacework
 [ v3_req ]
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
