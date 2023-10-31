@@ -84,9 +84,12 @@ data:
     },
     {{- end }}
     {{- end }}
-{{- if kindIs "string" .Values.laceworkConfig.perfmode }}
-     "perfmode": "{{ .Values.laceworkConfig.perfmode }}",
-{{- end }}
+    {{- if kindIs "string" .Values.laceworkConfig.perfmode }}
+        "perfmode": "{{ .Values.laceworkConfig.perfmode }}",
+    {{- end }}
+    {{- if .Values.laceworkConfig.vmprovidercustom }}
+      "vmprovidercustom": "{{- .Values.laceworkConfig.vmprovidercustom }}",
+    {{- end }}
 {{- if .Values.clusterAgent.enable }}
      "k8snodecollector": {
 {{- if .Values.clusterAgent.clusterType }}

@@ -310,6 +310,12 @@
                         }
                     }
                 },
+                "vmprovidercustom": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                },
                 "codeaware": {
                     "type": [
                         "object",
