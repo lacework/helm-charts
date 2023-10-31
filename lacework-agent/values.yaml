@@ -67,6 +67,8 @@ laceworkConfig:
     allow:
     # [Optional] Do not track only the executables listed in the following filter
     disallow:
+  # [Optional] Configure auto-detect VM provider
+  vmprovidercustom: false
   # [Optional] Enable Active Vulnerability Detection
   # https://docs.lacework.net/onboarding/configure-agent-behavior-in-configjson-file#codeaware-property
   codeaware:
