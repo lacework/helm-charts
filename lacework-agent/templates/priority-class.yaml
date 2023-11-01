@@ -1,0 +1,9 @@
+{{- if .Values.priorityClassCreate}}
+apiVersion: scheduling.k8s.io/v1
+description: Used by Lacework daemonset to be scheduled at a higher priority
+kind: PriorityClass
+metadata:
+  name: {{ .Values.priorityClassName | default (include "lacework-agent.fullname" . ) }}
+preemptionPolicy: {{ .Values.priorityClassPreemptionPolicy }}
+value: {{ .Values.priorityClassValue }}
+{{- end }}

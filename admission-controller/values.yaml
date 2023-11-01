@@ -8,9 +8,16 @@ admission:
   tls_port: 8443
   cert_file_path: "/certs/admission.crt"
   cert_key_path: "/certs/admission.key"
+  # It is highly recommended that all resources except `Pod` are excluded from scans.
+  # All other resources may spawn multiple child resources,
+  # and you will need to exclude all of these if you want to prevent excessive scanning during the deployment.
   excluded_resources:
-  - 
-  - 
+  - "Deployment"
+  - "ReplicaSet"
+  - "DaemonSet"
+  - "Job"
+  - "CronJob"
+  - "StatefulSet"
 
 policy:
   block_exec: false
@@ -68,7 +75,7 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.11.0
+  tag: 0.23.0
   pullPolicy: Always
   replicaCount: 1
   service:
@@ -83,31 +90,33 @@ proxy-scanner:
   resources: {}
 
   config:
-    default_registry: index.docker.io
+    default_registry:
     static_cache_location: /opt/lacework
     scan_public_registries: true
+    # [optional] Location to cache the sbom so future scan requests will use the cached sbom for vulnerability scans
+    manifest_cache_location_beta:
     lacework:
       account_name:
       integration_access_token:
-    registry_secret_name:
+#    registry_secret_name:
     registries:
-    - domain:
-      name:
-      ssl:
-      type:
-      auto_poll:
-      is_public:
-      auth_type:
-      auth_header_name: Authorization
-      credentials:
-        user_name:
-        password:
-      notification_type:
-      poll_frequency_minutes: 20
-      disable_non_os_package_scanning: false
-      go_binary_scanning:
-        enable: false
-        scan_directory_path: ""
+#      - domain:
+#        name:
+#        ssl:
+#        type:
+#        auto_poll:
+#        is_public:
+#        auth_type:
+#        auth_header_name: Authorization
+#        credentials:
+#          user_name:
+#          password:
+#        notification_type:
+#        poll_frequency_minutes: 20
+#        disable_non_os_package_scanning: false
+#        go_binary_scanning:
+#          enable: false
+#          scan_directory_path: ""
 
   certs:
     skipCert: true

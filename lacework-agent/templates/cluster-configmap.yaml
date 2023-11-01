@@ -17,10 +17,10 @@ metadata:
 data:
   config.yaml: |
     serverurl: {{ .Values.laceworkConfig.serverUrl}}
-{{- if kindIs "int64" .Values.clusterAgent.scrapeInitialDelayMins }}
+{{- if or (kindIs "int64" .Values.clusterAgent.scrapeInitialDelayMins) (kindIs "float64" .Values.clusterAgent.scrapeInitialDelayMins) }}
     initialdelaymins: {{ .Values.clusterAgent.scrapeInitialDelayMins }}
 {{- end }}
-{{- if kindIs "int64" .Values.clusterAgent.scrapeIntervalMins }}
+{{- if or (kindIs "int64" .Values.clusterAgent.scrapeIntervalMins) (kindIs "float64" .Values.clusterAgent.scrapeIntervalMins) }}
     runintervalmins: {{ .Values.clusterAgent.scrapeIntervalMins }}
 {{- end }}
 {{- if or (kindIs "string" .Values.clusterAgent.clusterType) (kindIs "string" .Values.laceworkConfig.kubernetesCluster) }}

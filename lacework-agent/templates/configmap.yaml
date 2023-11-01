@@ -1,3 +1,4 @@
+{{- if .Values.datacollector.enable -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -16,11 +17,43 @@ metadata:
 data:
   config.json: |
     {"autoupgrade": "{{ required "A value for autoupgrade is required" .Values.laceworkConfig.autoUpgrade }}",
+      {{- with .Values.laceworkConfig.anonymizeIncoming }}
+        {{- if .netmask }}
+     "AnonymizeIncoming": {"netmask": "{{ .netmask }}"},
+        {{- end }}
+      {{- end }}
+     {{- with .Values.laceworkConfig.cmdlinefilter }}
+       {{- if or .allow .disallow }}
+       "cmdlinefilter": {
+         {{- if and .allow .disallow }}
+         "allow": "{{- .allow }}",
+         "disallow": "{{- .disallow }}"
+         {{- else if .allow }}
+         "allow": "{{- .allow }}"
+         {{- else if .disallow }}
+         "disallow": "{{- .disallow }}"
+         {{- end }}
+       },
+       {{- end }}
+     {{- end }}
+     {{- with .Values.laceworkConfig.codeaware }}
+       {{- if .enable }}
+        "codeaware": {
+          "enable": "all"
+        },
+       {{- end }}
+     {{- end }}
+     {{- if .Values.laceworkConfig.containerEngineEndpoint }}
+     "containerengineendpoint": "{{- .Values.laceworkConfig.containerEngineEndpoint }}",
+     {{- end }}
+     {{- if .Values.laceworkConfig.containerRuntime }}
+     "containerruntime": "{{- .Values.laceworkConfig.containerRuntime }}",
+     {{- end }}
      {{- with .Values.laceworkConfig.fim }}
      {{- if .enable }}
      "fim": {
-             {{- if kindIs "int64" .coolingPeriod }}"coolingperiod": "{{ .coolingPeriod }}", {{- end }}
-             {{- if kindIs "int64" .crawlInterval }}"crawlinterval": "{{ .crawlInterval }}", {{- end }}
+             {{- if or (kindIs "float64" .coolingPeriod) (kindIs "int64" .coolingPeriod) }}"coolingperiod": "{{ .coolingPeriod }}", {{- end }}
+             {{- if or (kindIs "float64" .crawlInterval) (kindIs "int64" .crawlInterval) }}"crawlinterval": "{{ .crawlInterval }}", {{- end }}
              {{- if .fileIgnore }}"fileignore": {{ mustToJson .fileIgnore }}, {{- end }}
              {{- if .filePath }}"filepath": {{ mustToJson .filePath }}, {{- end }}
              "mode": "enable"
@@ -31,9 +64,32 @@ data:
      "fim": {"mode": "disable"},
      {{- end }}
      {{- end }}
-{{- if kindIs "string" .Values.laceworkConfig.perfmode }}
-     "perfmode": "{{ .Values.laceworkConfig.perfmode }}",
-{{- end }}
+    {{- with .Values.laceworkConfig.packagescan }}
+    {{- if .enable }}
+    "packagescan": {
+      {{- if .interval }}
+      "interval": "{{- .interval }}",
+      {{- end }}
+      "enable": "{{- .enable }}"
+    },
+    {{- end }}
+    {{- end }}
+    {{- with .Values.laceworkConfig.procscan }}
+    {{- if .enable }}
+    "procscan": {
+      {{- if .interval }}
+      "interval": "{{- .interval }}",
+      {{- end }}
+      "enable": "{{- .enable }}"
+    },
+    {{- end }}
+    {{- end }}
+    {{- if kindIs "string" .Values.laceworkConfig.perfmode }}
+        "perfmode": "{{ .Values.laceworkConfig.perfmode }}",
+    {{- end }}
+    {{- if .Values.laceworkConfig.vmprovidercustom }}
+      "vmprovidercustom": "{{- .Values.laceworkConfig.vmprovidercustom }}",
+    {{- end }}
 {{- if .Values.clusterAgent.enable }}
      "k8snodecollector": {
 {{- if .Values.clusterAgent.clusterType }}
@@ -48,7 +104,7 @@ data:
 {{- if eq .Values.laceworkConfig.datacollector "disable" }}
              "exclusivemode": "true",
 {{- end }}
-{{- if kindIs "int64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins }}
+{{- if or (kindIs "int64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins) (kindIs "float64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins) }}
              "tickerfreqmins": "{{ .Values.laceworkConfig.k8sNodeScrapeIntervalMins }}",
 {{- end }}
              "state": "enabled"
@@ -56,11 +112,28 @@ data:
 {{- end }}
   {{- if .Values.laceworkConfig.proxyUrl }} "proxyurl" :"{{ .Values.laceworkConfig.proxyUrl}}", {{- end }}
      "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
-     "tags": {"Env": "{{ .Values.laceworkConfig.env }}"
-              {{- if .Values.laceworkConfig.kubernetesCluster }}, "KubernetesCluster" :"{{ .Values.laceworkConfig.kubernetesCluster}}" {{- end }}
-             }
+  {{- if .Values.laceworkConfig.metadataRequestInterval }} 
+     "metadata_request_interval": "{{ .Values.laceworkConfig.metadataRequestInterval}}",
+  {{- end }}
+{{- if .Values.cloudservice.gke.autopilot }}
+     "tokens":{"AccessToken": "{{ .Values.laceworkConfig.accessToken }}"},
+     "logstdout" : "true",
+{{- end }}     
+  {{- with .Values.laceworkConfig }}
+    "tags": { 
+  {{- if .tags }}
+    {{ range $key, $val := .tags }}
+      "{{ $key }}": "{{ $val }}",
+    {{- end }}
+  {{- end }}
+      "Env": "{{ .env }}"{{- if .kubernetesCluster }},
+      "KubernetesCluster" :"{{ .kubernetesCluster}}"
+    {{- end }}
+    }
+  {{- end }}
     }
 
 {{- with .Files.Glob "config/syscall_config.yaml" }}
 {{ tpl .AsConfig $ | indent 2 }}
+{{- end }}
 {{- end }}

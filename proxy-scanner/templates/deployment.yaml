@@ -40,6 +40,10 @@ spec:
                 name: {{ required "Secret name required for existing secret" .Values.config.lacework.integration_access_token.existingSecret.name }}
                 key: {{ required "Key name required for existing secret" .Values.config.lacework.integration_access_token.existingSecret.key }}
 {{- end }}
+{{- range $name, $value := .Values.env }}
+          - name: {{ $name }}
+            value: '{{ $value }}'
+{{- end }}
         ports:
         - containerPort: 8080
         volumeMounts:
@@ -47,20 +51,27 @@ spec:
           mountPath: /certs
         - name: scanner-config-volume
           mountPath: /opt/lacework/config
+{{- if (or .Values.config.registry_secret_name .Values.config.registries) }}
         - name: registries
           mountPath: /registries
+{{- end }}
         resources:
 {{ toYaml .Values.resources | indent 10 }}
+{{- if .Values.hostNetwork }}
+      hostNetwork: {{ .Values.hostNetwork }}
+{{- end }}
       volumes:
       - name: "certs"
         secret:
             secretName: {{ .Values.name }}-certs
+{{- if (or .Values.config.registry_secret_name .Values.config.registries) }}
       - name: "registries"
         secret:
 {{- if .Values.config.registry_secret_name }}
           secretName: {{ .Values.config.registry_secret_name }}
 {{- else }}
           secretName: {{ include "scanner.name" . }}-registry-secrets
+{{- end }}
 {{- end }}
       - name: "scanner-config-volume"
         configMap:

@@ -1,3 +1,4 @@
+{{- if .Values.datacollector.enable -}}
 apiVersion: apps/v1
 
 kind: DaemonSet
@@ -25,6 +26,8 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
+        app.kubernetes.io/name: {{ include "lacework-agent.name" . }}
+        app.kubernetes.io/instance: {{ include "lacework-agent.name" . }}
         name: {{ include "lacework-agent.name" . }}
         {{- with .Values.laceworkConfig.labels }}
           {{- toYaml . | nindent 8 }}
@@ -32,10 +35,10 @@ spec:
     spec:
       affinity:
 {{ toYaml .Values.daemonset.affinity | indent 8 }}
-      tolerations: 
+      tolerations:
 {{ toYaml .Values.tolerations | indent 8 }}
-{{- if .Values.priorityClassName }}
-      priorityClassName: {{ .Values.priorityClassName | quote }}
+{{- if or .Values.priorityClassCreate .Values.priorityClassName }}
+      priorityClassName: {{ .Values.priorityClassName | default (include "lacework-agent.fullname" . ) }}
 {{- end }}
 {{- if .Values.image.imagePullSecrets }}
       imagePullSecrets:
@@ -49,6 +52,7 @@ spec:
       - name: lacework
         image: {{ template "lacework-agent.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if not .Values.cloudservice.gke.autopilot }}        
         env:
 {{- if .Values.laceworkConfig.stdoutLogging }}
           - name: LaceworkLogStdout
@@ -64,8 +68,16 @@ spec:
                 name: {{ required "Secret name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.name }}
                 key: {{ required "Key name required for existing secret" .Values.laceworkConfig.accessToken.existingSecret.key }}
 {{- end}}
+{{- end}}
         resources:
-{{ toYaml .Values.resources | indent 12 }}
+          requests:
+{{ toYaml .Values.resources.requests | indent 12 }}
+{{- if .Values.cloudservice.gke.autopilot }}
+            ephemeral-storage: 200Mi
+{{- else }}
+          limits:
+{{ toYaml .Values.resources.limits | indent 12 }}
+{{- end }}
         securityContext:
           privileged: true
           runAsNonRoot: false
@@ -171,3 +183,4 @@ spec:
                   fieldPath: metadata.namespace
   updateStrategy:
 {{ toYaml .Values.daemonset.updateStrategy | indent 4 }}
+{{- end }}

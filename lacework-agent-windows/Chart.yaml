@@ -1,0 +1,18 @@
+apiVersion: v2
+name: lacework-agent-windows
+version: 1.7.0
+appVersion: "1.0"
+kubeVersion: "> 1.23.0-0"
+description: Lacework Windows Agent
+namespace: kube-system
+keywords:
+  - monitoring
+  - security
+  - run-time
+  - metric
+  - troubleshooting
+home: https://www.lacework.com
+icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
+maintainers:
+- name: lacework-support
+  email: info@lacework.net
