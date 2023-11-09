@@ -12,12 +12,12 @@ admission:
   # All other resources may spawn multiple child resources,
   # and you will need to exclude all of these if you want to prevent excessive scanning during the deployment.
   excluded_resources:
-  - "Deployment"
-  - "ReplicaSet"
-  - "DaemonSet"
-  - "Job"
-  - "CronJob"
-  - "StatefulSet"
+    - "Deployment"
+    - "ReplicaSet"
+    - "DaemonSet"
+    - "Job"
+    - "CronJob"
+    - "StatefulSet"
 
 policy:
   block_exec: false
@@ -63,7 +63,8 @@ securityContext:
   fsGroup: 11433
 container_securityContext: {}
 
-resources: {}
+resources:
+  {}
   # requests:
   #   cpu: 250m
   #   memory: 0.2Gi
@@ -75,8 +76,12 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.23.0
+  tag: 0.24.0
   pullPolicy: Always
+  # [Optional] imagePullSecrets.
+  # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  # imagePullSecrets:
+  #   - name: CustomerRegistrKeySecretName
   replicaCount: 1
   service:
     port: 8443
@@ -89,6 +94,15 @@ proxy-scanner:
 
   resources: {}
 
+  replicaCount: 1
+  image: lacework/lacework-proxy-scanner
+  tag: 0.24.0
+  pullPolicy: Always
+  # [Optional] imagePullSecrets.
+  # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  # imagePullSecrets:
+  #   - name: CustomerRegistrKeySecretName
+
   config:
     default_registry:
     static_cache_location: /opt/lacework
@@ -98,25 +112,25 @@ proxy-scanner:
     lacework:
       account_name:
       integration_access_token:
-#    registry_secret_name:
+    #    registry_secret_name:
     registries:
-#      - domain:
-#        name:
-#        ssl:
-#        type:
-#        auto_poll:
-#        is_public:
-#        auth_type:
-#        auth_header_name: Authorization
-#        credentials:
-#          user_name:
-#          password:
-#        notification_type:
-#        poll_frequency_minutes: 20
-#        disable_non_os_package_scanning: false
-#        go_binary_scanning:
-#          enable: false
-#          scan_directory_path: ""
+  #      - domain:
+  #        name:
+  #        ssl:
+  #        type:
+  #        auto_poll:
+  #        is_public:
+  #        auth_type:
+  #        auth_header_name: Authorization
+  #        credentials:
+  #          user_name:
+  #          password:
+  #        notification_type:
+  #        poll_frequency_minutes: 20
+  #        disable_non_os_package_scanning: false
+  #        go_binary_scanning:
+  #          enable: false
+  #          scan_directory_path: ""
 
   certs:
     skipCert: true

@@ -23,10 +23,14 @@ spec:
       {{- if .Values.serviceAccount.enabled }}
       serviceAccountName: {{ .Values.name }}
       {{- end }}
-
+{{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.imagePullSecrets | indent 8 }}
+{{- end }}
       containers:
       - name: {{ include "scanner.name" . }}
-        image: {{ .Values.image }}
+        image: "{{ .Values.image }}:{{ .Values.tag }}"
+        imagePullPolicy: {{ .Values.pullPolicy }}
         env:
           - name: LOG_LEVEL
             value: {{ .Values.logLevel }}
