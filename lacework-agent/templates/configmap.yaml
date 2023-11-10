@@ -49,6 +49,13 @@ data:
      {{- if .Values.laceworkConfig.containerRuntime }}
      "containerruntime": "{{- .Values.laceworkConfig.containerRuntime }}",
      {{- end }}
+     {{- with .Values.laceworkConfig.ebpf }}
+     "ebpf": {
+              {{- if or (kindIs "float64" .shortlivedmsecs) (kindIs "int64" .shortlivedmsecs) }}
+              "shortlivedmsecs": "{{ .shortlivedmsecs }}" 
+              {{- end }}
+     {{- end }}
+     },
      {{- with .Values.laceworkConfig.fim }}
      {{- if .enable }}
      "fim": {

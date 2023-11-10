@@ -395,6 +395,17 @@
                         "null"
                     ]
                 },
+                "ebpf": {
+                    "type": "object",
+                    "properties": {
+                        "shortlivedmsecs": {
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
+                        }
+                    }
+                },
                 "fim": {
                     "type": "object",
                     "additionalProperties": false,
