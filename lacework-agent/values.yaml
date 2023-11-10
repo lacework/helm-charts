@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 6.9.2
+  tag: 6.10.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -36,7 +36,7 @@ clusterAgent:
   image:
     registry: docker.io
     repository: lacework/k8scollector
-    tag: 6.9.2
+    tag: 6.10.0
     # imagePullPolicy should be Always to get the latest container
     # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     pullPolicy: Always
@@ -84,6 +84,10 @@ laceworkConfig:
   datacollector: enable
   # [Optional] Kubernetes node's scrape interval in minutes.
   k8sNodeScrapeIntervalMins:
+  # [Optional]: Configure advanced ebpf settings. 
+  ebpf:
+    # [Optional] Configure the short lived process detection time in millisecs. Defaults to 1000msec - if not specified.
+    shortlivedmsecs:
   # [Optional] Configure File Integrity Monitoring
   # https://docs.lacework.com/configure-agent-behavior-in-configjson-file#file-integrity-monitoring-fim-properties
   fim:
