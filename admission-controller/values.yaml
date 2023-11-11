@@ -75,8 +75,12 @@ nodeSelector: {}
 
 deployment:
   image: lacework/lacework-admission-controller
-  tag: 0.23.1
+  tag: 0.23.2
   pullPolicy: Always
+  # [Optional] imagePullSecrets.
+  # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  # imagePullSecrets:
+  #   - name: CustomerRegistrKeySecretName
   replicaCount: 1
   service:
     port: 8443
@@ -88,6 +92,13 @@ proxy-scanner:
   logLevel: "info"
 
   resources: {}
+
+  # [Optional] image.
+  # image: lacework/lacework-proxy-scanner:latest
+  # [Optional] imagePullSecrets.
+  # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  # imagePullSecrets:
+  #   - name: CustomerRegistrKeySecretName
 
   config:
     default_registry:
