@@ -22,6 +22,10 @@ spec:
         runAsGroup: 11433
         fsGroup: 11433
       serviceAccountName: {{ .Values.serviceAccount.name }}
+{{- if .Values.deployment.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.deployment.imagePullSecrets | indent 8 }}
+{{- end }}
       containers:
         - name: {{ include "admission.name" . }}
           image: "{{ .Values.deployment.image }}:{{ .Values.deployment.tag }}"
