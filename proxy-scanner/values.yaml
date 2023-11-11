@@ -12,7 +12,7 @@ logLevel: "info"
 resources: {}
 
 replicaCount: 1
-image: lacework/lacework-proxy-scanner:0.23.1
+image: lacework/lacework-proxy-scanner:0.23.2
 pullPolicy: Always
 # [Optional] imagePullSecrets.
 # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
