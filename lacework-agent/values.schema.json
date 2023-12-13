@@ -326,7 +326,16 @@
                         "enable": {
                             "type": [
                                 "boolean",
+                                "string",
                                 "null"
+                            ],
+                            "enum": [
+                                "all",
+                                "experimental",
+                                "false",
+                                true,
+                                false,
+                                null
                             ]
                         }
                     }
