@@ -72,7 +72,7 @@ laceworkConfig:
   # [Optional] Enable Active Vulnerability Detection
   # https://docs.lacework.net/onboarding/configure-agent-behavior-in-configjson-file#codeaware-property
   codeaware:
-    enable: false
+    enable:
   # [Optional] Define the endpoint that the agent uses to discover containers
   containerEngineEndpoint:
   # [Optional] Define the runtime that the agent uses to discover containers
