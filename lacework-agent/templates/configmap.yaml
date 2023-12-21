@@ -37,17 +37,13 @@ data:
        {{- end }}
      {{- end }}
      {{- with .Values.laceworkConfig.codeaware }}
-       {{- if or (eq (quote .enable) "true") (eq (quote .enable) "all") }}
+       {{- if or (eq (toString .enable) "true") (eq (toString .enable) "all") }}
         "codeaware": {
           "enable": "all"
         },
-       {{- else if (eq (quote .enable) "experimental") }}
+       {{- else if or (eq (toString .enable) "experimental") (eq (toString .enable) "false") }}
         "codeaware": {
-          "enable": "experimental"
-        },
-       {{- else if (eq (quote .enable) "false") }}
-        "codeaware": {
-          "enable": "false"
+          "enable": {{ quote .enable }}
         },
        {{- end }}
      {{- end }}
