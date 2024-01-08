@@ -54,14 +54,15 @@ data:
      "containerruntime": "{{- .Values.laceworkConfig.containerRuntime }}",
      {{- end }}
      {{- with .Values.laceworkConfig.ebpf }}
-     "ebpf": {
-              {{- if or (kindIs "float64" .shortlivedmsecs) (kindIs "int64" .shortlivedmsecs) }}
-              "shortlivedmsecs": "{{ .shortlivedmsecs }}" 
-              {{- end }}
+       {{- if or (kindIs "float64" .shortlivedmsecs) (kindIs "int64" .shortlivedmsecs) }}
+        "ebpf": {
+          "shortlivedmsecs": "{{ .shortlivedmsecs }}"
+        },
+       {{- end }}
      {{- end }}
-     },
      {{- with .Values.laceworkConfig.fim }}
-     {{- if .enable }}
+     {{- if (kindIs "bool" .enable) }}
+       {{- if .enable }}
      "fim": {
              {{- if or (kindIs "float64" .coolingPeriod) (kindIs "int64" .coolingPeriod) }}"coolingperiod": "{{ .coolingPeriod }}", {{- end }}
              {{- if or (kindIs "float64" .crawlInterval) (kindIs "int64" .crawlInterval) }}"crawlinterval": "{{ .crawlInterval }}", {{- end }}
@@ -71,8 +72,9 @@ data:
              {{- if .noAtime }}, "noatime": "true" {{- end }}
              {{- if .runAt }}, "runat": "{{ .runAt }}" {{- end }}
      },
-     {{- else }}
+       {{- else }}
      "fim": {"mode": "disable"},
+       {{- end }}
      {{- end }}
      {{- end }}
     {{- with .Values.laceworkConfig.packagescan }}
