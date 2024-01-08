@@ -439,7 +439,10 @@
                             ]
                         },
                         "enable": {
-                            "type": "boolean"
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
                         },
                         "fileIgnore": {
                             "type": "array",

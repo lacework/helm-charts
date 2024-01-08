@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 6.10.4
+  tag: 6.11.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -36,7 +36,7 @@ clusterAgent:
   image:
     registry: docker.io
     repository: lacework/k8scollector
-    tag: 6.10.4
+    tag: 6.11.0
     # imagePullPolicy should be Always to get the latest container
     # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     pullPolicy: Always
@@ -95,7 +95,7 @@ laceworkConfig:
     coolingPeriod:
     # [Optional] Configure crawlinterval in minutes
     crawlInterval:
-    enable: true
+    enable:
     # [Optional] Configure file paths to ignore
     fileIgnore: []
     # [Optional] Configure file paths to include
