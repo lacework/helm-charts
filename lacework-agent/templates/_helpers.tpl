@@ -35,13 +35,15 @@ Create chart name and version as used by the chart label.
 Return the proper Lacework Agent image name
 */}}
 {{- define "lacework-agent.image" -}}
-{{- $registryName := .Values.image.registry -}}
-{{- $repositoryName := .Values.image.repository -}}
-{{- $tag := .Values.image.tag | toString -}}
-{{- if .Values.image.overrideValue }}
-    {{- printf .Values.image.overrideValue -}}
+{{- $registryName := (.Values.image).registry -}}
+{{- $repositoryName := (.Values.image).repository -}}
+{{- $tag := (.Values.image).tag | toString -}}
+{{- if (.Values.image).overrideValue }}
+    {{- printf (.Values.image).overrideValue -}}
 {{- else -}}
+{{- if and ($registryName) ($repositoryName) ($tag) }}
     {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
 
@@ -49,12 +51,14 @@ Return the proper Lacework Agent image name
 Return the proper Lacework Cluster Agent image name
 */}}
 {{- define "lacework-cluster-agent.image" -}}
-{{- $registryName := .Values.clusterAgent.image.registry -}}
-{{- $repositoryName := .Values.clusterAgent.image.repository -}}
-{{- $tag := .Values.clusterAgent.image.tag | toString -}}
-{{- if .Values.clusterAgent.image.overrideValue }}
-    {{- printf .Values.clusterAgent.image.overrideValue -}}
+{{- $registryName := ((.Values.clusterAgent).image).registry -}}
+{{- $repositoryName := ((.Values.clusterAgent).image).repository -}}
+{{- $tag := ((.Values.clusterAgent).image).tag | toString -}}
+{{- if ((.Values.clusterAgent).image).overrideValue }}
+    {{- printf ((.Values.clusterAgent.image).overrideValue) -}}
 {{- else -}}
+{{- if and ($registryName) ($repositoryName) ($tag) }}
     {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+{{- end -}}
 {{- end -}}
 {{- end -}}
