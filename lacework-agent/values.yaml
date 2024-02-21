@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 6.11.0
+  tag: 6.12.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -33,10 +33,14 @@ clusterAgent:
   scrapeInitialDelayMins:
   # [Optional] Cluster mode agent's scrape interval in minutes.
   scrapeIntervalMins:
+  # [Optional] Route agent traffic through the specified proxy.
+  # https://docs.lacework.net/onboarding/restricted/configure-agent-behavior-in-configjson-file#proxyurl-propert
+  proxyUrl:
+  hostNetworkAccess: false
   image:
     registry: docker.io
     repository: lacework/k8scollector
-    tag: 6.11.0
+    tag: 6.12.0
     # imagePullPolicy should be Always to get the latest container
     # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     pullPolicy: Always
@@ -72,7 +76,7 @@ laceworkConfig:
   # [Optional] Enable Active Vulnerability Detection
   # https://docs.lacework.net/onboarding/configure-agent-behavior-in-configjson-file#codeaware-property
   codeaware:
-    enable:
+    enable: false
   # [Optional] Define the endpoint that the agent uses to discover containers
   containerEngineEndpoint:
   # [Optional] Define the runtime that the agent uses to discover containers

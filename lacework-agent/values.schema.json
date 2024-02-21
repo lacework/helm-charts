@@ -231,6 +231,17 @@
                         "null"
                     ],
                     "description": "Cluster mode agent's scrape interval in minutes"
+                },
+		"proxyUrl": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+		    "description": "Proxy URL for the cluster collector"
+		},
+		"hostNetworkAccess": {
+                    "type": "boolean",
+                    "description": "Enable host network access to the cluster collector pod"
                 }
             },
             "additionalProperties": false

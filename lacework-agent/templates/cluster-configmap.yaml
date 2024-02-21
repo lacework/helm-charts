@@ -16,6 +16,9 @@ metadata:
   {{- end }}
 data:
   config.yaml: |
+    {{- if .Values.laceworkConfig.proxyUrl }}
+    proxyurl: {{ .Values.laceworkConfig.proxyUrl}}
+    {{- end }}
     serverurl: {{ .Values.laceworkConfig.serverUrl}}
 {{- if or (kindIs "int64" .Values.clusterAgent.scrapeInitialDelayMins) (kindIs "float64" .Values.clusterAgent.scrapeInitialDelayMins) }}
     initialdelaymins: {{ .Values.clusterAgent.scrapeInitialDelayMins }}
