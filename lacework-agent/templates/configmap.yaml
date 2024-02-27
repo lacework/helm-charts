@@ -1,4 +1,4 @@
-{{- if .Values.datacollector.enable -}}
+{{- if (.Values.datacollector).enable -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -7,22 +7,22 @@ metadata:
   labels:
     tier: monitoring
     app: {{ include "lacework-agent.name" . }}
-    {{- with .Values.laceworkConfig.labels }}
+    {{- with (.Values.laceworkConfig).labels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
-  {{- with .Values.laceworkConfig.annotations }}
+  {{- with (.Values.laceworkConfig).annotations }}
   annotations:
     {{- toYaml . | nindent 8 }}
   {{- end }}
 data:
   config.json: |
-    {"autoupgrade": "{{ required "A value for autoupgrade is required" .Values.laceworkConfig.autoUpgrade }}",
-      {{- with .Values.laceworkConfig.anonymizeIncoming }}
+    {"autoupgrade": "{{ required "A value for autoupgrade is required" (.Values.laceworkConfig).autoUpgrade }}",
+      {{- with (.Values.laceworkConfig).anonymizeIncoming }}
         {{- if .netmask }}
      "AnonymizeIncoming": {"netmask": "{{ .netmask }}"},
         {{- end }}
       {{- end }}
-     {{- with .Values.laceworkConfig.cmdlinefilter }}
+     {{- with (.Values.laceworkConfig).cmdlinefilter }}
        {{- if or .allow .disallow }}
        "cmdlinefilter": {
          {{- if and .allow .disallow }}
@@ -36,7 +36,7 @@ data:
        },
        {{- end }}
      {{- end }}
-     {{- with .Values.laceworkConfig.codeaware }}
+     {{- with (.Values.laceworkConfig).codeaware }}
        {{- if or (eq (quote .enable) "true") (eq (quote .enable) "all") }}
         "codeaware": {
           "enable": "all"
@@ -51,20 +51,20 @@ data:
         },
        {{- end }}
      {{- end }}
-     {{- if .Values.laceworkConfig.containerEngineEndpoint }}
-     "containerengineendpoint": "{{- .Values.laceworkConfig.containerEngineEndpoint }}",
+     {{- if (.Values.laceworkConfig).containerEngineEndpoint }}
+     "containerengineendpoint": "{{- (.Values.laceworkConfig).containerEngineEndpoint }}",
      {{- end }}
-     {{- if .Values.laceworkConfig.containerRuntime }}
-     "containerruntime": "{{- .Values.laceworkConfig.containerRuntime }}",
+     {{- if (.Values.laceworkConfig).containerRuntime }}
+     "containerruntime": "{{- (.Values.laceworkConfig).containerRuntime }}",
      {{- end }}
-     {{- with .Values.laceworkConfig.ebpf }}
+     {{- with (.Values.laceworkConfig).ebpf }}
        {{- if or (kindIs "float64" .shortlivedmsecs) (kindIs "int64" .shortlivedmsecs) }}
         "ebpf": {
           "shortlivedmsecs": "{{ .shortlivedmsecs }}"
         },
        {{- end }}
      {{- end }}
-     {{- with .Values.laceworkConfig.fim }}
+     {{- with (.Values.laceworkConfig).fim }}
      {{- if (kindIs "bool" .enable) }}
        {{- if .enable }}
      "fim": {
@@ -81,7 +81,7 @@ data:
        {{- end }}
      {{- end }}
      {{- end }}
-    {{- with .Values.laceworkConfig.packagescan }}
+    {{- with (.Values.laceworkConfig).packagescan }}
     {{- if .enable }}
     "packagescan": {
       {{- if .interval }}
@@ -91,7 +91,7 @@ data:
     },
     {{- end }}
     {{- end }}
-    {{- with .Values.laceworkConfig.procscan }}
+    {{- with (.Values.laceworkConfig).procscan }}
     {{- if .enable }}
     "procscan": {
       {{- if .interval }}
@@ -101,39 +101,39 @@ data:
     },
     {{- end }}
     {{- end }}
-    {{- if kindIs "string" .Values.laceworkConfig.perfmode }}
-        "perfmode": "{{ .Values.laceworkConfig.perfmode }}",
+    {{- if kindIs "string" (.Values.laceworkConfig).perfmode }}
+        "perfmode": "{{ (.Values.laceworkConfig).perfmode }}",
     {{- end }}
-    {{- if .Values.laceworkConfig.vmprovidercustom }}
-      "vmprovidercustom": "{{- .Values.laceworkConfig.vmprovidercustom }}",
+    {{- if (.Values.laceworkConfig).vmprovidercustom }}
+      "vmprovidercustom": "{{- (.Values.laceworkConfig).vmprovidercustom }}",
     {{- end }}
-{{- if .Values.clusterAgent.enable }}
+{{- if (.Values.clusterAgent).enable }}
      "k8snodecollector": {
-{{- if .Values.clusterAgent.clusterType }}
-             "k8sclustertype": "{{ .Values.clusterAgent.clusterType}}",
+{{- if (.Values.clusterAgent).clusterType }}
+             "k8sclustertype": "{{ (.Values.clusterAgent).clusterType}}",
 {{- end }}
  
-{{- if  not .Values.laceworkConfig.kubernetesCluster }}
-             #kubernetes cluster "{{ required "kubernetesCluster name is a required parameter" .Values.laceworkConfig.kubernetesCluster }}
+{{- if  not (.Values.laceworkConfig).kubernetesCluster }}
+             #kubernetes cluster "{{ required "kubernetesCluster name is a required parameter" (.Values.laceworkConfig).kubernetesCluster }}
 {{- end}}
-             "clusterregion" : "{{ required "A clusterRegion is a required parameter" .Values.clusterAgent.clusterRegion }}",
+             "clusterregion" : "{{ required "A clusterRegion is a required parameter" (.Values.clusterAgent).clusterRegion }}",
 
-{{- if eq .Values.laceworkConfig.datacollector "disable" }}
+{{- if eq (.Values.laceworkConfig).datacollector "disable" }}
              "exclusivemode": "true",
 {{- end }}
-{{- if or (kindIs "int64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins) (kindIs "float64" .Values.laceworkConfig.k8sNodeScrapeIntervalMins) }}
-             "tickerfreqmins": "{{ .Values.laceworkConfig.k8sNodeScrapeIntervalMins }}",
+{{- if or (kindIs "int64" (.Values.laceworkConfig).k8sNodeScrapeIntervalMins) (kindIs "float64" (.Values.laceworkConfig).k8sNodeScrapeIntervalMins) }}
+             "tickerfreqmins": "{{ (.Values.laceworkConfig).k8sNodeScrapeIntervalMins }}",
 {{- end }}
              "state": "enabled"
      },
 {{- end }}
-  {{- if .Values.laceworkConfig.proxyUrl }} "proxyurl" :"{{ .Values.laceworkConfig.proxyUrl}}", {{- end }}
-     "serverurl": "{{ .Values.laceworkConfig.serverUrl}}",
-  {{- if .Values.laceworkConfig.metadataRequestInterval }} 
-     "metadata_request_interval": "{{ .Values.laceworkConfig.metadataRequestInterval}}",
+  {{- if (.Values.laceworkConfig).proxyUrl }} "proxyurl" :"{{ (.Values.laceworkConfig).proxyUrl}}", {{- end }}
+     "serverurl": "{{ (.Values.laceworkConfig).serverUrl}}",
+  {{- if (.Values.laceworkConfig).metadataRequestInterval }} 
+     "metadata_request_interval": "{{ (.Values.laceworkConfig).metadataRequestInterval}}",
   {{- end }}
-{{- if .Values.cloudservice.gke.autopilot }}
-     "tokens":{"AccessToken": "{{ .Values.laceworkConfig.accessToken }}"},
+{{- if ((.Values.cloudservice).gke).autopilot }}
+     "tokens":{"AccessToken": "{{ (.Values.laceworkConfig).accessToken }}"},
      "logstdout" : "true",
 {{- end }}     
   {{- with .Values.laceworkConfig }}
