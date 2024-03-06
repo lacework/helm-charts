@@ -430,7 +430,6 @@
                     "type": "object",
                     "additionalProperties": false,
                     "required": [
-                        "enable",
                         "fileIgnore",
                         "filePath"
                     ],
