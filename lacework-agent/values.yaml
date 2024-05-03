@@ -11,6 +11,15 @@ image:
   # imagePullSecrets:
   #   - name: CustomerRegistrKeySecretName
   overrideValue:
+
+# [Optional] Additional Volumes for the agent Pod.
+# https://kubernetes.io/docs/concepts/storage/volumes/
+volumes: []
+
+# [Optional] Additional Volume Mounts for the agent container.
+# (https://kubernetes.io/docs/concepts/storage/volumes/
+volumeMounts: []
+
 resources:
   # The requests/limits is guidance and should be adjusted based on the workload
   # Please contact Lacework support for additional details
