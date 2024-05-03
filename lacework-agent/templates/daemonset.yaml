@@ -113,6 +113,9 @@ spec:
             readOnly: true
           - name: podinfo
             mountPath: /etc/podinfo
+          {{- if .Values.volumeMounts }}
+            {{- toYaml .Values.volumeMounts | nindent 10 }} 
+          {{- end }}
 {{- if kindIs "string" (.Values.laceworkConfig).serviceAccountName }}
       serviceAccountName: {{ (.Values.laceworkConfig).serviceAccountName | quote }}
 {{- end}}
@@ -181,6 +184,9 @@ spec:
               - path: "namespace"
                 fieldRef:
                   fieldPath: metadata.namespace
+        {{- if .Values.volumes }}
+          {{- toYaml .Values.volumes | nindent 8 }}
+        {{- end }}
   updateStrategy:
 {{ toYaml (.Values.daemonset).updateStrategy | indent 4 }}
 {{- end }}
