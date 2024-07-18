@@ -24,6 +24,5 @@ spec:
 {{- end }}
       # Dummy test until we have a URL that we can use to validate the server URL + agent token combination
       command:
-        - /usr/bin/bash
-        - "true"
+        - /usr/bin/true
   restartPolicy: Never

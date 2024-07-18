@@ -145,8 +145,4 @@ data:
     }
   {{- end }}
     }
-
-{{- with .Files.Glob "config/syscall_config.yaml" }}
-{{ tpl .AsConfig $ | indent 2 }}
-{{- end }}
 {{- end }}

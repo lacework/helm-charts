@@ -161,8 +161,6 @@ spec:
             items:
             - key: config.json
               path: config.json
-            - key: syscall_config.yaml
-              path: syscall_config.yaml
         - name: podinfo
           downwardAPI:
             items:
