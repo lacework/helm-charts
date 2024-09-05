@@ -38,6 +38,9 @@ clusterAgent:
   # https://docs.lacework.net/onboarding/restricted/configure-agent-behavior-in-configjson-file#proxyurl-propert
   proxyUrl:
   hostNetworkAccess: false
+  createRoleBinding: true
+  createRole: true
+  createServiceAccount: true
   image:
     registry: docker.io
     repository: lacework/k8scollector
