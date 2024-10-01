@@ -242,6 +242,18 @@
 		"hostNetworkAccess": {
                     "type": "boolean",
                     "description": "Enable host network access to the cluster collector pod"
+                },
+        "createRoleBinding": {
+                    "type": "boolean",
+                    "description": "Enable creation of the role binding"
+                },
+        "createRole": {
+                    "type": "boolean",
+                    "description": "Enable creation of the role"
+                },
+        "createServiceAccount": {
+                    "type": "boolean",
+                    "description": "Enable creation of the service account"
                 }
             },
             "additionalProperties": false
