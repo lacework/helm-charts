@@ -39,10 +39,18 @@ data:
      {{- with (.Values.laceworkConfig).codeaware }}
        {{- if or (eq (toString .enable) "true") (eq (toString .enable) "all") }}
         "codeaware": {
+          {{- if .mountignore }}"mountignore": {{ mustToJson .mountignore }}, {{- end }}
+          {{- if .invignoremarkrate }}"invignoremarkrate": {{ mustToJson .invignoremarkrate }}, {{- end }}
+          {{- if .eventprocessingdelay }}"eventprocessingdelay": {{ mustToJson .eventprocessingdelay }}, {{- end }}
+          {{- if .restartinterval }}"restartinterval": {{ mustToJson .restartinterval }}, {{- end }}
           "enable": "all"
         },
        {{- else if or (eq (toString .enable) "experimental") (eq (toString .enable) "false") }}
         "codeaware": {
+          {{- if .mountignore }}"mountignore": {{ mustToJson .mountignore }}, {{- end }}
+          {{- if .invignoremarkrate }}"invignoremarkrate": {{ mustToJson .invignoremarkrate }}, {{- end }}
+          {{- if .eventprocessingdelay }}"eventprocessingdelay": {{ mustToJson .eventprocessingdelay }}, {{- end }}
+          {{- if .restartinterval }}"restartinterval": {{ mustToJson .restartinterval }}, {{- end }}
           "enable": {{ quote .enable }}
         },
        {{- end }}

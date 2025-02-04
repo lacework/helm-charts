@@ -360,6 +360,30 @@
                                 false,
                                 null
                             ]
+                        },
+                        "mountignore": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "invignoremarkrate": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "eventprocessingdelay": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
+                        },
+                        "restartinterval": {
+                            "type": [
+                                "string",
+                                "null"
+                            ]
                         }
                     }
                 },
