@@ -53,6 +53,10 @@ spec:
       - name: lwdatacollector
         image: {{ template "lacework-windows-agent.image" . }}
         imagePullPolicy: {{ .Values.windowsAgent.image.pullPolicy }}
+        lifecycle:
+          preStop:
+            exec:
+              command: ["LWMonitor.exe", "-k8sshutdown"]
         env:
 {{- if .Values.windowsAgent.agentConfig.stdoutLogging }}
           - name: LaceworkLogStdout
