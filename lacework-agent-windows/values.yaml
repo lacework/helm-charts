@@ -3,8 +3,8 @@ windowsAgent:
   enable: true
   image:
     registry: docker.io
-    repository: lacework/datacollector-windows-private
-    tag: release-1.8.0-1.8.0.4050
+    repository: lacework/datacollector-windows
+    tag: 1.8.0.4050
     # imagePullPolicy should be Always to get the latest container
     # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     pullPolicy: Always
@@ -12,8 +12,6 @@ windowsAgent:
     # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
     # imagePullSecrets:
     # - name: WindowsRegKeySecretName
-    imagePullSecrets:
-    - name: windowsregsecret
   agentConfig:
     # [Required] An access token is required before running agents.
     # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
