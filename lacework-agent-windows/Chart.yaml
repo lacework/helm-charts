@@ -1,6 +1,6 @@
 apiVersion: v2
 name: lacework-agent-windows
-version: 1.7.2
+version: 1.8.0
 appVersion: "1.0"
 kubeVersion: "> 1.23.0-0"
 description: Lacework Windows Agent
