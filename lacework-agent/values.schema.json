@@ -362,10 +362,10 @@
                             ]
                         },
                         "mountignore": {
-                            "type": [
-                                "string",
-                                "null"
-                            ]
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         },
                         "invignoremarkrate": {
                             "type": [
