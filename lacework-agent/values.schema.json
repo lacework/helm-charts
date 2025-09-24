@@ -612,6 +612,22 @@
             },
             "additionalProperties": false
         },
+        "volumes": {
+            "type": "array",
+            "default": [],
+            "description": "Array of Additional Volumes",
+            "items": {
+                "type": "object"
+            }
+        },
+        "volumeMounts": {
+            "type": "array",
+            "default": [],
+            "description": "Array of Additional Volume Mounts",
+            "items": {
+                "type": "object"
+            }
+        },
         "resources": {
             "$ref": "#/definitions/io.k8s.api.core.v1.ResourceRequirements",
             "description": "Compute Resources required by this container. Cannot be updated. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/"
