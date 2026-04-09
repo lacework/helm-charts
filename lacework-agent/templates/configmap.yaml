@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: lacework-config
+  name: {{ include "lacework-agent.fullname" . }}-config
   namespace: {{ .Release.Namespace }}          
   labels:
     tier: monitoring
-    app: {{ include "lacework-agent.name" . }}
+    app: {{ include "lacework-agent.fullname" . }}
     {{- with (.Values.laceworkConfig).labels }}
       {{- toYaml . | nindent 4 }}
     {{- end }}
@@ -43,6 +43,8 @@ data:
           {{- if .invignoremarkrate }}"invignoremarkrate": {{ mustToJson .invignoremarkrate }}, {{- end }}
           {{- if .eventprocessingdelay }}"eventprocessingdelay": {{ mustToJson .eventprocessingdelay }}, {{- end }}
           {{- if .restartinterval }}"restartinterval": {{ mustToJson .restartinterval }}, {{- end }}
+          {{- if or (eq (toString .vulnwatch) "true") (eq (toString .vulnwatch) "false") }}"vulnwatch": {{ quote .vulnwatch }}, {{- end }}
+          {{- if or (eq (toString .jvmvulnobserver) "true") (eq (toString .jvmvulnobserver) "false") }}"jvmvulnobserver": {{ quote .jvmvulnobserver }}, {{- end }}
           "enable": "all"
         },
        {{- else if or (eq (toString .enable) "experimental") (eq (toString .enable) "false") }}
@@ -51,6 +53,8 @@ data:
           {{- if .invignoremarkrate }}"invignoremarkrate": {{ mustToJson .invignoremarkrate }}, {{- end }}
           {{- if .eventprocessingdelay }}"eventprocessingdelay": {{ mustToJson .eventprocessingdelay }}, {{- end }}
           {{- if .restartinterval }}"restartinterval": {{ mustToJson .restartinterval }}, {{- end }}
+          {{- if or (eq (toString .vulnwatch) "true") (eq (toString .vulnwatch) "false") }}"vulnwatch": {{ quote .vulnwatch }}, {{- end }}
+          {{- if or (eq (toString .jvmvulnobserver) "true") (eq (toString .jvmvulnobserver) "false") }}"jvmvulnobserver": {{ quote .jvmvulnobserver }}, {{- end }}
           "enable": {{ quote .enable }}
         },
        {{- end }}

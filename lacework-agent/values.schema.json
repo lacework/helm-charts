@@ -4,6 +4,15 @@
         "laceworkConfig"
     ],
     "properties": {
+        "fullnameOverride": {
+            "type": ["string", "null"],
+            "description": "Overrides the full name of the resources (truncated at 63 chars)",
+            "maxLength": 63
+        },
+        "nameOverride": {
+            "type": ["string", "null"],
+            "description": "Overrides the name of the chart"
+        },
         "global": {
             "type": "object",
             "$comment": "Blanket 'global' object to enable embedding this chart as a sub-chart"
@@ -382,6 +391,18 @@
                         "restartinterval": {
                             "type": [
                                 "string",
+                                "null"
+                            ]
+                        },
+                        "vulnwatch": {
+                            "type": [
+                                "boolean",
+                                "null"
+                            ]
+                        },
+                        "jvmvulnobserver": {
+                            "type": [
+                                "boolean",
                                 "null"
                             ]
                         }
