@@ -2,7 +2,7 @@
 image:
   registry: docker.io
   repository: lacework/datacollector
-  tag: 8.1.0
+  tag: 8.2.0
   # imagePullPolicy should be Always to get the latest container
   # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   pullPolicy: Always
@@ -10,11 +10,13 @@ image:
   # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
   # imagePullSecrets:
   #   - name: CustomerRegistrKeySecretName
-  overrideValue:
+  overrideValue: 
+
 #  [Optional] Overrides the full name of the resources
 fullnameOverride: ""
 #  [Optional] Overrides the name of the chart
 nameOverride: ""
+
 resources:
   # The requests/limits is guidance and should be adjusted based on the workload
   # Please contact Lacework support for additional details
@@ -48,7 +50,7 @@ clusterAgent:
   image:
     registry: docker.io
     repository: lacework/k8scollector
-    tag: 8.1.0
+    tag: 8.2.0
     # imagePullPolicy should be Always to get the latest container
     # http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
     pullPolicy: Always
@@ -56,9 +58,12 @@ clusterAgent:
     # https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
     # imagePullSecrets:
     #   - name: CustomerRegistrKeySecretName
+
+
 datacollector:
   # [Optional] Set to "disable" to disable installation of the datacollector daemonset
   enable: true
+
 laceworkConfig:
   # [Required] An access token is required before running agents.
   # Visit https://<LACEWORK UI URL> for eg: https://lacework.lacework.net
@@ -110,8 +115,8 @@ laceworkConfig:
   k8sNodeScrapeIntervalMins:
   # [Optional]: Configure advanced ebpf settings. 
   ebpf:
-    # [Optional] Configure the short lived process detection time in millisecs. Defaults to 1000msec - if not specified.
-    shortlivedmsecs:
+  # [Optional] Configure the short lived process detection time in millisecs. Defaults to 1000msec - if not specified.
+    shortlivedmsecs: 
   # [Optional] Configure File Integrity Monitoring
   # https://docs.lacework.com/configure-agent-behavior-in-configjson-file#file-integrity-monitoring-fim-properties
   fim:
@@ -160,12 +165,16 @@ laceworkConfig:
 ##########################################################################
 # Set daemonset priorityClassName
 priorityClassName:
+
 # Create the priority class for the daemonset pods
 priorityClassCreate: false
+
 # Preemption policy for the PriorityClass
 priorityClassPreemptionPolicy: PreemptLowerPriority
+
 # Priority class value to use for daemonset pods
 priorityClassValue: 1000000000
+
 # Allow Lacework agent to run on all nodes including master and infra nodes
 tolerations:
   - effect: NoSchedule
@@ -174,9 +183,11 @@ tolerations:
     key: node-role.kubernetes.io/infra
   - effect: NoSchedule
     key: node-role.kubernetes.io/control-plane
+
 # Allow Lacework agent to run on all nodes in case of a taint
 # - effect: NoSchedule
 #   operator: Exists
+
 daemonset:
   # Use rolling updates in the DaemonSet
   # https://kubernetes.io/docs/tasks/manage-daemon/update-daemon-set/
@@ -198,6 +209,8 @@ daemonset:
                 operator: In
                 values:
                   - linux
+
+
 #Specify per workload parameters for cluster agent
 deployment:
   # Use rolling updates in the deployment

@@ -1,17 +1,18 @@
 apiVersion: v2
+name: lacework-agent
+version: 8.2.0
 appVersion: "1.0"
+kubeVersion: "> 1.9.0-0"
 description: Lacework Agent
+namespace: kube-system
+keywords:
+  - monitoring
+  - security
+  - run-time
+  - metric
+  - troubleshooting
 home: https://www.lacework.com
 icon: https://www.lacework.com/wp-content/uploads/2019/07/Lacework_Logo_color_2019.svg
-keywords:
-- monitoring
-- security
-- run-time
-- metric
-- troubleshooting
-kubeVersion: '> 1.9.0-0'
 maintainers:
-- email: info@lacework.net
-  name: lacework-support
-name: lacework-agent
-version: 8.1.0
+- name: lacework-support
+  email: info@lacework.net
