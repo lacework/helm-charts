@@ -7,7 +7,7 @@ metadata:
   name: {{ include "scanner.fullname" . }}
 spec:
   selector:
-    app: {{ .Values.name }}
+    app: {{ include "scanner.fullname" . }}  
   ports:
     - port: 8080
       targetPort: 8080
